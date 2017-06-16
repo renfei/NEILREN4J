@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neilren.neilren4j.modules.article.dao.FrielinkDao">
+  <resultMap id="BaseResultMap" type="com.neilren.neilren4j.modules.article.entity.Frielink">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="add_date" jdbcType="TIMESTAMP" property="addDate" />
+    <result column="enable" jdbcType="INTEGER" property="enable" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.neilren.neilren4j.modules.article.entity.FrielinkWithBLOBs">
+    <result column="name" jdbcType="LONGVARCHAR" property="name" />
+    <result column="link" jdbcType="LONGVARCHAR" property="link" />
+    <result column="link_img" jdbcType="LONGVARCHAR" property="linkImg" />
+    <result column="contact" jdbcType="LONGVARCHAR" property="contact" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, add_date, enable
+  </sql>
+  <sql id="Blob_Column_List">
+    name, link, link_img, contact
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_frielink
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectForAll" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_frielink
+    WHERE enable = 1
+    ORDER BY add_date;
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_frielink
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.neilren.neilren4j.modules.article.entity.FrielinkWithBLOBs">
+    insert into t_frielink (id, add_date, enable, 
+      name, link, link_img, 
+      contact)
+    values (#{id,jdbcType=BIGINT}, #{addDate,jdbcType=TIMESTAMP}, #{enable,jdbcType=INTEGER}, 
+      #{name,jdbcType=LONGVARCHAR}, #{link,jdbcType=LONGVARCHAR}, #{linkImg,jdbcType=LONGVARCHAR}, 
+      #{contact,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neilren.neilren4j.modules.article.entity.FrielinkWithBLOBs">
+    insert into t_frielink
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="addDate != null">
+        add_date,
+      </if>
+      <if test="enable != null">
+        enable,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="link != null">
+        link,
+      </if>
+      <if test="linkImg != null">
+        link_img,
+      </if>
+      <if test="contact != null">
+        contact,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="addDate != null">
+        #{addDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable != null">
+        #{enable,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="link != null">
+        #{link,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="linkImg != null">
+        #{linkImg,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="contact != null">
+        #{contact,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neilren.neilren4j.modules.article.entity.FrielinkWithBLOBs">
+    update t_frielink
+    <set>
+      <if test="addDate != null">
+        add_date = #{addDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable != null">
+        enable = #{enable,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="link != null">
+        link = #{link,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="linkImg != null">
+        link_img = #{linkImg,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="contact != null">
+        contact = #{contact,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.neilren.neilren4j.modules.article.entity.FrielinkWithBLOBs">
+    update t_frielink
+    set add_date = #{addDate,jdbcType=TIMESTAMP},
+      enable = #{enable,jdbcType=INTEGER},
+      name = #{name,jdbcType=LONGVARCHAR},
+      link = #{link,jdbcType=LONGVARCHAR},
+      link_img = #{linkImg,jdbcType=LONGVARCHAR},
+      contact = #{contact,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neilren.neilren4j.modules.article.entity.Frielink">
+    update t_frielink
+    set add_date = #{addDate,jdbcType=TIMESTAMP},
+      enable = #{enable,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

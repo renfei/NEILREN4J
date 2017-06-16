@@ -1,7 +1,20 @@
 package com.neilren.neilren4j.modules.home.controller;
 
+import com.neilren.neilren4j.common.controller.BaseController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
 /**
- * Created by neil on 16/06/2017.
+ * 首页
  */
-public class HomeController {
+@Controller
+@RequestMapping(value = "/")
+public class HomeController extends BaseController {
+    @RequestMapping(value = "/")
+    public ModelAndView homePage() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("home/index");
+        return mv;
+    }
 }

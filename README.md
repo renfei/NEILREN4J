@@ -1,6 +1,6 @@
 <p align="center">
   <a href="http://www.neilren.com">
-    <img src="https://github.com/NeilRen/NEILREN4J/raw/master/doc/img/neilren4j_logo_1415x477.png" width=72 height=72>
+    <img src="https://github.com/NeilRen/NEILREN4J/raw/master/doc/img/neilren4j_logo_1415x477.png" width=300 height=101>
   </a>
 
   <h3 align="center">NEILREN4J</h3>

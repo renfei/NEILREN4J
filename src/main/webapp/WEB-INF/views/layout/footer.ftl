@@ -9,11 +9,9 @@
     </div>
     <nav class="social-icons animated" data-animation="fadeInUp" data-animation-delay="500">
         <ul>
-            <li title="圆象"><a target="_blank" href="#"><i class="fa fa-leaf"></i></a></li>
-            <li title="QQ"><a href="###"><i class="fa fa-qq"></i></a></li>
-            <li title="WeChat"><a href="###"><i class="fa fa-weixin"></i></a></li>
-            <li title="微博"><a href="###"><i class="fa fa-weibo"></i></a></li>
-            <li title="开始"><a href="###"><i class="fa fa-windows"></i></a></li>
+            <li title="Github"><a target="_blank" href="//github.com/NeilRen"><i class="fa fa-github"></i></a></li>
+            <li title="QQ"><a href="//shang.qq.com/wpa/qunwpa?idkey=3cc6fa673e18c1fbe34103bc8805b3634d03a6b5b923c9ade75c9caad25c4c93"><i class="fa fa-qq"></i></a></li>
+            <li title="微博"><a href="//weibo.com/NeilRen"><i class="fa fa-weibo"></i></a></li>
         </ul>
     </nav>
 </footer>

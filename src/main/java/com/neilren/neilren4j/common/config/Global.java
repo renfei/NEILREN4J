@@ -105,7 +105,7 @@ public class Global {
     }
 
     /**
-     * Memcached缓存时间
+     * Memcached缓存时间，秒
      */
-    public static int MemcachedExpire = 10000;
+    public static int MemcachedExpire = 60;
 }

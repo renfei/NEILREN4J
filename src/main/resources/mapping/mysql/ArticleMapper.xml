@@ -51,6 +51,13 @@
         ) article_grade ON article.id = article_grade.article_id
         ORDER BY article_dat DESC;
     </select>
+    <select id="selectByArchivesLimit" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+        SELECT *
+        FROM t_article
+        WHERE date_format(article_dat, '%Y-%m') = #{date,jdbcType=LONGVARCHAR}
+        ORDER BY article_dat DESC
+        LIMIT #{index,jdbcType=INTEGER}, #{size,jdbcType=INTEGER};
+    </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
@@ -89,6 +96,11 @@
     <select id="selectArticleTotal" resultType="Integer">
         SELECT count(id)
         FROM t_article
+    </select>
+    <select id="selectArticleTotalByArchives" resultType="Integer" parameterType="String">
+        SELECT COUNT(1) AS con
+        FROM t_article
+        WHERE date_format(article_dat, '%Y-%m') = #{_parameter};
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from t_article

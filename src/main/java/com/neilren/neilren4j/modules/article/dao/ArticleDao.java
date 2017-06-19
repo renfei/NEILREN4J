@@ -8,6 +8,7 @@ import com.neilren.neilren4j.modules.article.entity.ArticleWithBLOBs;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 @MyBatisDao
 public interface ArticleDao extends CrudDao<Article> {
@@ -34,5 +35,10 @@ public interface ArticleDao extends CrudDao<Article> {
     int selectArticleTotal();
 
     List<ArticleWithBLOBs> selectTop10ByDate();
+
     List<ArticleWithBLOBs> searchByLike(String wd);
+
+    List<ArticleWithBLOBs> selectByArchivesLimit(Map<String, Object> stringObjectMap);
+
+    int selectArticleTotalByArchives(String date);
 }

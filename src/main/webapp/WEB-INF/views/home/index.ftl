@@ -49,7 +49,9 @@ bgcolour="bg-yellow">
                                                                     </div>
                                                                     <p class="animated" data-animation="fadeIn" data-animation-delay="100">
                                                                         <#if articleWithBLOBs.getContent()?length gt 600>
-                                                                        ${articleWithBLOBs.getContent()?substring(0,600)?html}...
+                                                                            ${articleWithBLOBs.getContent()?substring(0,600)?html}...
+                                                                            <#else >
+                                                                            ${articleWithBLOBs.getContent()?html}
                                                                         </#if>
                                                                     </p>
                                                                 </div>

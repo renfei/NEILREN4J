@@ -1,7 +1,7 @@
 <#macro header>
 <header id="awd-site-header">
     <div id="awd-site-logo" class="animated" data-animation="fadeInDown" data-animation-delay="500">
-        <h1><a href="#" class="" data-slide="home">
+        <h1><a href="/" class="" data-slide="home">
             <#--<img src="/static/img/Neil4J.png" width="60px" height="60px" style="margin-bottom: -11px;margin-right: 15px;" />-->
             <span style="/*text-transform: none;*/">NeilRen.Com</span>
         </a>

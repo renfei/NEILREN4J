@@ -1,11 +1,10 @@
-package com.neilren.neilren4j.modules.home.controller;
+package com.neilren.neilren4j.modules.article.controller;
 
 import com.neilren.neilren4j.common.controller.BaseController;
 import com.neilren.neilren4j.modules.article.entity.ArticleWithBLOBs;
+import com.neilren.neilren4j.modules.article.service.ArchivesService;
 import com.neilren.neilren4j.modules.article.service.ArticleService;
-import com.neilren.neilren4j.modules.article.service.FrielinkService;
 import com.neilren.neilren4j.modules.article.service.TagService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,25 +14,25 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 /**
- * 首页Controller
+ * Created by neil on 19/06/2017.
  */
 @Controller
-@RequestMapping(value = "/")
-public class HomeController extends BaseController {
+public class ArchivesController extends BaseController {
+
     @Autowired
-    private ArticleService articleService;
+    ArchivesService archivesService;
     @Autowired
     private TagService tagService;
     @Autowired
-    private FrielinkService frielinkService;
+    private ArticleService articleService;
 
-    @RequestMapping(value = "/")
-    public ModelAndView homePage() {
-        return homePage("1");
+    @RequestMapping("/Archives/{date}")
+    public ModelAndView getArticleByTag(@PathVariable String date) {
+        return getArticleByTag(date, "1");
     }
 
-    @RequestMapping(value = "/page/{index}")
-    public ModelAndView homePage(@PathVariable String index) {
+    @RequestMapping("/Archives/{date}/page/{index}")
+    public ModelAndView getArticleByTag(@PathVariable String date, @PathVariable String index) {
         ModelAndView mv = new ModelAndView();
         int Index = 0;
         try {
@@ -41,14 +40,13 @@ public class HomeController extends BaseController {
         } catch (Exception e) {
         }
         if (Index > 0) {
-            List<ArticleWithBLOBs> articleWithBLOBsList = articleService.getArticleList(Index);
+            List<ArticleWithBLOBs> articleWithBLOBsList = archivesService.getArticleList(date, Index);
             mv.addObject("articleWithBLOBsList", articleWithBLOBsList);
         }
+        mv.addObject("articlePagingList", archivesService.getArticlePagingList(date, Index));
+        mv.addObject("articlePagingUrl", "/Archives/" + date + "/page/");
         mv.addObject("tagList", tagService.getAllTag());
         mv.addObject("archivesList", articleService.getArticleArchives());
-        mv.addObject("articlePagingList", articleService.getArticlePagingList(Index));
-        mv.addObject("articlePagingUrl", "/page/");
-        mv.addObject("frieLinkList", frielinkService.getAllFrieLink());
         mv.addObject("articleTop10ByDateList", articleService.getArticleTop10ByDateList());
         mv.addObject("Index", Index);
         mv.setViewName("home/index");

@@ -3,6 +3,7 @@ package com.neilren.neilren4j.modules.article.service;
 import com.neilren.neilren4j.common.cache.memcached.MemcachedManager;
 import com.neilren.neilren4j.common.config.Global;
 import com.neilren.neilren4j.common.service.BaseService;
+import com.neilren.neilren4j.common.service.PagingService;
 import com.neilren.neilren4j.modules.article.dao.ArticleDao;
 import com.neilren.neilren4j.modules.article.entity.ArticleArchives;
 import com.neilren.neilren4j.modules.article.entity.ArticlePaging;
@@ -33,6 +34,8 @@ public class ArticleService extends BaseService {
     private ArticleDao articleDao;
     @Autowired
     private MemcachedManager memcachedManager;
+    @Autowired
+    private PagingService pagingService;
 
     /**
      * 获取指定的文章
@@ -120,29 +123,8 @@ public class ArticleService extends BaseService {
         List<ArticlePaging> articlePagingList = null;
         articlePagingList = (List<ArticlePaging>) memcachedManager.get(memcachedArticlePagingListKey + "_" + index);
         if (articlePagingList == null) {
-            int front = 4;
             int total = articleDao.selectArticleTotal();
-            total = (int) Math.ceil(total / 10);
-            articlePagingList = new ArrayList<ArticlePaging>();
-            articlePagingList.add(new ArticlePaging("首页", 1));
-            if (index > total - 3) {
-                //后方不足数
-                front = 6 - (total - index);
-            }
-            List<ArticlePaging> tempList = new ArrayList<ArticlePaging>();
-            //从当前页往前取3个，但不能成负数
-            for (int i = 0, j = index; i < front && j > 0; i++, j--) {
-                tempList.add(new ArticlePaging(String.valueOf(j), j));
-            }
-            //顺序修正，需要倒序
-            for (int i = tempList.size() - 1; i >= 0; i--) {
-                articlePagingList.add(tempList.get(i));
-            }
-            //如果不满8个，就一直加，但是不能加的超过总页数
-            for (int i = articlePagingList.size(), j = index + 1; i < 8 && j <= total; i++, j++) {
-                articlePagingList.add(new ArticlePaging(String.valueOf(j), j));
-            }
-            articlePagingList.add(new ArticlePaging("末页", total));
+            articlePagingList = pagingService.getPaging(index, total);
             memcachedManager.set(memcachedArticlePagingListKey + "_" + index, articlePagingList, Global.MemcachedExpire);
         }
         return articlePagingList;

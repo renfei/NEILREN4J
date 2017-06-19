@@ -8,12 +8,43 @@
         <result column="en_name" jdbcType="LONGVARCHAR" property="enName"/>
         <result column="zh_name" jdbcType="LONGVARCHAR" property="zhName"/>
     </resultMap>
+    <resultMap id="articleBaseResultMap" type="com.neilren.neilren4j.modules.article.entity.Article">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="article_type" jdbcType="INTEGER" property="articleType"/>
+        <result column="views" jdbcType="BIGINT" property="views"/>
+        <result column="article_dat" jdbcType="TIMESTAMP" property="articleDat"/>
+        <result column="article_status" jdbcType="INTEGER" property="articleStatus"/>
+    </resultMap>
+    <resultMap extends="articleBaseResultMap" id="articleResultMapWithBLOBs"
+               type="com.neilren.neilren4j.modules.article.entity.ArticleWithBLOBs">
+        <result column="source_url" jdbcType="LONGVARCHAR" property="sourceUrl"/>
+        <result column="author" jdbcType="LONGVARCHAR" property="author"/>
+        <result column="author_url" jdbcType="LONGVARCHAR" property="authorUrl"/>
+        <result column="title" jdbcType="LONGVARCHAR" property="title"/>
+        <result column="keyword" jdbcType="LONGVARCHAR" property="keyword"/>
+        <result column="describes" jdbcType="LONGVARCHAR" property="describes"/>
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+    </resultMap>
     <sql id="Base_Column_List">
     id
   </sql>
     <sql id="Blob_Column_List">
     en_name, zh_name
   </sql>
+    <select id="selectByTagLimit" parameterType="java.util.Map" resultMap="articleResultMapWithBLOBs">
+        SELECT
+          t1.zh_name,
+          t_article.*
+        FROM (SELECT
+                t_article_tag.article_id,
+                t_tag.zh_name
+              FROM t_article_tag
+                LEFT JOIN t_tag ON t_article_tag.tag_id = t_tag.id
+              WHERE t_tag.en_name = #{tag,jdbcType=LONGVARCHAR}) t1
+          LEFT JOIN t_article ON t1.article_id = t_article.id
+        ORDER BY t_article.article_dat DESC
+        LIMIT #{index,jdbcType=INTEGER}, #{size,jdbcType=INTEGER};
+    </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
@@ -36,6 +67,17 @@
     t_tag
     ON t.tag_id = t_tag.id;
   </select>
+    <select id="selectArticleTotal" parameterType="String" resultType="Integer">
+        SELECT
+         COUNT(1) AS con
+        FROM (SELECT
+                t_article_tag.article_id,
+                t_tag.zh_name
+              FROM t_article_tag
+                LEFT JOIN t_tag ON t_article_tag.tag_id = t_tag.id
+              WHERE t_tag.en_name = #{_parameter}) t1
+          LEFT JOIN t_article ON t1.article_id = t_article.id;
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from t_tag
     where id = #{id,jdbcType=BIGINT}

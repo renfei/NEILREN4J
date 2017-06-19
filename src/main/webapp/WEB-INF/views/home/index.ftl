@@ -62,7 +62,7 @@ bgcolour="bg-yellow">
                                             <#if articlePagingList??>
                                                 <div>
                                                     <#list articlePagingList as articlePaging>
-                                                        <a href="/page/${articlePaging.getIndex()!""}" class="btn <#if articlePaging.getIndex()==Index>btn-inverse</#if> animated" data-animation-delay="60" style="margin-bottom: 5px;">
+                                                        <a href="${articlePagingUrl}${articlePaging.getIndex()!""}" class="btn <#if articlePaging.getIndex()==Index>btn-inverse</#if> animated" data-animation-delay="60" style="margin-bottom: 5px;">
                                                         ${articlePaging.getName()!""}
                                                         </a>
                                                     </#list>
@@ -71,20 +71,22 @@ bgcolour="bg-yellow">
                                             </div>
                                             <div class="col-lg-4 col-md-5 svm" style="vertical-align: top;">
                                                 <div class="section-info text-left">
+
+                                                <#if tagList??>
                                                     <h2 class="text-default animated" data-animation="fadeIn" data-animation-delay="50">
                                                         Popular Tags
                                                     </h2>
-                                                <#if tagList??>
                                                     <#list tagList as tag>
                                                         <a href="/tag/${tag.getEnName()!""}" class="btn animated" data-animation-delay="60" style="margin-bottom: 5px;">
                                                         ${tag.getZhName()!""}
                                                         </a>
                                                     </#list>
                                                 </#if>
+
+                                                <#if articleTop10ByDateList??>
                                                     <h2 class="text-default animated" data-animation="fadeIn" data-animation-delay="50">
                                                         Most Recent
                                                     </h2>
-                                                <#if articleTop10ByDateList??>
                                                     <#list articleTop10ByDateList as articleTop10ByDate>
                                                         <a href="/Article/${articleTop10ByDate.getId()?c}" class="animated" data-animation-delay="60" style="display:block;margin-bottom: 5px;font-size: 14px">
                                                             <#if articleTop10ByDate.getTitle()?length gt 28>
@@ -95,20 +97,22 @@ bgcolour="bg-yellow">
                                                         </a>
                                                     </#list>
                                                 </#if>
+
+                                                <#if archivesList??>
                                                     <h2 class="text-default animated" data-animation="fadeIn" data-animation-delay="50">
                                                         Archives
                                                     </h2>
-                                                <#if archivesList??>
                                                     <#list archivesList as archives>
                                                         <a href="/Archives/${archives.getDateYmd()}" class="animated" data-animation-delay="60" style="display:block;margin-bottom: 5px;">
                                                         ${archives.getDateYmd()!""}（${archives.getNumber()!""}）
                                                         </a>
                                                     </#list>
                                                 </#if>
+
+                                                <#if frieLinkList??>
                                                     <h2 class="text-default animated" data-animation="fadeIn" data-animation-delay="50">
                                                         Friendly Link
                                                     </h2>
-                                                <#if frieLinkList??>
                                                     <#list frieLinkList as frielink>
                                                         <a href="${frielink.getLink()!""}" target="_blank" class="animated" data-animation-delay="60" style="display:block;margin-bottom: 5px;font-size: 14px">
                                                         ${frielink.getName()}

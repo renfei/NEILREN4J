@@ -231,5 +231,11 @@
             <artifactId>lucene-core</artifactId>
             <version>3.6.1</version>
         </dependency>
+        <!--Yubico OTP-->
+        <dependency>
+            <groupId>com.yubico</groupId>
+            <artifactId>yubico-validation-client2</artifactId>
+            <version>3.0.1</version>
+        </dependency>
     </dependencies>
 </project>

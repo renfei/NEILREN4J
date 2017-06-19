@@ -9,6 +9,7 @@ import com.neilren.neilren4j.common.utils.StringUtils;
 
 /**
  * 全局配置类
+ *
  * @author NeilRen
  * @version 2017-06-07
  */
@@ -60,11 +61,12 @@ public class Global {
 
     /**
      * 获取配置
+     *
      * @see ${fns:getConfig('adminPath')}
      */
     public static String getConfig(String key) {
         String value = map.get(key);
-        if (value == null){
+        if (value == null) {
             value = loader.getProperty(key);
             map.put(key, value != null ? value : StringUtils.EMPTY);
         }
@@ -108,4 +110,14 @@ public class Global {
      * Memcached缓存时间，秒
      */
     public static int MemcachedExpire = 60;
+
+    /**
+     * Yubico 的客户ID
+     */
+    public static Integer YubicoClientId = 100000;
+
+    /**
+     * Yubico 的key
+     */
+    public static String YubicoClientSecretKey = "";
 }

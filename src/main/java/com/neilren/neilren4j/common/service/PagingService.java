@@ -37,7 +37,7 @@ public class PagingService extends BaseService {
     public List<ArticlePaging> getPaging(int index, int total, int size) {
         List<ArticlePaging> articlePagingList = new ArrayList<ArticlePaging>();
         int front = 4;
-        total = (int) Math.ceil(total / size);
+        total = (int) Math.ceil((double)total / (double) size);
         articlePagingList.add(new ArticlePaging("首页", 1));
         if (index > total - 3) {
             //后方不足数

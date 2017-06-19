@@ -27,7 +27,7 @@ public class TagController extends BaseController {
         return getArticleByTag(en_name, "1");
     }
 
-    @RequestMapping("/tag/{en_name}/pange/{index}")
+    @RequestMapping("/tag/{en_name}/page/{index}")
     public ModelAndView getArticleByTag(@PathVariable String en_name, @PathVariable String index) {
         ModelAndView mv = new ModelAndView();
         int Index = 0;

@@ -28,7 +28,7 @@ import java.util.Observable;
 public class TagService extends BaseService {
 
     private static String memcachedArticleListByTagKey = "ArticleListByTagKey_";
-    private static String memcachedArticleByTagPagingListKey="ArticleByTagPagingListKey_";
+    private static String memcachedArticleByTagPagingListKey = "ArticleByTagPagingListKey_";
     private static String memcachedTagAllKey = "Tag_all";
     @Autowired
     private TagDao tagDao;
@@ -97,11 +97,11 @@ public class TagService extends BaseService {
     public List<ArticlePaging> getArticlePagingList(String tag, int index) {
         if (index <= 0) return null;
         List<ArticlePaging> articlePagingList = null;
-        articlePagingList = (List<ArticlePaging>) memcachedManager.get(memcachedArticleByTagPagingListKey + "_" + index);
+        articlePagingList = (List<ArticlePaging>) memcachedManager.get(memcachedArticleByTagPagingListKey + "_" + index + "_tag" + tag);
         if (articlePagingList == null) {
             int total = tagDao.selectArticleTotal(tag);
             articlePagingList = pagingService.getPaging(index, total);
-            memcachedManager.set(memcachedArticleByTagPagingListKey + "_" + index, articlePagingList, Global.MemcachedExpire);
+            memcachedManager.set(memcachedArticleByTagPagingListKey + "_" + index + "_tag" + tag, articlePagingList, Global.MemcachedExpire);
         }
         return articlePagingList;
     }

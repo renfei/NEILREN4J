@@ -59,6 +59,8 @@ public class ArticleService extends BaseService {
             } catch (Exception e) {
             }
         }
+        if (articleWithBLOBs != null)
+            articleDao.updateViewsByPrimaryKey(longID);
         return articleWithBLOBs;
     }
 

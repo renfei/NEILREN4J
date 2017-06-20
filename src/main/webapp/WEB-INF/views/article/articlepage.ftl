@@ -36,6 +36,7 @@ bgcolour="bg-black">
                                                                     <div class="col-xs-6">
                                                                         <span class="entry-date">${articleWithBLOBs.getArticleDat()?date}</span>
                                                                         <span class="entry-byline">By <a href="${articleWithBLOBs.getAuthorUrl()!"javascript:void(0)"}" target="_blank">${articleWithBLOBs.getAuthor()!""}</a></span>
+                                                                        <span class="entry-byline">Views:${articleWithBLOBs.getViews()!""}</span>
                                                                     </div>
                                                                     <div class="col-xs-6 rating-wrap text-right">
                                                                         <div class="score-callback" data-score="${articleWithBLOBs.getGrade()!""}" style="float: right;"></div>

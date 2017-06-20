@@ -42,6 +42,7 @@ bgcolour="bg-yellow">
                                                                         <div class="col-xs-6">
                                                                             <span class="entry-date">${articleWithBLOBs.getArticleDat()?date}</span>
                                                                             <span class="entry-byline">By <a href="${articleWithBLOBs.getAuthorUrl()!"javascript:void(0)"}" target="_blank">${articleWithBLOBs.getAuthor()!""}</a></span>
+                                                                            <span class="entry-byline">Views:${articleWithBLOBs.getViews()!""}</span>
                                                                         </div>
                                                                         <div class="col-xs-6 rating-wrap text-right">
                                                                             <div class="score-callback" data-score="${articleWithBLOBs.getGrade()!""}" style="float: right;"></div>
@@ -95,6 +96,21 @@ bgcolour="bg-yellow">
                                                             ${articleTop10ByDate.getTitle()?substring(0,28)?html}...
                                                             <#else>
                                                             ${articleTop10ByDate.getTitle()!""}
+                                                            </#if>
+                                                        </a>
+                                                    </#list>
+                                                </#if>
+
+                                                <#if articleTop10ByViewsList??>
+                                                    <h2 class="text-default animated" data-animation="fadeIn" data-animation-delay="50">
+                                                        Top Views
+                                                    </h2>
+                                                    <#list articleTop10ByViewsList as articleTop10ByViews>
+                                                        <a href="/Article/${articleTop10ByViews.getId()?c}" class="animated" data-animation-delay="60" style="display:block;margin-bottom: 5px;font-size: 14px">
+                                                            <#if articleTop10ByViews.getTitle()?length gt 28>
+                                                            ${articleTop10ByViews.getTitle()?substring(0,28)?html}...
+                                                            <#else>
+                                                            ${articleTop10ByViews.getTitle()!""}
                                                             </#if>
                                                         </a>
                                                     </#list>

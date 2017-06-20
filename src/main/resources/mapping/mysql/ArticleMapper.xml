@@ -85,6 +85,15 @@
         ORDER BY article_dat DESC
         LIMIT 10;
     </select>
+    <select id="selectTop10ByViews" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        FROM t_article
+        ORDER BY views DESC
+        LIMIT 10;
+    </select>
     <select id="selectArchives" resultType="com.neilren.neilren4j.modules.article.entity.ArticleArchives">
         SELECT
         DATE_FORMAT(article_dat, '%Y-%m')        AS DATEYmd,

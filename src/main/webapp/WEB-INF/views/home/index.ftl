@@ -101,6 +101,21 @@ bgcolour="bg-yellow">
                                                     </#list>
                                                 </#if>
 
+                                                <#if articleTop10ByViewsList??>
+                                                    <h2 class="text-default animated" data-animation="fadeIn" data-animation-delay="50">
+                                                        Top Views
+                                                    </h2>
+                                                    <#list articleTop10ByViewsList as articleTop10ByViews>
+                                                        <a href="/Article/${articleTop10ByViews.getId()?c}" class="animated" data-animation-delay="60" style="display:block;margin-bottom: 5px;font-size: 14px">
+                                                            <#if articleTop10ByViews.getTitle()?length gt 28>
+                                                            ${articleTop10ByViews.getTitle()?substring(0,28)?html}...
+                                                            <#else>
+                                                            ${articleTop10ByViews.getTitle()!""}
+                                                            </#if>
+                                                        </a>
+                                                    </#list>
+                                                </#if>
+
                                                 <#if archivesList??>
                                                     <h2 class="text-default animated" data-animation="fadeIn" data-animation-delay="50">
                                                         Archives

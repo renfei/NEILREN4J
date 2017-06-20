@@ -50,6 +50,7 @@ public class HomeController extends BaseController {
         mv.addObject("articlePagingUrl", "/page/");
         mv.addObject("frieLinkList", frielinkService.getAllFrieLink());
         mv.addObject("articleTop10ByDateList", articleService.getArticleTop10ByDateList());
+        mv.addObject("articleTop10ByViewsList", articleService.getArticleTop10ByViewsList());
         mv.addObject("Index", Index);
         mv.setViewName("home/index");
         return mv;

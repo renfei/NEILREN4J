@@ -27,9 +27,11 @@ public class ArticleService extends BaseService {
 
     private static String memcachedArticleListKey = "ArticleList_index";
     private static String memcachedArticleTop10ByDateListKey = "ArticleTop10ByDateList";
+    private static String memcachedArticleTop10ByViewsListKey = "ArticleTop10ByViewsList";
     private static String memcachedArticleKey = "Article_id";
     private static String memcachedArticleArchivesListKey = "ArticleArchivesList";
     private static String memcachedArticlePagingListKey = "ArticlePagingList";
+
     @Autowired
     private ArticleDao articleDao;
     @Autowired
@@ -96,8 +98,26 @@ public class ArticleService extends BaseService {
         articleWithBLOBsList = (List<ArticleWithBLOBs>) memcachedManager.get(memcachedArticleTop10ByDateListKey);
         if (articleWithBLOBsList == null) {
             try {
-                articleWithBLOBsList = articleDao.selectTop10ByDate();
+                articleWithBLOBsList = articleDao.selectTop10ByViews();
                 memcachedManager.set(memcachedArticleTop10ByDateListKey, articleWithBLOBsList, Global.MemcachedExpire);
+            } catch (Exception e) {
+            }
+        }
+        return articleWithBLOBsList;
+    }
+
+    /**
+     * 获取阅读量前十文章
+     *
+     * @return 文章List
+     */
+    public List<ArticleWithBLOBs> getArticleTop10ByViewsList() {
+        List<ArticleWithBLOBs> articleWithBLOBsList = null;
+        articleWithBLOBsList = (List<ArticleWithBLOBs>) memcachedManager.get(memcachedArticleTop10ByViewsListKey);
+        if (articleWithBLOBsList == null) {
+            try {
+                articleWithBLOBsList = articleDao.selectTop10ByDate();
+                memcachedManager.set(memcachedArticleTop10ByViewsListKey, articleWithBLOBsList, Global.MemcachedExpire);
             } catch (Exception e) {
             }
         }

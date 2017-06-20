@@ -31,6 +31,7 @@ public class ArticleController extends BaseController {
         mv.addObject("tagList", tagService.getAllTag());
         mv.addObject("archivesList", articleService.getArticleArchives());
         mv.addObject("articleTop10ByDateList", articleService.getArticleTop10ByDateList());
+        mv.addObject("articleTop10ByViewsList", articleService.getArticleTop10ByViewsList());
         mv.setViewName("article/articlepage");
         return mv;
     }

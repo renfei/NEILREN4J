@@ -36,6 +36,8 @@ public interface ArticleDao extends CrudDao<Article> {
 
     List<ArticleWithBLOBs> selectTop10ByDate();
 
+    List<ArticleWithBLOBs> selectTop10ByViews();
+
     List<ArticleWithBLOBs> searchByLike(String wd);
 
     List<ArticleWithBLOBs> selectByArchivesLimit(Map<String, Object> stringObjectMap);

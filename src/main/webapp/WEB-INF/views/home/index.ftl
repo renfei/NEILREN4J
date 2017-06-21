@@ -74,7 +74,22 @@
                                             </div>
                                             <div class="col-lg-4 col-md-5 svm" style="vertical-align: top;">
                                                 <div class="section-info text-left">
-
+                                                    <div class="row">
+                                                        <form class="subscribe-form animated"
+                                                              method="get" action="/Search/" data-animation="fadeIn" data-animation-delay="50">
+                                                            <div class="col-md-10" style="padding: 0;margin: 0;">
+                                                                <input type="text" id="subscribe-email"
+                                                                       name="wd"
+                                                                       placeholder="搜索一下"
+                                                                       style="padding: 5px 20px;" data-animation="fadeIn" data-animation-delay="50">
+                                                            </div>
+                                                            <div class="col-md-2" style="padding: 0;margin: 0;">
+                                                                <button type="submit" class="btn" style="width: 100%" data-animation="fadeIn" data-animation-delay="50">
+                                                                    <span>搜索</span> <i class="fa fa-search"></i>
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                                 <#if tagList??>
                                                     <h2 class="text-default animated" data-animation="fadeIn" data-animation-delay="50">
                                                         Popular Tags

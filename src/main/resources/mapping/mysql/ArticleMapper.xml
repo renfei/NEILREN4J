@@ -60,11 +60,17 @@
     </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
         select
-        <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
-        from t_article
-        where id = #{id,jdbcType=BIGINT}
+        *
+        FROM t_article
+          /*连接文章评分表*/
+          LEFT JOIN (
+                      SELECT
+                        article_id,
+                        AVG(grade) AS grade
+                      FROM t_article_grade
+                      GROUP BY article_id
+                    ) article_grade ON t_article.id = article_grade.article_id
+        WHERE t_article.id = #{id,jdbcType=BIGINT};
     </select>
     <select id="searchByLike" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
         select

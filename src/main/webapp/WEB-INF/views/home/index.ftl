@@ -45,7 +45,7 @@ bgcolour="bg-yellow">
                                                                             <span class="entry-byline">Views:${articleWithBLOBs.getViews()!""}</span>
                                                                         </div>
                                                                         <div class="col-xs-6 rating-wrap text-right">
-                                                                            <div class="score-callback" data-score="${articleWithBLOBs.getGrade()!""}" style="float: right;"></div>
+                                                                            <div class="score-callback" data-id="${articleWithBLOBs.getId()?c}" data-score="${articleWithBLOBs.getGrade()!""}" style="float: right;"></div>
                                                                         </div>
                                                                     </div>
                                                                     <p class="animated" data-animation="fadeIn" data-animation-delay="100">
@@ -165,6 +165,15 @@ bgcolour="bg-yellow">
 
                 return $(this).attr('data-score');
 
+            },
+            click: function(score, evt) {
+                $.ajax({
+                    type:"POST",
+                    url:"/Article/Grade",
+                    data:{
+                        longId:$(this).attr('data-id'),grade:score
+                    }
+                });
             }
 
         });

@@ -5,7 +5,9 @@ import com.neilren.neilren4j.common.config.Global;
 import com.neilren.neilren4j.common.service.BaseService;
 import com.neilren.neilren4j.common.service.PagingService;
 import com.neilren.neilren4j.modules.article.dao.ArticleDao;
+import com.neilren.neilren4j.modules.article.dao.ArticleGradeDao;
 import com.neilren.neilren4j.modules.article.entity.ArticleArchives;
+import com.neilren.neilren4j.modules.article.entity.ArticleGrade;
 import com.neilren.neilren4j.modules.article.entity.ArticlePaging;
 import com.neilren.neilren4j.modules.article.entity.ArticleWithBLOBs;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,6 +37,8 @@ public class ArticleService extends BaseService {
 
     @Autowired
     private ArticleDao articleDao;
+    @Autowired
+    private ArticleGradeDao articleGradeDao;
     @Autowired
     private MemcachedManager memcachedManager;
     @Autowired
@@ -168,5 +173,23 @@ public class ArticleService extends BaseService {
             }
         }
         return articleArchivesList;
+    }
+
+    public int setArticleGrade(String longId, String grade) {
+        int Grade = 5;
+        long ID = 0l;
+        try {
+            Grade = Integer.parseInt(grade);
+            ID = Long.parseLong(longId);
+        } catch (Exception e) {
+            return -1;
+        }
+        if (Grade > 0 && Grade < 6 && ID > 1000000) {
+            ArticleGrade articleGrade = new ArticleGrade();
+            articleGrade.setArticleId(ID);
+            articleGrade.setGrade(Grade);
+            articleGrade.setAddDate(new Date());
+            return articleGradeDao.insert(articleGrade);
+        } else return -1;
     }
 }

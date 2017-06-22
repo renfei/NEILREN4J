@@ -1,4 +1,4 @@
-<#macro head title="默认文字" keywords="默认文字" description="默认文字" bgcolour="bg-red">
+<#macro head bgcolour="bg-red">
 <!--
                                 ,r5qBMBMBMBMBq1r.
                           :FZBMBZZ2u77:i:iir7u5Z8BBBZ2:
@@ -46,13 +46,10 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <title>${title}</title>
     <!-- META DATA -->
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="${keywords}" />
-    <meta name="description" content="${description}" />
     <meta name="Author" content="NEILREN.COM">
     <meta name="Copyright" content="NEILREN.COM">
     <meta name="Generator" content="IntelliJ IDEA 2016.3.2 Build #IU-163.10154.41, built on December 21, 2016">
@@ -78,7 +75,15 @@
     <link rel="apple-touch-icon" sizes="114x114" href="/static/img/apple-touch-icon-114x114.png">
 
     <#nested>
-
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?9ec9e1ad12b870030ee328be943fb6c6";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
 </head>
 <body>
 <div id="awd-site-wrap" class="bg ${bgcolour}">

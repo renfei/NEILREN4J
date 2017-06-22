@@ -1,11 +1,10 @@
 <#-- 引入布局指令的命名空间 -->
 <#import "../layout/defaultLayout.ftl" as defaultLayout>
-
 <#-- 调用布局指令 -->
-<@defaultLayout.head  title="任霏的个人网站与博客 - NEILREN.COM - 关注分享互联网、IT技术、软件应用等计算机科技领域的IT科技博客"
-keywords="任霏,网站,博客,互联网,IT,技术,软件,应用,开发,建站"
-description="任霏个人博客，是一个关注分享关于互联网、IT技术、软件应用、程序开发等计算机科技领域的IT科技独立博客站点，作者任霏（NeilRen）免费为软件开发者提供帮助与支持。"
-bgcolour="bg-black">
+<@defaultLayout.head bgcolour="bg-black">
+<meta name="keywords" content="${articleWithBLOBs.getKeyword()!""}" />
+<meta name="description" content="${articleWithBLOBs.getDescribes()!""}" />
+<title>${articleWithBLOBs.getTitle()} - 任霏的个人网站与博客 - NEILREN.COM - 关注分享互联网、IT技术、软件应用等计算机科技领域的IT科技博客</title>
 </@defaultLayout.head>
 
 <@defaultLayout.header>
@@ -54,7 +53,22 @@ bgcolour="bg-black">
                                             </div>
                                             <div class="col-lg-4 col-md-5 svm" style="vertical-align: top;">
                                                 <div class="section-info text-left">
-
+                                                    <div class="row">
+                                                        <form class="subscribe-form animated"
+                                                              method="get" action="/Search/" data-animation="fadeIn" data-animation-delay="50">
+                                                            <div class="col-md-10" style="padding: 0;margin: 0;">
+                                                                <input type="text" id="subscribe-email"
+                                                                       name="wd"
+                                                                       placeholder="搜索一下"
+                                                                       style="padding: 5px 20px;" data-animation="fadeIn" data-animation-delay="50">
+                                                            </div>
+                                                            <div class="col-md-2" style="padding: 0;margin: 0;">
+                                                                <button type="submit" class="btn" style="width: 100%" data-animation="fadeIn" data-animation-delay="50">
+                                                                    <span>搜索</span> <i class="fa fa-search"></i>
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                                 <#if tagList??>
                                                     <h2 class="text-default animated" data-animation="fadeIn" data-animation-delay="50">
                                                         Popular Tags

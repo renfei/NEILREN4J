@@ -40,6 +40,7 @@ public class ArticleController extends BaseController {
     public ModelAndView getArticleById(@PathVariable String ID, HttpServletResponse response) {
         ModelAndView mv = new ModelAndView();
         ArticleWithBLOBs articleWithBLOBs = articleService.findById(ID);
+
         if (articleWithBLOBs == null)
             return errorController.error404(response);
         mv.addObject("articleWithBLOBs", articleWithBLOBs);

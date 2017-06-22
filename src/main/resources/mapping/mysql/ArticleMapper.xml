@@ -60,21 +60,29 @@
     </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
         select
-        <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
-        from t_article
-        where id = #{id,jdbcType=BIGINT}
+        *
+        FROM t_article
+          /*连接文章评分表*/
+          LEFT JOIN (
+                      SELECT
+                        article_id,
+                        AVG(grade) AS grade
+                      FROM t_article_grade
+                      GROUP BY article_id
+                    ) article_grade ON t_article.id = article_grade.article_id
+        WHERE t_article.id = #{id,jdbcType=BIGINT};
     </select>
-    <select id="searchByLike" parameterType="String" resultMap="ResultMapWithBLOBs">
+    <select id="searchByLike" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
         ,
         <include refid="Blob_Column_List"/>
         FROM t_article
         WHERE
-        t_article.title LIKE "%"#{_parameter}"%"
-        OR t_article.content LIKE "%"#{_parameter}"%";
+        t_article.title LIKE "%"#{wd,jdbcType=LONGVARCHAR}"%"
+        OR t_article.content LIKE "%"#{wd,jdbcType=LONGVARCHAR}"%"
+        ORDER BY article_dat DESC
+        LIMIT #{index,jdbcType=INTEGER},#{size,jdbcType=INTEGER};
     </select>
     <select id="selectTop10ByDate" resultMap="ResultMapWithBLOBs">
         select
@@ -105,6 +113,13 @@
     <select id="selectArticleTotal" resultType="Integer">
         SELECT count(id)
         FROM t_article
+    </select>
+    <select id="selectSearchArticleTotal" resultType="Integer" parameterType="String">
+        SELECT count(1)
+        FROM t_article
+        WHERE
+        t_article.title LIKE "%"#{_parameter}"%"
+        OR t_article.content LIKE "%"#{_parameter}"%"
     </select>
     <select id="selectArticleTotalByArchives" resultType="Integer" parameterType="String">
         SELECT COUNT(1) AS con

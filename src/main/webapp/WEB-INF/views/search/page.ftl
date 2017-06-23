@@ -178,11 +178,11 @@
 
 
 <@defaultLayout.footer>
-<script type="text/javascript" src="/static/js/jquery.raty.min.js"></script>
+<script type="text/javascript" src="//cdn.neilren.com/neilren4j/1.0.0/js/jquery.raty.min.js"></script>
 <script>
     $(function () {
 
-        $.fn.raty.defaults.path = '/static/img';
+        $.fn.raty.defaults.path = '//cdn.neilren.com/neilren4j/1.0.0/img';
 
         $('.score-callback').raty({
 

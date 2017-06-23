@@ -103,7 +103,7 @@ public class ArticleService extends BaseService {
         articleWithBLOBsList = (List<ArticleWithBLOBs>) memcachedManager.get(memcachedArticleTop10ByDateListKey);
         if (articleWithBLOBsList == null) {
             try {
-                articleWithBLOBsList = articleDao.selectTop10ByViews();
+                articleWithBLOBsList = articleDao.selectTop10ByDate();
                 memcachedManager.set(memcachedArticleTop10ByDateListKey, articleWithBLOBsList, Global.MemcachedExpire);
             } catch (Exception e) {
             }
@@ -121,7 +121,7 @@ public class ArticleService extends BaseService {
         articleWithBLOBsList = (List<ArticleWithBLOBs>) memcachedManager.get(memcachedArticleTop10ByViewsListKey);
         if (articleWithBLOBsList == null) {
             try {
-                articleWithBLOBsList = articleDao.selectTop10ByDate();
+                articleWithBLOBsList = articleDao.selectTop10ByViews();
                 memcachedManager.set(memcachedArticleTop10ByViewsListKey, articleWithBLOBsList, Global.MemcachedExpire);
             } catch (Exception e) {
             }

@@ -58,4 +58,19 @@
     <bean id="memcachedManager" class="com.neilren.neilren4j.common.cache.memcached.MemcachedManager">
         <property name="memcachedClient" ref="memcachedClient" />
     </bean>
+    <!--&lt;!&ndash; 阿里云身份校验 &ndash;&gt;-->
+    <!--<bean id="authDescriptor" class="net.spy.memcached.auth.AuthDescriptor">-->
+        <!--<constructor-arg index="0" >-->
+            <!--<list>-->
+                <!--<value>PLAIN</value>-->
+            <!--</list>-->
+        <!--</constructor-arg>-->
+        <!--<constructor-arg  index="1" ref="plainCallbackHandler"/>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 阿里云账号密码配置  &ndash;&gt;-->
+    <!--<bean id="plainCallbackHandler" class="net.spy.memcached.auth.PlainCallbackHandler">-->
+        <!--<constructor-arg index="0" value="${memcached.username}"/>-->
+        <!--<constructor-arg index="1" value="${memcached.password}"/>-->
+    <!--</bean>-->
 </beans>

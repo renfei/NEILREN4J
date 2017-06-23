@@ -11,29 +11,23 @@
 <@defaultLayout.header>
 </@defaultLayout.header>
 
-<!-- START MAIN -->
 <main id="awd-site-main">
-    <!-- START SECTION -->
     <section id="awd-site-content">
         <div class="sections-block">
             <div class="slides">
 
                 <div class="slides-wrap">
                     <div class="slide-item" data-slide-id="contact">
-                        <!-- START CONTAINER -->
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <!-- START SLIDE CONTENT-->
                                     <div class="slide-content">
                                         <div class="row">
                                             <div class="col-lg-5 col-lg-offset-1 col-md-6 col-md-push-6 svm">
 
                                                 <div class="section-info text-right">
-                                                    <!-- START TITLE -->
                                                     <h2 class="section-title text-default animated"
                                                         data-animation="fadeIn">联系我们</h2>
-                                                    <!-- END TITLE -->
                                                     <div class="contact-info">
                                                         <p class="contact-item"><i class="fa fa-qq"></i>
                                                             QQ群:<a href="//shang.qq.com/wpa/qunwpa?idkey=bfbde7e5dec79fd3cdb23c7cf590ca698e3da8b48a71369139ed6aa52f9a7513"
@@ -57,7 +51,6 @@
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-md-pull-6 svm">
                                                 <div class="section-info text-left">
-                                                    <!-- START CONTACT FORM -->
                                                     <form id="contact-form" class="contact-form">
                                                         <div class="row">
                                                             <div class="col-lg-4 col-md-6 col-md-12 animated"
@@ -77,7 +70,7 @@
 									                            <textarea name="contact-message" placeholder="您的留言内容..."
                                                                     class="contact-form-message required"
                                                                     rows="4"></textarea>
-                                                                <button class="btn btn-block" type="submit" id="submit"
+                                                                <button class="btn btn-block" type="submit" id="submit" onclick="alert('该功能暂未启用')"
                                                                         name="submit"><span>发送留言</span>
                                                                     <i class="fa fa-send"></i></button>
                                                             </div>

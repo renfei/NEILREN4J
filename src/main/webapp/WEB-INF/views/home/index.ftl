@@ -24,9 +24,6 @@
                                     <div class="slide-content">
                                         <div class="row">
                                             <div class="col-lg-8 col-md-7 svm">
-                                                <a href="/neilren4j">
-                                                    <img src="/static/img/home_neilren4j.png" class="animated" data-animation="fadeInDown" data-animation-delay="100" />
-                                                </a>
                                                 <div class="section-info text-left">
                                                     <div class="countdown">
                                                         <div class="animated" data-animation="fadeIn" data-animation-delay="60">
@@ -168,11 +165,11 @@
 
 
 <@defaultLayout.footer>
-<script type="text/javascript" src="/static/js/jquery.raty.min.js"></script>
+<script type="text/javascript" src="//cdn.neilren.com/neilren4j/1.0.0/js/jquery.raty.min.js"></script>
 <script>
     $(function() {
 
-        $.fn.raty.defaults.path = '/static/img';
+        $.fn.raty.defaults.path = '//cdn.neilren.com/neilren4j/1.0.0/img';
 
         $('.score-callback').raty({
 

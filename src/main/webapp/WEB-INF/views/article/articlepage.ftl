@@ -3,7 +3,7 @@
 <#-- 调用布局指令 -->
 <@defaultLayout.head bgcolour="bg-black">
 <meta name="keywords" content="${articleWithBLOBs.getKeyword()!""}" />
-<meta name="description" content="${articleWithBLOBs.getDescribes()!""}" />
+<meta name="description" content="${articleWithBLOBs.getDescribes()?html}" />
 <title>${articleWithBLOBs.getTitle()} - 任霏的个人网站与博客 - NEILREN.COM - 关注分享互联网、IT技术、软件应用等计算机科技领域的IT科技博客</title>
 </@defaultLayout.head>
 
@@ -135,11 +135,11 @@
 </main>
 
 <@defaultLayout.footer>
-<script type="text/javascript" src="/static/js/jquery.raty.min.js"></script>
+<script type="text/javascript" src="//cdn.neilren.com/neilren4j/1.0.0/js/jquery.raty.min.js"></script>
 <script>
     $(function() {
 
-        $.fn.raty.defaults.path = '/static/img';
+        $.fn.raty.defaults.path = '//cdn.neilren.com/neilren4j/1.0.0/img';
 
         $('.score-callback').raty({
 

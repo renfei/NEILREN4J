@@ -54,13 +54,13 @@
     <meta name="Copyright" content="NEILREN.COM">
     <meta name="Generator" content="IntelliJ IDEA 2016.3.2 Build #IU-163.10154.41, built on December 21, 2016">
     <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" type="text/css" href="/static/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/static/css/bicolor.min.css">
+    <link rel="stylesheet" type="text/css" href="//cdn.neilren.com/neilren4j/1.0.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.neilren.com/neilren4j/1.0.0/css/bicolor.min.css">
 
     <!-- CSS Global Compulsory -->
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/css/animate.min.css">
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="//cdn.neilren.com/neilren4j/1.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.neilren.com/neilren4j/1.0.0/css/animate.min.css">
+    <link rel="stylesheet" href="//cdn.neilren.com/neilren4j/1.0.0/css/style.css">
     <!--<link rel="stylesheet" href="css/custom.css">-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -69,10 +69,10 @@
     <![endif]-->
 
     <!-- FAVICONS -->
-    <link rel="shortcut icon" href="/static/img/favicon.png">
-    <link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/static/img/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/static/img/apple-touch-icon-114x114.png">
+    <link rel="shortcut icon" href="//cdn.neilren.com/neilren4j/1.0.0/img/favicon.png">
+    <link rel="apple-touch-icon" href="//cdn.neilren.com/neilren4j/1.0.0/img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="//cdn.neilren.com/neilren4j/1.0.0/img/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="//cdn.neilren.com/neilren4j/1.0.0/img/apple-touch-icon-114x114.png">
 
     <#nested>
     <script>

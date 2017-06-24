@@ -3,6 +3,7 @@ package com.neilren.neilren4j.modules.article.service;
 import com.neilren.neilren4j.common.cache.memcached.MemcachedManager;
 import com.neilren.neilren4j.common.config.Global;
 import com.neilren.neilren4j.common.service.BaseService;
+import com.neilren.neilren4j.common.service.IKAnalyzerService;
 import com.neilren.neilren4j.common.service.PagingService;
 import com.neilren.neilren4j.modules.article.dao.ArticleDao;
 import com.neilren.neilren4j.modules.article.dao.ArticleGradeDao;
@@ -43,6 +44,8 @@ public class ArticleService extends BaseService {
     private MemcachedManager memcachedManager;
     @Autowired
     private PagingService pagingService;
+    @Autowired
+    private IKAnalyzerService ikAnalyzerService;
 
     /**
      * 获取指定的文章
@@ -62,8 +65,23 @@ public class ArticleService extends BaseService {
         if (articleWithBLOBs == null) {
             try {
                 articleWithBLOBs = articleDao.selectByPrimaryKey(longID);
+                if (articleWithBLOBs.getKeyword() == null || articleWithBLOBs.getKeyword().equals("")) {
+                    List<String> list = ikAnalyzerService.analyzer(articleWithBLOBs.getTitle());
+                    String keyword = "";
+                    for (String str : list) {
+                        keyword += str + ",";
+                    }
+                    keyword = keyword.substring(0, keyword.length() - 1);
+                    articleWithBLOBs.setKeyword(keyword);
+                }
+                if (articleWithBLOBs.getDescribes() == null || articleWithBLOBs.getDescribes().equals("")) {
+                    articleWithBLOBs.setDescribes(
+                            articleWithBLOBs.getContent().length() > 200 ? articleWithBLOBs.getContent().substring(0, 200) : articleWithBLOBs.getContent()
+                    );
+                }
                 memcachedManager.set(memcachedArticleKey + longID, articleWithBLOBs, Global.MemcachedExpire);
             } catch (Exception e) {
+                System.out.print(e.getMessage());
             }
         }
         if (articleWithBLOBs != null)

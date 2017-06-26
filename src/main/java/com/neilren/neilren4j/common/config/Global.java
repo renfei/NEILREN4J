@@ -60,9 +60,17 @@ public class Global {
     public static final String USERFILES_BASE_URL = "/userfiles/";
 
     /**
+     * 获取属性文件
+     * @return
+     */
+    public static PropertiesLoader getLoader(){
+        return loader;
+    }
+
+    /**
      * 获取配置
      *
-     * @see ${fns:getConfig('adminPath')}
+     * @see
      */
     public static String getConfig(String key) {
         String value = map.get(key);

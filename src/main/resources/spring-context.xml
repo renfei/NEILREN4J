@@ -110,4 +110,9 @@
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
     </bean>-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="maxUploadSize" value="104857600" />  <!-- 设置允许上传的最大文件大小，以字节为单位计算。当设为-1时表示无限制，默认是-1 -->
+        <property name="maxInMemorySize" value="4096" />   <!-- 设置在文件上传时允许写到内存中的最大值，以字节为单位计算，默认是10240 -->
+    </bean>
 </beans>

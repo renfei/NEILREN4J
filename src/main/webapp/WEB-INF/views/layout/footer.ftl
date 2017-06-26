@@ -14,7 +14,7 @@
                         allowtransparency="true" frameborder="0" scrolling="0" width="80px" height="30px"
                         style="padding-top: 10px;margin-bottom: -5px;"></iframe></li>
             <li title="Github"><a target="_blank" href="//github.com/NeilRen"><i class="fa fa-github"></i></a></li>
-            <li title="QQ"><a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=3cc6fa673e18c1fbe34103bc8805b3634d03a6b5b923c9ade75c9caad25c4c93"><i class="fa fa-qq"></i></a></li>
+            <li title="QQ"><a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=bfbde7e5dec79fd3cdb23c7cf590ca698e3da8b48a71369139ed6aa52f9a7513"><i class="fa fa-qq"></i></a></li>
             <li title="微博"><a target="_blank" href="//weibo.com/NeilRen"><i class="fa fa-weibo"></i></a></li>
         </ul>
     </nav>

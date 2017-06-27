@@ -130,17 +130,17 @@
     delete from t_article
     where id = #{id,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.neilren.neilren4j.modules.article.entity.ArticleWithBLOBs">
-    insert into t_article (id, article_type, views, 
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.neilren.neilren4j.modules.article.entity.ArticleWithBLOBs">
+    insert into t_article (article_type, views,
       article_dat, article_status, source_url, 
       author, author_url, title, 
       keyword, describes, content
       )
-    values (#{id,jdbcType=BIGINT}, #{articleType,jdbcType=INTEGER}, #{views,jdbcType=BIGINT}, 
+    values (#{articleType,jdbcType=INTEGER}, #{views,jdbcType=BIGINT},
       #{articleDat,jdbcType=TIMESTAMP}, #{articleStatus,jdbcType=INTEGER}, #{sourceUrl,jdbcType=LONGVARCHAR}, 
       #{author,jdbcType=LONGVARCHAR}, #{authorUrl,jdbcType=LONGVARCHAR}, #{title,jdbcType=LONGVARCHAR}, 
       #{keyword,jdbcType=LONGVARCHAR}, #{describes,jdbcType=LONGVARCHAR}, #{content,jdbcType=LONGVARCHAR}
-      )
+      );
   </insert>
     <insert id="insertSelective" parameterType="com.neilren.neilren4j.modules.article.entity.ArticleWithBLOBs">
         insert into t_article

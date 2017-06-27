@@ -122,10 +122,10 @@ public class Global {
     /**
      * Yubico 的客户ID
      */
-    public static Integer YubicoClientId = 100000;
+    public static Integer YubicoClientId = Integer.parseInt(getConfig("Yubico.ClientId"));
 
     /**
      * Yubico 的key
      */
-    public static String YubicoClientSecretKey = "";
+    public static String YubicoClientSecretKey = getConfig("Yubico.ClientSecretKey");
 }

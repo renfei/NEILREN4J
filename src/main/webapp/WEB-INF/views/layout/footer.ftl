@@ -22,7 +22,6 @@
 </div>
 
 <!-- JS -->
-<script type="text/javascript" src="//cdn.neilren.com/neilren4j/1.0.0/js/jquery.min.js"></script>
 <script type="text/javascript" src="//cdn.neilren.com/neilren4j/1.0.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="//cdn.neilren.com/neilren4j/1.0.0/js/vendor.js"></script>
 <script type="text/javascript" src="//cdn.neilren.com/neilren4j/1.0.0/js/options.js"></script>

@@ -19,10 +19,10 @@
     delete from t_article_tag
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.neilren.neilren4j.modules.article.entity.ArticleTag">
-    insert into t_article_tag (id, article_id, tag_id
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.neilren.neilren4j.modules.article.entity.ArticleTag">
+    insert into t_article_tag (article_id, tag_id
       )
-    values (#{id,jdbcType=BIGINT}, #{articleId,jdbcType=BIGINT}, #{tagId,jdbcType=BIGINT}
+    values (#{articleId,jdbcType=BIGINT}, #{tagId,jdbcType=BIGINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.neilren.neilren4j.modules.article.entity.ArticleTag">

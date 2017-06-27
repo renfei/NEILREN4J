@@ -73,7 +73,7 @@
     <link rel="apple-touch-icon" href="//cdn.neilren.com/neilren4j/1.0.0/img/apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="72x72" href="//cdn.neilren.com/neilren4j/1.0.0/img/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="//cdn.neilren.com/neilren4j/1.0.0/img/apple-touch-icon-114x114.png">
-
+    <script type="text/javascript" src="//cdn.neilren.com/neilren4j/1.0.0/js/jquery.min.js"></script>
     <#nested>
     <script>
         var _hmt = _hmt || [];

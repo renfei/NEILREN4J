@@ -4,8 +4,10 @@ import com.neilren.neilren4j.common.cache.memcached.MemcachedManager;
 import com.neilren.neilren4j.common.config.Global;
 import com.neilren.neilren4j.common.service.BaseService;
 import com.neilren.neilren4j.common.service.PagingService;
+import com.neilren.neilren4j.modules.article.dao.ArticleTagDao;
 import com.neilren.neilren4j.modules.article.dao.TagDao;
 import com.neilren.neilren4j.modules.article.entity.ArticlePaging;
+import com.neilren.neilren4j.modules.article.entity.ArticleTag;
 import com.neilren.neilren4j.modules.article.entity.ArticleWithBLOBs;
 import com.neilren.neilren4j.modules.article.entity.Tag;
 import freemarker.ext.beans.HashAdapter;
@@ -32,6 +34,8 @@ public class TagService extends BaseService {
     private static String memcachedTagAllKey = "Tag_all";
     @Autowired
     private TagDao tagDao;
+    @Autowired
+    private ArticleTagDao articleTagDao;
     @Autowired
     private MemcachedManager memcachedManager;
     @Autowired
@@ -104,5 +108,13 @@ public class TagService extends BaseService {
             memcachedManager.set(memcachedArticleByTagPagingListKey + "_" + index + "_tag" + tag, articlePagingList, Global.MemcachedExpire);
         }
         return articlePagingList;
+    }
+
+    /**
+     * 插入文章标签关系
+     * @param record
+     */
+    public void insterArticleTag(ArticleTag record){
+        articleTagDao.insert(record);
     }
 }

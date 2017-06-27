@@ -14,7 +14,7 @@ import java.util.Map;
 public interface ArticleDao extends CrudDao<Article> {
     int deleteByPrimaryKey(Long id);
 
-    int insert(ArticleWithBLOBs record);
+    Long insert(ArticleWithBLOBs record);
 
     int insertSelective(ArticleWithBLOBs record);
 

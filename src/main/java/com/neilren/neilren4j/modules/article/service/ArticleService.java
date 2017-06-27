@@ -5,12 +5,10 @@ import com.neilren.neilren4j.common.config.Global;
 import com.neilren.neilren4j.common.service.BaseService;
 import com.neilren.neilren4j.common.service.IKAnalyzerService;
 import com.neilren.neilren4j.common.service.PagingService;
+import com.neilren.neilren4j.modules.article.dao.ArticleCategoryDao;
 import com.neilren.neilren4j.modules.article.dao.ArticleDao;
 import com.neilren.neilren4j.modules.article.dao.ArticleGradeDao;
-import com.neilren.neilren4j.modules.article.entity.ArticleArchives;
-import com.neilren.neilren4j.modules.article.entity.ArticleGrade;
-import com.neilren.neilren4j.modules.article.entity.ArticlePaging;
-import com.neilren.neilren4j.modules.article.entity.ArticleWithBLOBs;
+import com.neilren.neilren4j.modules.article.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,6 +38,8 @@ public class ArticleService extends BaseService {
     private ArticleDao articleDao;
     @Autowired
     private ArticleGradeDao articleGradeDao;
+    @Autowired
+    private ArticleCategoryDao articleCategoryDao;
     @Autowired
     private MemcachedManager memcachedManager;
     @Autowired
@@ -209,5 +209,24 @@ public class ArticleService extends BaseService {
             articleGrade.setAddDate(new Date());
             return articleGradeDao.insert(articleGrade);
         } else return -1;
+    }
+
+    /**
+     * 插入文章
+     *
+     * @param record
+     * @return
+     */
+    public Long insterArticle(ArticleWithBLOBs record) {
+        return articleDao.insert(record);
+    }
+
+    /**
+     * 插入文章分类关系
+     *
+     * @param record
+     */
+    public void insterArticleCat(ArticleCategory record) {
+        articleCategoryDao.insert(record);
     }
 }

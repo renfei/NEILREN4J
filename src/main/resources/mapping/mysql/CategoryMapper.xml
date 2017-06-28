@@ -22,6 +22,13 @@
     from t_category
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="selectAllCat" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_category
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from t_category
     where id = #{id,jdbcType=BIGINT}

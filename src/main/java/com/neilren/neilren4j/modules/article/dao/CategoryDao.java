@@ -4,6 +4,8 @@ import com.neilren.neilren4j.common.persistence.CrudDao;
 import com.neilren.neilren4j.common.persistence.annotation.MyBatisDao;
 import com.neilren.neilren4j.modules.article.entity.Category;
 
+import java.util.List;
+
 @MyBatisDao
 public interface CategoryDao extends CrudDao<Category> {
     int deleteByPrimaryKey(Long id);
@@ -17,4 +19,6 @@ public interface CategoryDao extends CrudDao<Category> {
     int updateByPrimaryKeySelective(Category record);
 
     int updateByPrimaryKeyWithBLOBs(Category record);
+
+    List<Category> selectAllCat();
 }

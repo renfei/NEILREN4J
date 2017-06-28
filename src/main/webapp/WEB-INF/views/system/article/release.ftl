@@ -191,24 +191,27 @@
                                                                    data-animation-delay="50"/>
                                                         </div>
                                                     </div>
+                                                <#if catList??>
                                                     <div class="row">
                                                         <h3>文章分类</h3>
                                                         <div>
-                                                            <a id="cat-1" onclick="selectcat(1);" class="btn animated">文本</a>
-                                                            <a id="cat-2" onclick="selectcat(2);" class="btn animated">文本</a>
-                                                            <a id="cat-3" onclick="selectcat(3);" class="btn animated">文本</a>
-                                                            <a id="cat-4" onclick="selectcat(4);" class="btn animated">文本</a>
+                                                            <#list catList as cat>
+                                                                <a id="cat-${cat.getId()}" onclick="selectcat(${cat.getId()});" class="btn animated">${cat.getZhName()!""}</a>
+                                                            </#list>
                                                         </div>
                                                     </div>
+                                                </#if>
+                                                <#if tagList??>
                                                     <div class="row">
                                                         <h3>文章标签</h3>
                                                         <div>
-                                                            <a id="tag-1" onclick="selecttag(1);" class="btn animated">文本</a>
-                                                            <a id="tag-2" onclick="selecttag(2);" class="btn animated">文本</a>
-                                                            <a id="tag-3" onclick="selecttag(3);" class="btn animated">文本</a>
-                                                            <a id="tag-4" onclick="selecttag(4);" class="btn animated">文本</a>
+                                                            <#list tagList as tag>
+                                                                <a id="tag-${tag.getId()}" onclick="selecttag(${tag.getId()});" class="btn animated">${tag.getZhName()!""}</a>
+                                                            </#list>
                                                         </div>
                                                     </div>
+                                                </#if>
+
                                                     <div class="row" style="margin-top: 50px;">
                                                         <h3>发布文章</h3>
                                                         <div class="col-md-10" style="padding: 0;margin: 0;">

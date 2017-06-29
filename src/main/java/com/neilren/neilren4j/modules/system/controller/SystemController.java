@@ -12,6 +12,7 @@ import com.neilren.neilren4j.modules.article.entity.ArticleWithBLOBs;
 import com.neilren.neilren4j.modules.article.service.ArticleService;
 import com.neilren.neilren4j.modules.article.service.CategoryService;
 import com.neilren.neilren4j.modules.article.service.TagService;
+import com.neilren.neilren4j.modules.system.service.ArticleReleaseService;
 import com.yubico.client.v2.exceptions.YubicoValidationFailure;
 import com.yubico.client.v2.exceptions.YubicoVerificationException;
 import freemarker.ext.beans.HashAdapter;
@@ -42,7 +43,7 @@ public class SystemController extends BaseController {
     @Autowired
     private AliyunService aliyunService;
     @Autowired
-    private ArticleService articleService;
+    private ArticleReleaseService articleReleaseService;
     @Autowired
     private TagService tagService;
     @Autowired
@@ -79,36 +80,7 @@ public class SystemController extends BaseController {
             return retMap;
         }
         if (otpVerify) {
-            //插入文章
-            ArticleWithBLOBs archiveWithBLOBs = new ArticleWithBLOBs();
-            archiveWithBLOBs.setArticleDat(new Date());
-            archiveWithBLOBs.setViews(0L);
-            archiveWithBLOBs.setArticleStatus(0);
-            archiveWithBLOBs.setArticleType(Integer.parseInt(map.get("type").toString()));
-            archiveWithBLOBs.setTitle(map.get("title").toString());
-            archiveWithBLOBs.setAuthor(map.get("author").toString());
-            archiveWithBLOBs.setAuthorUrl(map.get("author_link").toString());
-            archiveWithBLOBs.setSourceUrl(map.get("source").toString());
-            archiveWithBLOBs.setKeyword(map.get("keyword").toString());
-            archiveWithBLOBs.setDescribes(map.get("describes").toString());
-            archiveWithBLOBs.setContent(map.get("content").toString());
-            Long id = articleService.insterArticle(archiveWithBLOBs);
-            //插入标签关系
-            JSONArray jsonTagArray = (JSONArray) map.get("tag");
-            for (int i = 0; i < jsonTagArray.size(); i++) {
-                ArticleTag articleTag = new ArticleTag();
-                articleTag.setArticleId(archiveWithBLOBs.getId());
-                articleTag.setTagId(Long.parseLong(jsonTagArray.getString(i)));
-                tagService.insterArticleTag(articleTag);
-            }
-            //插入分类关系
-            JSONArray jsonCatArray = (JSONArray) map.get("cat");
-            for (int i = 0; i < jsonCatArray.size(); i++) {
-                ArticleCategory articleCategory = new ArticleCategory();
-                articleCategory.setArticleId(archiveWithBLOBs.getId());
-                articleCategory.setCategoryId(Long.parseLong(jsonCatArray.getString(i)));
-                articleService.insterArticleCat(articleCategory);
-            }
+            ArticleWithBLOBs archiveWithBLOBs = articleReleaseService.ArticleRelease(map);
             retMap.put("state", "success");
             retMap.put("msg", archiveWithBLOBs.getId());
         } else {

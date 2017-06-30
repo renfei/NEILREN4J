@@ -40,6 +40,7 @@ public class SiteMapService extends BaseService {
     public List<SiteMapXml> getSiteMaps() {
         List<SiteMapXml> siteMapXmls = (List<SiteMapXml>) memcachedManager.get(memcachedSiteMapstKey);
         if (siteMapXmls == null) {
+            siteMapXmls = new ArrayList<SiteMapXml>();
             List<List<ArticleWithBLOBs>> articleWithBLOBs = new ArrayList<List<ArticleWithBLOBs>>();
             //首页
             siteMapXmls.add(new SiteMapXml(Global.getConfig("neilren.site"), Changefreq.daily, "1"));

@@ -1,13 +1,15 @@
 package com.neilren.neilren4j.common.entity;
 
 import javax.xml.crypto.Data;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
  * Created by neil on 29/06/2017.
  */
-public class SiteMapXml {
+public class SiteMapXml implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String loc;
     private Changefreq changefreq;
     private float priority;

@@ -30,8 +30,9 @@ public class AliyunOSSClientUtil {
     //空间
     private String bucketName = Global.getLoader().getProperty("aliyun.oss.bucketName", "default");
     //文件存储目录
+    int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
     private String filedir = "img/" + Calendar.getInstance().get(Calendar.YEAR)
-            + "/" + (Calendar.getInstance().get(Calendar.MONTH) + 1) + "/";
+            + "/" + (month < 10 ? "0" + month : month) + "/";
 
     private OSSClient ossClient;
 

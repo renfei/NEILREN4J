@@ -1,17 +1,23 @@
 package com.neilren.neilren4j.modules.home.controller;
 
 import com.neilren.neilren4j.common.controller.BaseController;
+import com.neilren.neilren4j.common.entity.Changefreq;
+import com.neilren.neilren4j.common.entity.SiteMapXml;
 import com.neilren.neilren4j.modules.article.entity.ArticleWithBLOBs;
 import com.neilren.neilren4j.modules.article.service.ArticleService;
 import com.neilren.neilren4j.modules.article.service.FrielinkService;
 import com.neilren.neilren4j.modules.article.service.TagService;
 
+import com.neilren.neilren4j.modules.home.service.SiteMapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,6 +32,8 @@ public class HomeController extends BaseController {
     private TagService tagService;
     @Autowired
     private FrielinkService frielinkService;
+    @Autowired
+    private SiteMapService siteMapService;
 
     @RequestMapping(value = "/")
     public ModelAndView homePage() {
@@ -53,6 +61,26 @@ public class HomeController extends BaseController {
         mv.addObject("articleTop10ByViewsList", articleService.getArticleTop10ByViewsList());
         mv.addObject("Index", Index);
         mv.setViewName("home/index");
+        return mv;
+    }
+
+    @RequestMapping(value = "/sitemap.xml")
+    @ResponseBody
+    public ModelAndView getSiteMapXml(HttpServletResponse response) {
+        ModelAndView mv = new ModelAndView();
+        List<SiteMapXml> siteMapXmls = siteMapService.getSiteMaps();
+        mv.addObject("siteMapXmls", siteMapXmls);
+        mv.setViewName("home/sitemapxml");
+        response.setContentType("text/xml;charset=UTF-8");
+        return mv;
+    }
+
+    @RequestMapping(value = "/sitemap.xsl")
+    @ResponseBody
+    public ModelAndView getSiteMapXsl(HttpServletResponse response) {
+        ModelAndView mv = new ModelAndView();
+        response.setContentType("application/octet-stream");
+        mv.setViewName("home/sitemapxsl");
         return mv;
     }
 }

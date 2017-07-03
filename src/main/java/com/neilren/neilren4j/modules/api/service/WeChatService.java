@@ -1,8 +1,10 @@
 package com.neilren.neilren4j.modules.api.service;
 
 import com.neilren.neilren4j.common.config.Global;
+import com.neilren.neilren4j.modules.api.dao.WeChatMagDao;
 import com.neilren.neilren4j.modules.api.entity.Article;
 import com.neilren.neilren4j.modules.api.entity.WeChatMessage;
+import com.neilren.neilren4j.modules.api.entity.WeChatMsg;
 import com.neilren.neilren4j.modules.api.entity.WeChatReply;
 import com.neilren.neilren4j.modules.article.entity.ArticleWithBLOBs;
 import com.neilren.neilren4j.modules.article.service.SearchService;
@@ -37,6 +39,8 @@ public class WeChatService {
     private String EncodingAESKey;
     @Autowired
     private SearchService searchService;
+    @Autowired
+    private WeChatMagDao weChatMagDao;
 
     WeChatService() {
         this.Token = Global.getConfig("wechat.token");
@@ -82,7 +86,21 @@ public class WeChatService {
     public WeChatReply responseMessage(HttpServletRequest request) {
         Map<String, String> requestMap = parseXml(request);
         WeChatMessage message = mapToMessage(requestMap);
-        //[TODO]...保存接受消息到数据库
+        //保存接受消息到数据库
+        WeChatMsg weChatMsg = new WeChatMsg();
+        weChatMsg.setRecording_time(new Date());
+        weChatMsg.setType(0);
+        weChatMsg.setFrom_user_name(message.getFromUserName());
+        weChatMsg.setCreate_time(message.getCreateTime().getTime());
+        weChatMsg.setMsg_type(message.getMsgType());
+        if (message.getMsgType().equals(WeChatMessage.TEXT))
+            weChatMsg.setContent(message.getContent());
+        else//如果是语音识别类型的消息，则获取Recognitio字段
+            weChatMsg.setContent(message.getRecognition());
+        weChatMsg.setMsg_id(Long.parseLong(message.getMsgId()));
+        weChatMsg.setOriginal(requestMap.toString());
+        weChatMagDao.insert(weChatMsg);
+        //保存结束
         String replyContent = WeChatReply.WELCOME_CONTENT;
         String type = message.getMsgType();
         //拼装回复消息
@@ -90,8 +108,12 @@ public class WeChatService {
         reply.setToUserName(message.getFromUserName());
         reply.setFromUserName(message.getToUserName());
         reply.setCreateTime(new Date());
-        if (type.equals(WeChatMessage.TEXT)) {//仅处理文本回复内容
-            String content = message.getContent();//消息内容
+        //接收语音消息，需要在公众号平台开启语音识别
+        if (type.equals(WeChatMessage.TEXT) || type.equals(WeChatMessage.VOICE)) {//仅处理文本回复内容
+            String content;//消息内容
+            if (type.equals(WeChatMessage.TEXT))
+                content = message.getContent();
+            else content = message.getVOICE();
             List<ArticleWithBLOBs> articleWithBLOBss = null;
             try {
                 //调用搜索服务
@@ -123,13 +145,33 @@ public class WeChatService {
             } else {
                 //什么也没搜索到
                 reply.setMsgType(WeChatReply.TEXT);
-                reply.setContent("根据您发来的【" + content + "】没有搜索到任何博文，陛下换个词试试？");
+                if (message.getMsgType().equals(WeChatMessage.TEXT))
+                    reply.setContent("根据您发来的【" + content + "】没有搜索到任何博文，陛下换个词试试？");
+                else
+                    reply.setContent("根据您发来的【" + message.getRecognition() + "】没有搜索到任何博文，陛下换个词试试？");
             }
         } else {
             reply.setMsgType(WeChatReply.TEXT);
             reply.setContent("NEILREN.COM 的微信模块暂时只能处理文本类消息哦，我们会积极改进的。");
         }
-        //[TODO]...保存回复消息到数据库
+        //保存回复消息到数据库
+        WeChatMsg weChatMsgReply = new WeChatMsg();
+        weChatMsgReply.setRecording_time(new Date());
+        weChatMsgReply.setType(1);
+        weChatMsgReply.setFrom_user_name(reply.getFromUserName());
+        weChatMsgReply.setCreate_time(reply.getCreateTime().getTime());
+        weChatMsgReply.setMsg_type(reply.getMsgType());
+        if (reply.getContent() == null) {
+            if (reply.getArticleCount() > 0)
+                weChatMsgReply.setContent(reply.getArticles().toString());
+            else
+                weChatMsgReply.setContent("");
+        } else
+            weChatMsgReply.setContent(reply.getContent());
+        weChatMsgReply.setMsg_id(0L);
+        weChatMsgReply.setOriginal(replyToXml(reply));
+        weChatMagDao.insert(weChatMsgReply);
+        //保存结束
         return reply;
     }
 
@@ -188,6 +230,8 @@ public class WeChatService {
         } else if (msgType.equals(WeChatMessage.EVENT)) {
             message.setEvent(map.get("Event"));
             message.setEventKey(map.get("EventKey"));
+        } else if (msgType.equals(WeChatMessage.VOICE)) {
+            message.setRecognition(map.get("Recognition"));
         }
         return message;
     }

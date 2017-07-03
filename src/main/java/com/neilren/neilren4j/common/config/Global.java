@@ -117,7 +117,7 @@ public class Global {
     /**
      * Memcached缓存时间，秒
      */
-    public static int MemcachedExpire = 1800;
+    public static int MemcachedExpire = 3600;
 
     /**
      * Yubico 的客户ID

@@ -64,6 +64,15 @@ public class HomeController extends BaseController {
         return mv;
     }
 
+    @RequestMapping(value = "/robots.txt")
+    @ResponseBody
+    public ModelAndView getRobotsTxt(HttpServletResponse response) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("home/robotstxt");
+        response.setContentType("text/plain;charset=UTF-8");
+        return mv;
+    }
+
     @RequestMapping(value = "/sitemap.xml")
     @ResponseBody
     public ModelAndView getSiteMapXml(HttpServletResponse response) {

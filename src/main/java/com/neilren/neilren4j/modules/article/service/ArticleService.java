@@ -5,6 +5,7 @@ import com.neilren.neilren4j.common.config.Global;
 import com.neilren.neilren4j.common.service.BaseService;
 import com.neilren.neilren4j.common.service.IKAnalyzerService;
 import com.neilren.neilren4j.common.service.PagingService;
+import com.neilren.neilren4j.common.utils.StringUtils;
 import com.neilren.neilren4j.modules.article.dao.ArticleCategoryDao;
 import com.neilren.neilren4j.modules.article.dao.ArticleDao;
 import com.neilren.neilren4j.modules.article.dao.ArticleGradeDao;
@@ -104,6 +105,17 @@ public class ArticleService extends BaseService {
         if (articleWithBLOBsList == null) {
             try {
                 articleWithBLOBsList = articleDao.selectByLimit(index, size);
+                //文章内容要移除html代码，消除干扰，只要文字内容
+                for (int i = 0; i < articleWithBLOBsList.size(); i++) {
+                    //循环
+                    articleWithBLOBsList.get(i).setContent(
+                            //修改内容
+                            StringUtils.replaceHtml(
+                                    //替换内容
+                                    articleWithBLOBsList.get(i).getContent()//获取内容
+                            )
+                    );
+                }
                 memcachedManager.set(memcachedArticleListKey + index + "_size" + size, articleWithBLOBsList, Global.MemcachedExpire);
             } catch (Exception e) {
             }

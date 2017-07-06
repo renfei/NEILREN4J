@@ -17,4 +17,11 @@ public class AboutController extends BaseController {
         mv.setViewName("about/index");
         return mv;
     }
+
+    @RequestMapping(value = "Advert")
+    public ModelAndView getAdvert() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("about/advert");
+        return mv;
+    }
 }

@@ -1,5 +1,6 @@
 package com.neilren.neilren4j.modules.home.controller;
 
+import com.neilren.neilren4j.common.config.Global;
 import com.neilren.neilren4j.common.controller.BaseController;
 import com.neilren.neilren4j.common.entity.Changefreq;
 import com.neilren.neilren4j.common.entity.SiteMapXml;
@@ -60,6 +61,7 @@ public class HomeController extends BaseController {
         mv.addObject("articleTop10ByDateList", articleService.getArticleTop10ByDateList());
         mv.addObject("articleTop10ByViewsList", articleService.getArticleTop10ByViewsList());
         mv.addObject("Index", Index);
+        mv.addObject("advert", Global.getConfig("neilren.advert"));
         mv.setViewName("home/index");
         return mv;
     }

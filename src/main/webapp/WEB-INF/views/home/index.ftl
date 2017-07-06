@@ -24,6 +24,19 @@
                                     <div class="slide-content">
                                         <div class="row">
                                             <div class="col-lg-8 col-md-7 svm">
+                                            <#if advert=="true">
+                                                <div class="row nr_tui animated" data-animation="fadeIn"
+                                                     data-animation-delay="50">
+                                                    <a href="https://s.click.taobao.com/t?e=m%3D2%26s%3DnfMbSZA5AyccQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAuKYBMmWJFfCwT9z089mpeRRPAWXiEIX1TxQHrjNFTalRZZz3lSCmilrM3aIbBJsIzDVuRn8ddiDsEVVC24eqozO54LQ%2FVw1L9X5LHh3Z8M%2BWS6ALZVeqlk9XUfbPSJC%2F06deTzTIbffYpyF7ku%2BxKgGargQjSAC4C6cUF%2FXAmem"
+                                                       target="_blank">
+                                                        <img src="//cdn.neilren.com/neilren4j/tui/aliyun/baokuan/1000-110.jpg"
+                                                             alt="阿里云爆款"/>
+                                                    </a>
+                                                    <a href="/About/Advert" target="_blank">
+                                                        <span>广告</span>
+                                                    </a>
+                                                </div>
+                                            </#if>
                                                 <div class="section-info text-left">
                                                     <div class="countdown">
                                                         <div class="animated" data-animation="fadeIn"
@@ -82,9 +95,9 @@
                                             </#if>
                                             </div>
                                             <div class="col-lg-4 col-md-5 svm" style="vertical-align: top;">
-                                                <div class="section-info text-left">
+                                                <div class="section-info text-left" style="margin-top: 0;">
                                                     <div class="row">
-                                                        <form class="subscribe-form animated"
+                                                        <form class="subscribe-form animated" style="margin-top: 0;"
                                                               method="get" action="/Search/" data-animation="fadeIn"
                                                               data-animation-delay="50">
                                                             <div class="col-md-10" style="padding: 0;margin: 0;">
@@ -116,7 +129,19 @@
                                                         </a>
                                                     </#list>
                                                 </#if>
-
+                                                <#if advert=="true">
+                                                    <div class="row nr_tui animated" data-animation="fadeIn"
+                                                         data-animation-delay="50">
+                                                        <a href="https://s.click.taobao.com/t?e=m%3D2%26s%3DMzrWpLC33MscQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAr1GCRldg2hZFhw4aU3RPsBRPAWXiEIX1TxQHrjNFTalRZZz3lSCmil6cX2EUpDecTDVuRn8ddiDsEVVC24eqozO54LQ%2FVw1L9X5LHh3Z8M%2BWS6ALZVeqlk9XUfbPSJC%2F06deTzTIbffMLokHRX1EtqlarZr4RXuLi6cUF%2FXAmem"
+                                                           target="_blank">
+                                                            <img src="//cdn.neilren.com/neilren4j/tui/aliyun/xuesheng/800-200.jpg"
+                                                                 alt="阿里云学生优惠"/>
+                                                        </a>
+                                                        <a href="/About/Advert" target="_blank">
+                                                            <span>广告</span>
+                                                        </a>
+                                                    </div>
+                                                </#if>
                                                 <#if articleTop10ByDateList??>
                                                     <h2 class="text-default animated" data-animation="fadeIn"
                                                         data-animation-delay="50">
@@ -183,7 +208,19 @@
                                                         </a>
                                                     </#list>
                                                 </#if>
-
+                                                <#if advert=="true">
+                                                    <div class="row nr_tui animated" data-animation="fadeIn"
+                                                         data-animation-delay="50">
+                                                        <a href="https://s.click.taobao.com/t?e=m%3D2%26s%3DrpkqzWnLrCYcQipKwQzePCperVdZeJviEViQ0P1Vf2kguMN8XjClAuKYBMmWJFfCu6ClLcnoGFRRPAWXiEIX1TxQHrjNFTalRZZz3lSCmilWwJ9Z9bYyjzDVuRn8ddiDsEVVC24eqozO54LQ%2FVw1L9X5LHh3Z8M%2BWS6ALZVeqlk9XUfbPSJC%2F06deTzTIbffYpyF7ku%2BxKguktBpDNMjUsC9aO5Uou70LpxQX9cCZ6Y%3D"
+                                                           target="_blank">
+                                                            <img src="//cdn.neilren.com/neilren4j/tui/aliyun/gaoxingneng/730-270.jpg"
+                                                                 alt="阿里云高性能"/>
+                                                        </a>
+                                                        <a href="/About/Advert" target="_blank">
+                                                            <span>广告</span>
+                                                        </a>
+                                                    </div>
+                                                </#if>
                                                 <#if frieLinkList??>
                                                     <h2 class="text-default animated" data-animation="fadeIn"
                                                         data-animation-delay="50">

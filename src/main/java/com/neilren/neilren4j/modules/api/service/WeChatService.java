@@ -1,6 +1,7 @@
 package com.neilren.neilren4j.modules.api.service;
 
 import com.neilren.neilren4j.common.config.Global;
+import com.neilren.neilren4j.common.utils.StringUtils;
 import com.neilren.neilren4j.modules.api.dao.WeChatMagDao;
 import com.neilren.neilren4j.modules.api.entity.Article;
 import com.neilren.neilren4j.modules.api.entity.WeChatMessage;
@@ -96,7 +97,7 @@ public class WeChatService {
         if (message.getMsgType().equals(WeChatMessage.TEXT))
             weChatMsg.setContent(message.getContent());
         else//如果是语音识别类型的消息，则获取Recognitio字段
-            weChatMsg.setContent(message.getRecognition());
+            weChatMsg.setContent(StringUtils.removePunctuation(message.getRecognition()));
         weChatMsg.setMsg_id(Long.parseLong(message.getMsgId()));
         weChatMsg.setOriginal(requestMap.toString());
         weChatMagDao.insert(weChatMsg);

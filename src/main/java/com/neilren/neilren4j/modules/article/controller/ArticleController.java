@@ -1,5 +1,6 @@
 package com.neilren.neilren4j.modules.article.controller;
 
+import com.neilren.neilren4j.common.config.Global;
 import com.neilren.neilren4j.common.controller.BaseController;
 
 import com.neilren.neilren4j.modules.article.entity.Article;
@@ -48,6 +49,7 @@ public class ArticleController extends BaseController {
         mv.addObject("archivesList", articleService.getArticleArchives());
         mv.addObject("articleTop10ByDateList", articleService.getArticleTop10ByDateList());
         mv.addObject("articleTop10ByViewsList", articleService.getArticleTop10ByViewsList());
+        mv.addObject("advert", Global.getConfig("neilren.advert"));
         mv.setViewName("article/articlepage");
         return mv;
     }

@@ -18,6 +18,7 @@ import com.google.common.collect.Lists;
 
 /**
  * 字符串工具类, 继承org.apache.commons.lang3.StringUtils类
+ *
  * @author NeilRen
  * @version 2017-06-07
  */
@@ -28,17 +29,18 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
     /**
      * 转换为字节数组
+     *
      * @param str
      * @return
      */
-    public static byte[] getBytes(String str){
-        if (str != null){
+    public static byte[] getBytes(String str) {
+        if (str != null) {
             try {
                 return str.getBytes(CHARSET_NAME);
             } catch (UnsupportedEncodingException e) {
                 return null;
             }
-        }else{
+        } else {
             return null;
         }
     }
@@ -47,8 +49,8 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * 转换为Boolean类型
      * 'true', 'on', 'y', 't', 'yes' or '1' (case insensitive) will return true. Otherwise, false is returned.
      */
-    public static Boolean toBoolean(final Object val){
-        if (val == null){
+    public static Boolean toBoolean(final Object val) {
+        if (val == null) {
             return false;
         }
         return BooleanUtils.toBoolean(val.toString()) || "1".equals(val.toString());
@@ -56,10 +58,11 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
     /**
      * 转换为字节数组
+     *
      * @param str
      * @return
      */
-    public static String toString(byte[] bytes){
+    public static String toString(byte[] bytes) {
         try {
             return new String(bytes, CHARSET_NAME);
         } catch (UnsupportedEncodingException e) {
@@ -69,7 +72,8 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
     /**
      * 如果对象为空，则使用defaultVal值
-     * 	see: ObjectUtils.toString(obj, defaultVal)
+     * see: ObjectUtils.toString(obj, defaultVal)
+     *
      * @param obj
      * @param defaultVal
      * @return
@@ -80,14 +84,15 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
     /**
      * 是否包含字符串
-     * @param str 验证字符串
+     *
+     * @param str  验证字符串
      * @param strs 字符串组
      * @return 包含返回true
      */
-    public static boolean inString(String str, String... strs){
-        if (str != null){
-            for (String s : strs){
-                if (str.equals(trim(s))){
+    public static boolean inString(String str, String... strs) {
+        if (str != null) {
+            for (String s : strs) {
+                if (str.equals(trim(s))) {
                     return true;
                 }
             }
@@ -99,7 +104,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * 替换掉HTML标签方法
      */
     public static String replaceHtml(String html) {
-        if (isBlank(html)){
+        if (isBlank(html)) {
             return "";
         }
         String regEx = "<.+?>";
@@ -111,11 +116,12 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
     /**
      * 替换为手机识别的HTML，去掉样式及属性，保留回车。
+     *
      * @param html
      * @return
      */
-    public static String replaceMobileHtml(String html){
-        if (html == null){
+    public static String replaceMobileHtml(String html) {
+        if (html == null) {
             return "";
         }
         return html.replaceAll("<([a-z]+?)\\s+?.*?>", "<$1>");
@@ -123,11 +129,12 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
     /**
      * 替换为手机识别的HTML，去掉样式及属性，保留回车。
+     *
      * @param txt
      * @return
      */
-    public static String toHtml(String txt){
-        if (txt == null){
+    public static String toHtml(String txt) {
+        if (txt == null) {
             return "";
         }
         return replace(replace(Encodes.escapeHtml(txt), "\n", "<br/>"), "\t", "&nbsp; &nbsp; ");
@@ -135,7 +142,8 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
     /**
      * 缩略字符串（不区分中英文字符）
-     * @param str 目标字符串
+     *
+     * @param str    目标字符串
      * @param length 截取长度
      * @return
      */
@@ -228,8 +236,8 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     /**
      * 转换为Double类型
      */
-    public static Double toDouble(Object val){
-        if (val == null){
+    public static Double toDouble(Object val) {
+        if (val == null) {
             return 0D;
         }
         try {
@@ -242,21 +250,21 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     /**
      * 转换为Float类型
      */
-    public static Float toFloat(Object val){
+    public static Float toFloat(Object val) {
         return toDouble(val).floatValue();
     }
 
     /**
      * 转换为Long类型
      */
-    public static Long toLong(Object val){
+    public static Long toLong(Object val) {
         return toDouble(val).longValue();
     }
 
     /**
      * 转换为Integer类型
      */
-    public static Integer toInteger(Object val){
+    public static Integer toInteger(Object val) {
         return toLong(val).intValue();
     }
 
@@ -265,7 +273,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      */
     public static String getMessage(String code, Object[] args) {
         LocaleResolver localLocaleResolver = (LocaleResolver) SpringContextHolder.getBean(LocaleResolver.class);
-        HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         Locale localLocale = localLocaleResolver.resolveLocale(request);
         return SpringContextHolder.getApplicationContext().getMessage(code, args, localLocale);
     }
@@ -273,13 +281,13 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     /**
      * 获得用户远程地址
      */
-    public static String getRemoteAddr(HttpServletRequest request){
+    public static String getRemoteAddr(HttpServletRequest request) {
         String remoteAddr = request.getHeader("X-Real-IP");
         if (isNotBlank(remoteAddr)) {
             remoteAddr = request.getHeader("X-Forwarded-For");
-        }else if (isNotBlank(remoteAddr)) {
+        } else if (isNotBlank(remoteAddr)) {
             remoteAddr = request.getHeader("Proxy-Client-IP");
-        }else if (isNotBlank(remoteAddr)) {
+        } else if (isNotBlank(remoteAddr)) {
             remoteAddr = request.getHeader("WL-Proxy-Client-IP");
         }
         return remoteAddr != null ? remoteAddr : request.getRemoteAddr();
@@ -287,10 +295,10 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
     /**
      * 驼峰命名法工具
-     * @return
-     * 		toCamelCase("hello_world") == "helloWorld"
-     * 		toCapitalizeCamelCase("hello_world") == "HelloWorld"
-     * 		toUnderScoreCase("helloWorld") = "hello_world"
+     *
+     * @return toCamelCase("hello_world") == "helloWorld"
+     * toCapitalizeCamelCase("hello_world") == "HelloWorld"
+     * toUnderScoreCase("helloWorld") = "hello_world"
      */
     public static String toCamelCase(String s) {
         if (s == null) {
@@ -319,10 +327,10 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
     /**
      * 驼峰命名法工具
-     * @return
-     * 		toCamelCase("hello_world") == "helloWorld"
-     * 		toCapitalizeCamelCase("hello_world") == "HelloWorld"
-     * 		toUnderScoreCase("helloWorld") = "hello_world"
+     *
+     * @return toCamelCase("hello_world") == "helloWorld"
+     * toCapitalizeCamelCase("hello_world") == "HelloWorld"
+     * toUnderScoreCase("helloWorld") = "hello_world"
      */
     public static String toCapitalizeCamelCase(String s) {
         if (s == null) {
@@ -334,10 +342,10 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
     /**
      * 驼峰命名法工具
-     * @return
-     * 		toCamelCase("hello_world") == "helloWorld"
-     * 		toCapitalizeCamelCase("hello_world") == "HelloWorld"
-     * 		toUnderScoreCase("helloWorld") = "hello_world"
+     *
+     * @return toCamelCase("hello_world") == "helloWorld"
+     * toCapitalizeCamelCase("hello_world") == "HelloWorld"
+     * toUnderScoreCase("helloWorld") = "hello_world"
      */
     public static String toUnderScoreCase(String s) {
         if (s == null) {
@@ -372,20 +380,35 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 
     /**
      * 转换为JS获取对象值，生成三目运算返回结果
+     *
      * @param objectString 对象串
-     *   例如：row.user.id
-     *   返回：!row?'':!row.user?'':!row.user.id?'':row.user.id
+     *                     例如：row.user.id
+     *                     返回：!row?'':!row.user?'':!row.user.id?'':row.user.id
      */
-    public static String jsGetVal(String objectString){
+    public static String jsGetVal(String objectString) {
         StringBuilder result = new StringBuilder();
         StringBuilder val = new StringBuilder();
         String[] vals = split(objectString, ".");
-        for (int i=0; i<vals.length; i++){
+        for (int i = 0; i < vals.length; i++) {
             val.append("." + vals[i]);
-            result.append("!"+(val.substring(1))+"?'':");
+            result.append("!" + (val.substring(1)) + "?'':");
         }
         result.append(val.substring(1));
         return result.toString();
+    }
+
+    /**
+     * 去除标点符号
+     *
+     * @param string
+     * @return
+     */
+    public static String removePunctuation(String string) {
+        String s = string;
+        s = s.replaceAll("\\p{Punct}", "");
+        s = s.replaceAll("\\pP", "");
+        s = s.replaceAll("\\p{P}", "");
+        return s;
     }
 
 }

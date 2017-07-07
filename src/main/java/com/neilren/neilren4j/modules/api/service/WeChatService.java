@@ -8,7 +8,8 @@ import com.neilren.neilren4j.modules.api.entity.WeChatMessage;
 import com.neilren.neilren4j.modules.api.entity.WeChatMsg;
 import com.neilren.neilren4j.modules.api.entity.WeChatReply;
 import com.neilren.neilren4j.modules.article.entity.ArticleWithBLOBs;
-import com.neilren.neilren4j.modules.article.service.SearchService;
+import com.neilren.neilren4j.modules.search.entity.Results;
+import com.neilren.neilren4j.modules.search.service.SearchService;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.core.util.QuickWriter;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
@@ -115,29 +116,22 @@ public class WeChatService {
             if (type.equals(WeChatMessage.TEXT))
                 content = message.getContent();
             else content = message.getVOICE();
-            List<ArticleWithBLOBs> articleWithBLOBss = null;
+            Results results = null;
             try {
                 //调用搜索服务
-                articleWithBLOBss = searchService.Search(content, 1);
+                results = searchService.Search(content, 1);
             } catch (Exception e) {
                 reply.setMsgType(WeChatReply.TEXT);
                 reply.setContent(WeChatReply.ERROR_CONTENT);
             }
-            if (articleWithBLOBss != null && articleWithBLOBss.size() > 0) {
+            if (results != null && results.getItems().size() > 0) {
                 List<Article> articles = new ArrayList<Article>();
                 //循环装载5个搜索结果
-                for (int i = 0; i < articleWithBLOBss.size() && i < 5; i++) {
+                for (int i = 0; i < results.getItems().size() && i < 5; i++) {
                     Article article = new Article();
-                    article.setTitle(articleWithBLOBss.get(i).getTitle());
-                    if (articleWithBLOBss.get(i).getDescribes() == null || articleWithBLOBss.get(i).getDescribes().equals("")) {
-                        //摘要不存在，使用内容
-                        if (articleWithBLOBss.get(i).getContent().length() >= 200) {
-                            article.setDescription(articleWithBLOBss.get(i).getContent().substring(0, 200));
-                        } else {
-                            article.setDescription(articleWithBLOBss.get(i).getContent());
-                        }
-                    }
-                    article.setUrl(Global.getConfig("neilren.site") + "/Article/" + articleWithBLOBss.get(i).getId());
+                    article.setTitle(results.getItems().get(i).getTitle());
+                    article.setDescription(results.getItems().get(i).getContent());
+                    article.setUrl(Global.getConfig("neilren.site") + "/Article/" + results.getItems().get(i).getId());
                     articles.add(article);
                 }
                 reply.setArticles(articles);

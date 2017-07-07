@@ -3,9 +3,15 @@
 
 <#-- 调用布局指令 -->
 <@defaultLayout.head bgcolour="bg-yellow">
-<meta name="keywords" content="任霏,网站,博客,互联网,IT,技术,软件,应用,开发,建站" />
-<meta name="description" content="任霏个人博客，是一个关注分享关于互联网、IT技术、软件应用、程序开发等计算机科技领域的IT科技独立博客站点，作者任霏（NeilRen）免费为软件开发者提供帮助与支持。" />
+<meta name="keywords" content="任霏,网站,博客,互联网,IT,技术,软件,应用,开发,建站"/>
+<meta name="description" content="任霏个人博客，是一个关注分享关于互联网、IT技术、软件应用、程序开发等计算机科技领域的IT科技独立博客站点，作者任霏（NeilRen）免费为软件开发者提供帮助与支持。"/>
 <title>搜索 ${wd} - NEILREN.COM - 关注分享互联网、IT技术、软件应用等计算机科技领域的IT科技博客</title>
+<style>
+    em {
+        color: red;
+        font-weight: 800;
+    }
+</style>
 </@defaultLayout.head>
 
 <@defaultLayout.header>
@@ -24,8 +30,8 @@
                                     <div class="slide-content">
                                         <div class="row">
                                             <div class="col-lg-8 col-md-7 svm">
-                                                <div class="row">
-                                                    <form class="subscribe-form"
+                                                <div class="row" style="margin: 0;padding: 0;">
+                                                    <form class="subscribe-form" style="margin: 0;padding: 0;"
                                                           method="get" action="/Search/">
                                                         <div class="col-md-10" style="padding: 0;margin: 0;">
                                                             <input type="text" id="subscribe-email"
@@ -40,48 +46,39 @@
                                                         </div>
                                                     </form>
                                                 </div>
+                                                <div class="row"
+                                                     style="margin: 0;padding: 0;font-size: 12px;text-align: left;">
+                                                <#if searchResults??>
+                                                    共找到${searchResults.getTotal()}个结果，用时${searchResults.getSearchtime()}秒。
+                                                </#if>
+                                                </div>
                                                 <div class="section-info text-left">
                                                     <div class="countdown">
                                                         <div class="animated" data-animation="fadeIn"
                                                              data-animation-delay="60">
-                                                        <#if articleWithBLOBsList??>
-                                                            <#list articleWithBLOBsList as articleWithBLOBs>
+                                                        <#if searchResults??>
+                                                            <#list resultsItems as resultsItem>
                                                                 <div class="entry-content">
-                                                                    <a href="/Article/${articleWithBLOBs.getId()?c}">
+                                                                    <a href="/Article/${resultsItem.getId()}">
                                                                         <h3 class="text-default animated"
                                                                             data-animation="fadeIn"
                                                                             data-animation-delay="50">
-                                                                        ${articleWithBLOBs.getTitle()!""}
+                                                                        ${resultsItem.getTitle()}
                                                                         </h3>
                                                                     </a>
                                                                     <div class="row entry-info">
                                                                         <div class="col-xs-6">
-                                                                            <span class="entry-date">${articleWithBLOBs.getArticleDat()?date}</span>
-                                                                            <span class="entry-byline">By <a
-                                                                                    href="${articleWithBLOBs.getAuthorUrl()!"javascript:void(0)"}"
-                                                                                    target="_blank">${articleWithBLOBs.getAuthor()!""}</a></span>
-                                                                            <span class="entry-byline">Views:${articleWithBLOBs.getViews()!""}</span>
-                                                                        </div>
-                                                                        <div class="col-xs-6 rating-wrap text-right">
-                                                                            <div class="score-callback"
-                                                                                 data-id="${articleWithBLOBs.getId()?c}"
-                                                                                 data-score="${articleWithBLOBs.getGrade()!""}"
-                                                                                 style="float: right;"></div>
+                                                                            <span class="entry-date">${resultsItem.getTimestamp()?date}</span>
+                                                                            <span class="entry-byline">Views:${resultsItem.getPageview()}</span>
                                                                         </div>
                                                                     </div>
                                                                     <p class="animated" data-animation="fadeIn"
                                                                        data-animation-delay="100">
-                                                                        <#if articleWithBLOBs.getContent()?length gt 600>
-                                                                        ${articleWithBLOBs.getContent()?substring(0,600)?html}
-                                                                            ...
-                                                                        <#else >
-                                                                        ${articleWithBLOBs.getContent()?html}
-                                                                        </#if>
+                                                                    ${resultsItem.getContent()}
                                                                     </p>
                                                                 </div>
                                                             </#list>
                                                         </#if>
-
                                                         </div>
                                                     </div>
                                                 </div>

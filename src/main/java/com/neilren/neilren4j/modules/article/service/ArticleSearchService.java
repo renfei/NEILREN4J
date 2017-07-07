@@ -24,7 +24,7 @@ import java.util.Map;
  */
 @Service
 @Transactional(readOnly = true)
-public class SearchService {
+public class ArticleSearchService {
     private static String memcachedSearchArticleKey = "SearchArticleKey_word_";
     private static String memcachedSearchPagingKey = "SearchPagingKey_word_";
     @Autowired

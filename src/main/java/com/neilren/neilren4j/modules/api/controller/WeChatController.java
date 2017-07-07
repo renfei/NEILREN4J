@@ -5,7 +5,7 @@ import com.neilren.neilren4j.modules.api.entity.WeChatMessage;
 import com.neilren.neilren4j.modules.api.entity.WeChatReply;
 import com.neilren.neilren4j.modules.api.service.WeChatService;
 import com.neilren.neilren4j.modules.article.entity.ArticleWithBLOBs;
-import com.neilren.neilren4j.modules.article.service.SearchService;
+import com.neilren.neilren4j.modules.search.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

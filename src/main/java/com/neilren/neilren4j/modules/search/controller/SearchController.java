@@ -1,9 +1,10 @@
-package com.neilren.neilren4j.modules.home.controller;
+package com.neilren.neilren4j.modules.search.controller;
 
 import com.neilren.neilren4j.common.controller.BaseController;
 import com.neilren.neilren4j.modules.article.service.ArticleService;
-import com.neilren.neilren4j.modules.article.service.SearchService;
 import com.neilren.neilren4j.modules.article.service.TagService;
+import com.neilren.neilren4j.modules.search.entity.Results;
+import com.neilren.neilren4j.modules.search.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,19 +26,22 @@ public class SearchController extends BaseController {
     @RequestMapping(value = "/Search/")
     public ModelAndView SearchArticle(@RequestParam("wd") String wd, @RequestParam(value = "page", required = false) String page) {
         ModelAndView mv = new ModelAndView();
+        Results results = null;
         int intPage = 1;
         try {
             if (page == null)
                 intPage = 1;
             else
                 intPage = Integer.parseInt(page);
-            if (intPage > 0) {
-                mv.addObject("articleWithBLOBsList", searchService.Search(wd, intPage));
+            if (intPage > 0 && !wd.equals("")) {
+                results = searchService.Search(wd, intPage);
+                mv.addObject("searchResults", results);
+                mv.addObject("resultsItems", results.getItems());
+                mv.addObject("articlePagingList", searchService.getSearchPagingList(intPage, results.getTotal()));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        mv.addObject("articlePagingList", searchService.getSearchPagingList(wd, intPage));
         mv.addObject("tagList", tagService.getAllTag());
         mv.addObject("archivesList", articleService.getArticleArchives());
         mv.addObject("articleTop10ByDateList", articleService.getArticleTop10ByDateList());

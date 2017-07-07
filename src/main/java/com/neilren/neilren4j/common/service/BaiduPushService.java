@@ -15,9 +15,9 @@ public class BaiduPushService extends BaseService {
     private HttpClientService httpClientService;
 
     public String pushBaidu(String[] param, boolean isOriginal) throws IOException {
-        String url = "http://data.zz.baidu.com/urls?site={0}&token={1}";
+        String url = "http://data.zz.baidu.com/urls?site=%s&token=%s";
         url += isOriginal ? "&type=original" : "";
         url = String.format(url, Global.getConfig("baidu.site"), Global.getConfig("baidu.token"));
-        return httpClientService.sendPost(url, param);
+        return new HttpClientService().sendPost(url, param);
     }
 }

@@ -11,7 +11,7 @@
     </context-param>
     <!-- Spring监听器 -->
     <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+        <listener-class>com.neilren.neilren4j.common.system.listener.WebContextListener</listener-class>
     </listener>
     <!-- 防止Spring内存溢出监听器 -->
     <listener>

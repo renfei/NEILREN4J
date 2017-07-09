@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="http://localhost:8080/sitemap.xsl"?>
+<?xml-stylesheet type="text/xsl" href="https://www.neilren.com/sitemap.xsl"?>
 <urlset
         xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"

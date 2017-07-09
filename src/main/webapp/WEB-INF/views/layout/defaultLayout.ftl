@@ -41,10 +41,9 @@
             ├Copyright © 2012-${.now?string("yyyy")} NEILREN.COM. All Rights Reserved┤
             └┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┘
 -->
-<!-- NEILREN.COM Version 1.2.2.37 -->
 
 <!DOCTYPE html>
-<html lang="zh">
+<html amp lang="zh">
 <head>
     <!-- META DATA -->
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
@@ -72,13 +71,14 @@
     <link rel="shortcut icon" href="//cdn.neilren.com/neilren4j/1.0.0/img/favicon.png">
     <link rel="apple-touch-icon" href="//cdn.neilren.com/neilren4j/1.0.0/img/apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="72x72" href="//cdn.neilren.com/neilren4j/1.0.0/img/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="//cdn.neilren.com/neilren4j/1.0.0/img/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="114x114"
+          href="//cdn.neilren.com/neilren4j/1.0.0/img/apple-touch-icon-114x114.png">
     <script type="text/javascript" src="//cdn.neilren.com/neilren4j/1.0.0/js/jquery.min.js"></script>
     <#nested>
     <script>
         /*百度统计=开始*/
         var _hmt = _hmt || [];
-        (function() {
+        (function () {
             var hm = document.createElement("script");
             hm.src = "https://hm.baidu.com/hm.js?9ec9e1ad12b870030ee328be943fb6c6";
             var s = document.getElementsByTagName("script")[0];
@@ -86,7 +86,7 @@
         })();
         /*百度统计=结束*/
         /*百度自动提交=开始*/
-        (function(){
+        (function () {
             var bp = document.createElement('script');
             var curProtocol = window.location.protocol.split(':')[0];
             if (curProtocol === 'https') {
@@ -99,6 +99,22 @@
             s.parentNode.insertBefore(bp, s);
         })();
         /*百度自动提交=结束*/
+    </script>
+    <script type="application/ld+json">
+    [
+    {
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "name": "NEILREN.COM",
+        "alternateName": "任霏个人博客，是一个关注分享关于互联网、IT技术、软件应用、程序开发等计算机科技领域的IT科技独立博客站点，作者任霏（NeilRen）免费为软件开发者提供帮助与支持。",
+        "url": "https://www.neilren.com"
+    },
+    {
+        "@context": "http://schema.org",
+        "@type": "Organization",
+        "url": "https://www.neilren.com",
+        "logo": "https://cdn.neilren.com/Logo/NeilCat/NeilCat.svg"
+    }]
     </script>
 </head>
 <body>
@@ -115,6 +131,6 @@
         <canvas id="awd-site-canvas"></canvas>
     </div>
 </#macro>
-    <#include "header.ftl">
+<#include "header.ftl">
 
-    <#include "footer.ftl">
+<#include "footer.ftl">

@@ -2,7 +2,9 @@ package com.neilren.neilren4j.common.entity;
 
 import javax.xml.crypto.Data;
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -15,10 +17,11 @@ public class SiteMapXml implements Serializable {
     private float priority;
     private Date lastmod;
 
-    public String getLastmod() {
+    public String getLastmod() throws ParseException {
         if (lastmod == null)
             return "";
-        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(lastmod);
+        String str = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").format(lastmod);
+        return str.substring(0, str.length() - 2) + ":00";
     }
 
     public void setLastmod(Date lastmod) {

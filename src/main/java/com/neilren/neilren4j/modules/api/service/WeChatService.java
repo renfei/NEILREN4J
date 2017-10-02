@@ -7,7 +7,6 @@ import com.neilren.neilren4j.modules.api.entity.Article;
 import com.neilren.neilren4j.modules.api.entity.WeChatMessage;
 import com.neilren.neilren4j.modules.api.entity.WeChatMsg;
 import com.neilren.neilren4j.modules.api.entity.WeChatReply;
-import com.neilren.neilren4j.modules.article.entity.ArticleWithBLOBs;
 import com.neilren.neilren4j.modules.search.entity.Results;
 import com.neilren.neilren4j.modules.search.service.SearchService;
 import com.thoughtworks.xstream.XStream;
@@ -15,7 +14,6 @@ import com.thoughtworks.xstream.core.util.QuickWriter;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 import com.thoughtworks.xstream.io.xml.XppDriver;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +21,6 @@ import java.io.InputStream;
 import java.io.Writer;
 import java.math.BigInteger;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,6 +40,8 @@ public class WeChatService {
     private SearchService searchService;
     @Autowired
     private WeChatMagDao weChatMagDao;
+    @Autowired
+    private PhilisenseKaoQinService philisenseKaoQinService;
 
     WeChatService() {
         this.Token = Global.getConfig("wechat.token");
@@ -103,6 +102,11 @@ public class WeChatService {
         weChatMsg.setOriginal(requestMap.toString());
         weChatMagDao.insert(weChatMsg);
         //保存结束
+        //******************考勤接入*********************//
+        if (weChatMsg.getContent().substring(0, 2).equals("考勤") && message.getMsgType().equals(WeChatMessage.TEXT)) {
+            return philisenseKaoQinService.philisenseKaoQin(message, weChatMsg);
+        }
+        //******************考勤接入*********************//
         String replyContent = WeChatReply.WELCOME_CONTENT;
         String type = message.getMsgType();
         //拼装回复消息

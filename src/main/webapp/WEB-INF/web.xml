@@ -17,6 +17,16 @@
     <listener>
         <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
     </listener>
+    <!-- 解决xss & sql漏洞 -->
+    <filter>
+        <filter-name>xssAndSqlFilter</filter-name>
+        <filter-class>com.neilren.neilren4j.common.security.XssAndSqlFilter</filter-class>
+    </filter>
+    <!-- 解决xss & sql漏洞 -->
+    <filter-mapping>
+        <filter-name>xssAndSqlFilter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
     <!-- 编码过滤器 -->
     <filter>
         <filter-name>encodingFilter</filter-name>

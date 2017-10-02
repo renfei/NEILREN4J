@@ -2,10 +2,7 @@
 <?xml-stylesheet type="text/xsl" href="https://www.neilren.com/sitemap.xsl"?>
 <urlset
         xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-    		http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+        xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0">
 
 <#if siteMapXmls??>
     <#list siteMapXmls as siteMapXml>

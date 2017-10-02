@@ -6,7 +6,8 @@
 <meta name="keywords" content="任霏,网站,博客,互联网,IT,技术,软件,应用,开发,建站" />
 <meta name="description" content="404 - Not Found" />
 <title>404 - Not Found - NEILREN.COM - 关注分享互联网、IT技术、软件应用等计算机科技领域的IT科技博客</title>
-<script type="text/javascript" src="https://qzone.qq.com/gy/404/data.js" charset="utf-8"></script>
+<script type="text/javascript" src="//qzonestyle.gtimg.cn/qzone/v6/portal/gy/404/data.js" charset="utf-8"></script>
+<#--<script type="text/javascript" src="https://qzone.qq.com/gy/404/data.js" charset="utf-8"></script>-->
 </@defaultLayout.head>
 
 <@defaultLayout.header>

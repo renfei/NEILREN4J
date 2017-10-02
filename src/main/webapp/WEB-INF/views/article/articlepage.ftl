@@ -137,6 +137,21 @@
                                                             </div>
                                                         </form>
                                                     </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4 animated" data-animation="fadeIn"
+                                                             data-animation-delay="100">
+                                                            <a href="https://github.com/NeilRen" target="_blank"><img src="//cdn.neilren.com/neilren4j/1.0.0/img/NeilRenInGithub.png" alt="https://github.com/NeilRen" l></a>
+
+                                                        </div>
+                                                        <div class="col-md-8 animated" data-animation="fadeIn"
+                                                             data-animation-delay="100">
+                                                            <h3>NeilRen in Github</h3>
+                                                            <p style="font-size: 12px;">
+                                                                使用开源，回归开源；开源是极客们向技术垄断发起的挑战；是程序员们的饕餮狂欢。<br/>
+                                                                <a href="https://github.com/NeilRen" target="_blank">https://github.com/NeilRen</a>
+                                                            </p>
+                                                        </div>
+                                                    </div>
                                                 <#if tagList??>
                                                     <h2 class="text-default animated" data-animation="fadeIn"
                                                         data-animation-delay="50">

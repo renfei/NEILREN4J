@@ -245,7 +245,7 @@
                                                         <a href="${frielink.getLink()!""}" target="_blank"
                                                            class="animated" data-animation-delay="60"
                                                            style="display:block;margin-bottom: 5px;font-size: 14px">
-                                                        ${frielink.getName()}
+                                                        ${frielink.getSitename()}
                                                         </a>
                                                     </#list>
                                                 </#if>

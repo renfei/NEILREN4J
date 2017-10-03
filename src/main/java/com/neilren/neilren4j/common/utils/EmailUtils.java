@@ -1,7 +1,11 @@
 package com.neilren.neilren4j.common.utils;
 
 import com.neilren.neilren4j.common.config.Global;
+import com.neilren.neilren4j.common.dao.SendEmailLogDao;
 import com.neilren.neilren4j.common.entity.EmailObject;
+import com.neilren.neilren4j.common.entity.SendEmailLog;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
@@ -12,7 +16,11 @@ import javax.mail.internet.MimeMessage;
 import java.util.Date;
 import java.util.Properties;
 
+@Service
 public class EmailUtils {
+    //邮件发送日志表DAO
+    @Autowired
+    private SendEmailLogDao sendEmailLogDao;
     // 邮件发送协议
     private final static String PROTOCOL = "smtp";
     // SMTP邮件服务器
@@ -47,7 +55,7 @@ public class EmailUtils {
         // 创建MimeMessage实例对象
         MimeMessage message = new MimeMessage(session);
         // 设置邮件主题
-        message.setSubject(email.getEmailSubject());
+        message.setSubject(email.getEmailSubject(),"utf-8");
         // 设置发送人
         message.setFrom(new InternetAddress(from));
         // 设置发送时间
@@ -60,6 +68,13 @@ public class EmailUtils {
         message.saveChanges();
         // 发送邮件
         Transport.send(message);
+        //记录邮件发送日志
+        SendEmailLog sendEmailLog = new SendEmailLog();
+        sendEmailLog.setToemail(email.getToEmail());
+        sendEmailLog.setSubject(email.getEmailSubject());
+        sendEmailLog.setSenddate(new Date());
+        sendEmailLog.setContent(email.getEmailContent());
+        sendEmailLogDao.insert(sendEmailLog);
     }
 
     /**

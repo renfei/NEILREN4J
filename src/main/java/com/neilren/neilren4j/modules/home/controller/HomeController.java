@@ -2,13 +2,12 @@ package com.neilren.neilren4j.modules.home.controller;
 
 import com.neilren.neilren4j.common.config.Global;
 import com.neilren.neilren4j.common.controller.BaseController;
-import com.neilren.neilren4j.common.entity.Changefreq;
 import com.neilren.neilren4j.common.entity.SiteMapXml;
 import com.neilren.neilren4j.modules.article.entity.ArticleWithBLOBs;
 import com.neilren.neilren4j.modules.article.service.ArticleService;
-import com.neilren.neilren4j.modules.article.service.FrielinkService;
 import com.neilren.neilren4j.modules.article.service.TagService;
 
+import com.neilren.neilren4j.modules.frielink.service.FrielinkService;
 import com.neilren.neilren4j.modules.home.service.SiteMapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -57,7 +55,7 @@ public class HomeController extends BaseController {
         mv.addObject("archivesList", articleService.getArticleArchives());
         mv.addObject("articlePagingList", articleService.getArticlePagingList(Index));
         mv.addObject("articlePagingUrl", "/page/");
-        mv.addObject("frieLinkList", frielinkService.getAllFrieLink());
+        mv.addObject("frieLinkList", frielinkService.getValidFrieLinks());
         mv.addObject("articleTop10ByDateList", articleService.getArticleTop10ByDateList());
         mv.addObject("articleTop10ByViewsList", articleService.getArticleTop10ByViewsList());
         mv.addObject("Index", Index);

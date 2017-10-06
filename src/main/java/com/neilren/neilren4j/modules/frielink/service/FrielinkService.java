@@ -9,7 +9,6 @@ import com.neilren.neilren4j.common.utils.*;
 import com.neilren.neilren4j.modules.frielink.dao.FrielinkDao;
 import com.neilren.neilren4j.modules.frielink.entity.Forms;
 import com.neilren.neilren4j.modules.frielink.entity.Frielink;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -99,8 +98,7 @@ public class FrielinkService extends BaseService {
     /**
      * 友情链接定期自动巡检
      */
-    //@Scheduled(cron = "0 25 3 * * ?")
-    @Scheduled(cron = "0 0/5 * * * ?")
+    @Scheduled(cron = "0 25 3 * * ?")
     void regularVisit() {
         System.out.println("自动定时执行开始");
         //获取正在展示的友情链接
@@ -132,9 +130,13 @@ public class FrielinkService extends BaseService {
                 if (html != null && html != "") {
                     AliyunGreenWebUtil aliyunGreenWebUtil = new AliyunGreenWebUtil();
                     List<String> htmls = new ArrayList<String>();
-                    while (html.length() > 3999) {
-                        htmls.add(html.substring(0, 3999));
-                        html = html.substring(3999, html.length() - 1);
+                    if (html.length() > 3999) {
+                        while (html.length() > 3999) {
+                            htmls.add(html.substring(0, 3999));
+                            html = html.substring(3999, html.length() - 1);
+                        }
+                    } else {
+                        htmls.add(html);
                     }
                     boolean greenWeb = true;
                     String greenWeb_type = "";

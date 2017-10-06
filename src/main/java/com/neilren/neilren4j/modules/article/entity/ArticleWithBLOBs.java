@@ -17,6 +17,16 @@ public class ArticleWithBLOBs extends Article {
 
     private Double grade;
 
+    private Long comment;
+
+    public Long getComment() {
+        return comment;
+    }
+
+    public void setComment(Long comment) {
+        this.comment = comment;
+    }
+
     public String getSourceUrl() {
         return sourceUrl;
     }

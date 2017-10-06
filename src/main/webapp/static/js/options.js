@@ -31,9 +31,9 @@ var awd_bordered = false;
 ///** CONTACT **/
 
 var awd_contactEmail = 'email@example.com'; // contact email address
-var awd_contactSuccess = '<i class="icons fa fa-check valid"></i> Message has been sent'; // success submit message
-var awd_contactInputError = '<i class="icons fa fa-close error"></i> all fields are required'; // input error message
-var awd_contactEmailError = '<i class="icons fa fa-close error"></i> email address is invalid'; // email error message
+var awd_contactSuccess = '<i class="icons fa fa-check valid"></i> 信息已提交'; // success submit message
+var awd_contactInputError = '<i class="icons fa fa-close error"></i> 所有字段都是必填的'; // input error message
+var awd_contactEmailError = '<i class="icons fa fa-close error"></i> 电子邮件地址无效'; // email error message
 
 ///** SUBSCRIBE **/
 
@@ -42,8 +42,8 @@ var awd_subscribe = 3; // 1 = php send email, 2 = save to txt file, 3 = mailchim
 ///* PHP SEND EMAIL */
 
 var awd_subscribeEmail = 'email@example.com'; // subscribe email address
-var awd_subscribeSuccess = '<i class="icons fa fa-check valid"></i> thank you for subscribing'; // subscribe success message
-var awd_subscribeError = '<i class="icons fa fa-close error"></i> email address is invalid'; // subscribe error message
+var awd_subscribeSuccess = '<i class="icons fa fa-check valid"></i> 谢谢订阅'; // subscribe success message
+var awd_subscribeError = '<i class="icons fa fa-close error"></i> 电子邮件地址无效'; // subscribe error message
 
 ///* MAILCHIMP */
 

@@ -34,7 +34,8 @@
     <select id="selectByTagLimit" parameterType="java.util.Map" resultMap="articleResultMapWithBLOBs">
         SELECT
           t1.zh_name,
-          t_article.*
+          t_article.*,
+          comment
         FROM (SELECT
                 t_article_tag.article_id,
                 t_tag.zh_name
@@ -42,6 +43,15 @@
                 LEFT JOIN t_tag ON t_article_tag.tag_id = t_tag.id
               WHERE t_tag.en_name = #{tag,jdbcType=LONGVARCHAR}) t1
           LEFT JOIN t_article ON t1.article_id = t_article.id
+          /*连接文章评论表*/
+          LEFT JOIN (
+          SELECT
+          article_id,
+          COUNT(1) AS 'comment'
+          FROM t_comments
+          WHERE approved = 1
+          GROUP BY article_id
+          ) article_comment ON t_article.id = article_comment.article_id
         ORDER BY t_article.article_dat DESC
         LIMIT #{index,jdbcType=INTEGER}, #{size,jdbcType=INTEGER};
     </select>

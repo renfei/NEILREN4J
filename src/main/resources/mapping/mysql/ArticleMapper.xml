@@ -31,6 +31,7 @@
         ,
         <include refid="Blob_Column_List"/>
         ,grade
+        ,comment
         FROM
         /*文章分页降序*/
         (SELECT *
@@ -49,13 +50,31 @@
         FROM t_article_grade
         GROUP BY article_id
         ) article_grade ON article.id = article_grade.article_id
+        /*连接文章评论表*/
+        LEFT JOIN (
+        SELECT
+        article_id,
+        COUNT(1) AS 'comment'
+        FROM t_comments
+        WHERE approved = 1
+        GROUP BY article_id
+        ) article_comment ON article.id = article_comment.article_id
         ORDER BY article_dat DESC;
     </select>
     <select id="selectByArchivesLimit" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
         SELECT *
-        FROM t_article
-        WHERE date_format(article_dat, '%Y-%m') = #{date,jdbcType=LONGVARCHAR}
-        ORDER BY article_dat DESC
+        FROM (SELECT *
+              FROM t_article
+              WHERE date_format(article_dat, '%Y-%m') = #{date,jdbcType=LONGVARCHAR}
+              ORDER BY article_dat DESC) article
+          LEFT JOIN (
+                      SELECT
+                        article_id,
+                        COUNT(1) AS 'comment'
+                      FROM t_comments
+                      WHERE approved = 1
+                      GROUP BY article_id
+                    ) article_comment ON article.id = article_comment.article_id
         LIMIT #{index,jdbcType=INTEGER}, #{size,jdbcType=INTEGER};
     </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
@@ -70,6 +89,15 @@
                       FROM t_article_grade
                       GROUP BY article_id
                     ) article_grade ON t_article.id = article_grade.article_id
+          /*连接文章评论表*/
+          LEFT JOIN (
+                      SELECT
+                        article_id,
+                        COUNT(1) AS 'comment'
+                      FROM t_comments
+                      WHERE approved = 1
+                      GROUP BY article_id
+                    ) article_comment ON t_article.id = article_comment.article_id
         WHERE t_article.id = #{id,jdbcType=BIGINT};
     </select>
     <select id="searchByLike" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">

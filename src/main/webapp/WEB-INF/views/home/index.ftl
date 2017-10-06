@@ -57,7 +57,8 @@
                                                                             <span class="entry-byline">By <a
                                                                                     href="${articleWithBLOBs.getAuthorUrl()!"javascript:void(0)"}"
                                                                                     target="_blank">${articleWithBLOBs.getAuthor()!""}</a></span>
-                                                                            <span class="entry-byline">Views:${articleWithBLOBs.getViews()!""}</span>
+                                                                            <span class="entry-byline">浏览:${articleWithBLOBs.getViews()!""}</span>
+                                                                            <span class="entry-byline">评论:${articleWithBLOBs.getComment()!"0"}</span>
                                                                         </div>
                                                                         <div class="col-xs-6 rating-wrap text-right">
                                                                             <div class="score-callback"
@@ -120,7 +121,9 @@
                                                     <div class="row">
                                                         <div class="col-md-4 animated" data-animation="fadeIn"
                                                              data-animation-delay="100">
-                                                            <a href="https://github.com/NeilRen" target="_blank"><img src="//cdn.neilren.com/neilren4j/1.0.0/img/NeilRenInGithub.png" alt="https://github.com/NeilRen" l></a>
+                                                            <a href="https://github.com/NeilRen" target="_blank"><img
+                                                                    src="//cdn.neilren.com/neilren4j/1.0.0/img/NeilRenInGithub.png"
+                                                                    alt="https://github.com/NeilRen" l></a>
 
                                                         </div>
                                                         <div class="col-md-8 animated" data-animation="fadeIn"

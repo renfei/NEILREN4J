@@ -9,7 +9,7 @@
         <result column="author_email" jdbcType="LONGVARCHAR" property="author_email"/>
         <result column="author_url" jdbcType="LONGVARCHAR" property="author_url"/>
         <result column="author_IP" jdbcType="LONGVARCHAR" property="author_IP"/>
-        <result column="comment_date" jdbcType="DATE" property="comment_date"/>
+        <result column="comment_date" property="comment_date"/>
         <result column="comment_content" jdbcType="LONGVARCHAR" property="comment_content"/>
         <result column="approved" jdbcType="INTEGER" property="approved"/>
         <result column="agent" jdbcType="LONGVARCHAR" property="agent"/>
@@ -86,7 +86,7 @@
                 #{author_IP,jdbcType=LONGVARCHAR},
             </if>
             <if test="comment_date != null">
-                #{comment_date,jdbcType=DATE},
+                #{comment_date},
             </if>
             <if test="comment_content != null">
                 #{comment_content,jdbcType=LONGVARCHAR},
@@ -121,7 +121,7 @@
                 author_IP = #{author_IP,jdbcType=LONGVARCHAR},
             </if>
             <if test="comment_date != null">
-                comment_date = #{comment_date,jdbcType=DATE},
+                comment_date = #{comment_date},
             </if>
             <if test="comment_content != null">
                 comment_content = #{comment_content,jdbcType=LONGVARCHAR},

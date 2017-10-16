@@ -82,7 +82,7 @@
                 #{domain,jdbcType=LONGVARCHAR},
             </if>
             <if test="add_date != null">
-                #{add_date,jdbcType=TIMESTAMP},
+                #{add_date},
             </if>
             <if test="state != null">
                 #{state,jdbcType=INTEGER},
@@ -100,7 +100,7 @@
                 #{remark,jdbcType=LONGVARCHAR},
             </if>
             <if test="last_check_time != null">
-                #{last_check_time,jdbcType=TIMESTAMP},
+                #{last_check_time},
             </if>
         </trim>
     </insert>
@@ -111,7 +111,7 @@
                 link = #{link,jdbcType=LONGVARCHAR},
             </if>
             <if test="add_date != null">
-                add_date = #{add_date,jdbcType=TIMESTAMP},
+                add_date = #{add_date},
             </if>
             <if test="sitename != null">
                 sitename = #{sitename,jdbcType=LONGVARCHAR},
@@ -135,7 +135,7 @@
                 remark = #{remark,jdbcType=LONGVARCHAR},
             </if>
             <if test="last_check_time != null">
-                last_check_time = #{last_check_time,jdbcType=TIMESTAMP},
+                last_check_time = #{last_check_time},
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}

@@ -1,37 +1,28 @@
 package com.neilren.neilren4j.modules.system.controller;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Maps;
 import com.neilren.neilren4j.common.controller.BaseController;
+import com.neilren.neilren4j.common.entity.JsonObject;
 import com.neilren.neilren4j.common.security.OTP;
 import com.neilren.neilren4j.common.service.AliyunService;
-import com.neilren.neilren4j.modules.article.entity.ArticleCategory;
-import com.neilren.neilren4j.modules.article.entity.ArticleTag;
 import com.neilren.neilren4j.modules.article.entity.ArticleWithBLOBs;
-import com.neilren.neilren4j.modules.article.service.ArticleService;
 import com.neilren.neilren4j.modules.article.service.CategoryService;
 import com.neilren.neilren4j.modules.article.service.TagService;
 import com.neilren.neilren4j.modules.system.service.ArticleReleaseService;
-import com.yubico.client.v2.exceptions.YubicoValidationFailure;
-import com.yubico.client.v2.exceptions.YubicoVerificationException;
-import freemarker.ext.beans.HashAdapter;
+import com.neilren.neilren4j.common.service.IPDBService;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.io.*;
 import java.util.Map;
 
 /**
@@ -48,6 +39,9 @@ public class SystemController extends BaseController {
     private TagService tagService;
     @Autowired
     private CategoryService catService;
+    @Autowired
+    private IPDBService ipdbService;
+
     private OTP otp = new OTP();
 
     @RequestMapping(value = "Article/Release", method = RequestMethod.GET)
@@ -116,5 +110,59 @@ public class SystemController extends BaseController {
                 response.getWriter().write(JSONObject.toJSON(result).toString());
             }
         }
+    }
+
+
+    @RequestMapping(value = "ip/update", method = RequestMethod.GET)
+    public ModelAndView IPUpdate() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("system/ipupdate");
+        return mv;
+    }
+
+    /**
+     * 更新IP数据库
+     *
+     * @param file
+     * @param version
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "ip/update", method = RequestMethod.POST)
+    public JsonObject IPUpdate(@RequestParam("file") CommonsMultipartFile file,
+                               @RequestParam("version") String version,
+                               @RequestParam("otp") String Strotp) {
+        JsonObject jsonObject = new JsonObject();
+        //验证otp
+        if (Strotp.length() != 44) {
+            jsonObject.setState(504);
+            jsonObject.setMessage("OTP一次性密码验证失败");
+            return jsonObject;
+        }
+        boolean otpVerify;
+        try {
+            otpVerify = otp.verifyYubicoOTP(Strotp);
+        } catch (Exception ex) {
+            jsonObject.setState(504);
+            jsonObject.setMessage("OTP一次性密码验证失败");
+            return jsonObject;
+        }
+        if (!otpVerify) {
+            jsonObject.setState(504);
+            jsonObject.setMessage("OTP一次性密码验证失败");
+            return jsonObject;
+        }
+        //保存文件
+        try {
+            ipdbService.updateIPDB(ipdbService.saveFile(file), version);
+            jsonObject.setState(200);
+            jsonObject.setMessage("IP数据库更新成功！");
+            return jsonObject;
+        } catch (Exception ex) {
+            jsonObject.setState(500);
+            jsonObject.setMessage("IP数据库更新失败");
+            return jsonObject;
+        }
+
     }
 }

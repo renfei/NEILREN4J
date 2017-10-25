@@ -1,6 +1,5 @@
 package com.neilren.neilren4j.test;
 
-import com.neilren.neilren4j.modules.article.service.SearchService;
 import org.junit.Test;
 import org.wltea.analyzer.core.IKSegmenter;
 import org.wltea.analyzer.core.Lexeme;

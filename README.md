@@ -4,7 +4,11 @@
   </a>
 
   <h3 align="center">NEILREN4J</h3>
-
+  
+  [![Build Status](https://travis-ci.org/NeilRen/NEILREN4J.svg?branch=master)](https://travis-ci.org/NeilRen/NEILREN4J)
+  [![Packagist](https://img.shields.io/packagist/v/NeilRen/NEILREN4J.svg)](https://packagist.org/packages/NeilRen/NEILREN4J)
+  [![Yii2](https://img.shields.io/badge/Powered_by-NeilRen-green.svg?style=flat)](https://www.neilren.com/)
+  
   <p align="center">
     任霏的个人网站 Java 版，Spring MVC SSM框架整合
     <br>

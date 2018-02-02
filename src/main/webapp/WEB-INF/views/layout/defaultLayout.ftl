@@ -59,7 +59,7 @@
     <!-- CSS Global Compulsory -->
     <link rel="stylesheet" href="//cdn.neilren.com/neilren4j/1.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//cdn.neilren.com/neilren4j/1.0.0/css/animate.min.css">
-    <link rel="stylesheet" href="//cdn.neilren.com/neilren4j/1.0.0/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css">
     <!--<link rel="stylesheet" href="css/custom.css">-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->

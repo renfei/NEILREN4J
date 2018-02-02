@@ -3,7 +3,7 @@
     <div class="copyright animated" data-animation="fadeInUp" data-animation-delay="500">
         <p style="font-size: 12px;letter-spacing:normal;font-weight: 100;">Copyright &copy; 2012-${.now?string("yyyy")}
             NEILREN.COM All rights reserved.<br/>
-            <a href="http://www.miibeian.gov.cn/" target="_blank" rel="nofollow">冀ICP备12003293号</a>
+            <a href="http://www.miibeian.gov.cn/" target="_blank" rel="nofollow">冀ICP备12003293号-5</a>
             -
             <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=13070902000223" target="_blank"
                rel="nofollow">冀公网安备13070902000223号</a>

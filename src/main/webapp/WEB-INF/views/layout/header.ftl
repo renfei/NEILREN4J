@@ -17,6 +17,7 @@
         <div class="nav-container">
             <ul>
                 <li><a href="/">首页</a></li>
+                <li><a href="/Image">影像</a></li>
                 <li><a href="/Subscribe">订阅</a></li>
                 <li><a href="/About">关于</a></li>
                 <li><a href="/Contact">联系</a></li>

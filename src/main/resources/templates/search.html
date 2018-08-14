@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/head::head(${title},${head})">
+</head>
+<body>
+<header th:replace="layout/header::header(${menu},${holiday})">
+</header>
+<style>
+    em {
+        color: red;
+        font-style: initial;
+        font-weight: 600;
+    }
+</style>
+<main>
+    <div class="page-title" style="background-color: #f5f5f5;padding: 65px 0 20px 45px;">
+        <h1 th:text="${total+' matching results for “'+wd+'”'}"
+            style="line-height: 1.18182;font-size: 44px;letter-spacing: -.5px;"></h1>
+        <p th:text="${'Time of use: '+searchtime+' seconds'}"></p>
+    </div>
+</main>
+<main class="container">
+    <div class="list-box">
+        <ul id="ul">
+            <li th:each="search:${searchList}">
+                <a class="row" th:href="${'/Article/'+search.id}">
+                    <section class="col-md-12">
+                        <h3 th:utext="${search.title}"></h3>
+                        <p th:utext="${search.content}"></p>
+                    </section>
+                </a>
+            </li>
+        </ul>
+        <div class="row" style="padding: 20px 0;" th:if="${total>0}">
+            <button id="btn" type="button" class="btn btn-primary btn-lg btn-block"
+                    style="padding: 25px 0; width: 100%;text-transform: uppercase;" onclick="paging()">Load more stories
+            </button>
+        </div>
+    </div>
+</main>
+<footer th:replace="layout/footer::footer(${footer})"></footer>
+<script th:inline="javascript">
+    /* <![CDATA[ */
+    var wd = [[${wd}]];
+    /* ]]> */
+    var page = 1;
+
+    function paging() {
+        $("#btn").html("Loading...");
+        $.ajax({
+            url: '/Search/paging?wd=' + wd + "&page=" + (page + 1),
+            type: "post",
+            dataType: "json",
+            cache: false,
+            success: function (data, textStatus, jqXHR) {
+                if (data.success) {
+                    page = page + 1;
+                    var html = $("#ul").html();
+                    for (var i = 0; i < data.data.length; i++) {
+                        html += "<li>";
+                        html += "<a class=\"row\" href=\"/Article/" + data.data[i].id + "\">";
+                        html += "<section class=\"col-md-12\">";
+                        html += "<h3>" + data.data[i].title + "</h3>";
+                        html += "<p>" + data.data[i].content + "</p>";
+                        html += "</section>";
+                        html += "</a>";
+                        html += "</li>";
+                    }
+                    $("#ul").html(html);
+                }
+                $("#btn").html("Load more stories");
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $("#btn").html("Load more stories");
+            }
+        });
+    }
+</script>
+</body>
+</html>

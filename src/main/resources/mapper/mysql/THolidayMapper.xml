@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neilren.neilren4j.dao.THolidayMapper">
+  <resultMap id="BaseResultMap" type="com.neilren.neilren4j.dbentity.THoliday">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="start_date" jdbcType="DATE" property="startDate" />
+    <result column="end_date" jdbcType="DATE" property="endDate" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="style" jdbcType="LONGVARCHAR" property="style" />
+    <result column="text" jdbcType="LONGVARCHAR" property="text" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_holiday
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.neilren.neilren4j.dbentity.THoliday">
+    insert into t_holiday (id, start_date, end_date, 
+      color, style, text
+      )
+    values (#{id,jdbcType=BIGINT}, #{startDate,jdbcType=DATE}, #{endDate,jdbcType=DATE}, 
+      #{color,jdbcType=VARCHAR}, #{style,jdbcType=LONGVARCHAR}, #{text,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.neilren.neilren4j.dbentity.THoliday">
+    update t_holiday
+    set start_date = #{startDate,jdbcType=DATE},
+      end_date = #{endDate,jdbcType=DATE},
+      color = #{color,jdbcType=VARCHAR},
+      style = #{style,jdbcType=LONGVARCHAR},
+      text = #{text,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, start_date, end_date, color, style, text
+    from t_holiday
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, start_date, end_date, color, style, text
+    from t_holiday
+    order by start_date DESC
+  </select>
+  <select id="selectHolidayByDate" parameterType="java.util.Date" resultMap="BaseResultMap">
+    select id, start_date, end_date, color, style, text
+    from t_holiday
+    where start_date <![CDATA[<=]]> #{start_date,jdbcType=BIGINT} AND end_date <![CDATA[>=]]> #{end_date,jdbcType=BIGINT}
+  </select>
+</mapper>

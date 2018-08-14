@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neilren.neilren4j.dao.TLogAccessMapper">
+  <resultMap id="BaseResultMap" type="com.neilren.neilren4j.dbentity.TLogAccess">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="datetime" jdbcType="TIMESTAMP" property="datetime" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="protocol" jdbcType="VARCHAR" property="protocol" />
+    <result column="scheme" jdbcType="VARCHAR" property="scheme" />
+    <result column="host_name" jdbcType="VARCHAR" property="hostName" />
+    <result column="port" jdbcType="VARCHAR" property="port" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="session_id" jdbcType="VARCHAR" property="sessionId" />
+    <result column="accept" jdbcType="VARCHAR" property="accept" />
+    <result column="accept_language" jdbcType="VARCHAR" property="acceptLanguage" />
+    <result column="browser_type" jdbcType="VARCHAR" property="browserType" />
+    <result column="browser_name" jdbcType="VARCHAR" property="browserName" />
+    <result column="browser_manufacture" jdbcType="VARCHAR" property="browserManufacture" />
+    <result column="browser_group" jdbcType="VARCHAR" property="browserGroup" />
+    <result column="browser_engine" jdbcType="VARCHAR" property="browserEngine" />
+    <result column="browser_major_version" jdbcType="VARCHAR" property="browserMajorVersion" />
+    <result column="browser_minor_version" jdbcType="VARCHAR" property="browserMinorVersion" />
+    <result column="browser_version" jdbcType="VARCHAR" property="browserVersion" />
+    <result column="os_name" jdbcType="VARCHAR" property="osName" />
+    <result column="os_type" jdbcType="VARCHAR" property="osType" />
+    <result column="os_group" jdbcType="VARCHAR" property="osGroup" />
+    <result column="os_manufacturer" jdbcType="VARCHAR" property="osManufacturer" />
+    <result column="Referer" jdbcType="LONGVARCHAR" property="referer" />
+    <result column="url" jdbcType="LONGVARCHAR" property="url" />
+    <result column="query" jdbcType="LONGVARCHAR" property="query" />
+    <result column="user_agent" jdbcType="LONGVARCHAR" property="userAgent" />
+    <result column="cookie" jdbcType="LONGVARCHAR" property="cookie" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_log_access
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.neilren.neilren4j.dbentity.TLogAccess">
+    insert into t_log_access (id, datetime, ip, 
+      protocol, scheme, host_name, 
+      port, method, session_id, 
+      accept, accept_language, browser_type, 
+      browser_name, browser_manufacture, browser_group, 
+      browser_engine, browser_major_version, browser_minor_version, 
+      browser_version, os_name, os_type, 
+      os_group, os_manufacturer, Referer, 
+      url, query, user_agent, 
+      cookie)
+    values (#{id,jdbcType=BIGINT}, #{datetime,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR}, 
+      #{protocol,jdbcType=VARCHAR}, #{scheme,jdbcType=VARCHAR}, #{hostName,jdbcType=VARCHAR}, 
+      #{port,jdbcType=VARCHAR}, #{method,jdbcType=VARCHAR}, #{sessionId,jdbcType=VARCHAR}, 
+      #{accept,jdbcType=VARCHAR}, #{acceptLanguage,jdbcType=VARCHAR}, #{browserType,jdbcType=VARCHAR}, 
+      #{browserName,jdbcType=VARCHAR}, #{browserManufacture,jdbcType=VARCHAR}, #{browserGroup,jdbcType=VARCHAR}, 
+      #{browserEngine,jdbcType=VARCHAR}, #{browserMajorVersion,jdbcType=VARCHAR}, #{browserMinorVersion,jdbcType=VARCHAR}, 
+      #{browserVersion,jdbcType=VARCHAR}, #{osName,jdbcType=VARCHAR}, #{osType,jdbcType=VARCHAR}, 
+      #{osGroup,jdbcType=VARCHAR}, #{osManufacturer,jdbcType=VARCHAR}, #{referer,jdbcType=LONGVARCHAR}, 
+      #{url,jdbcType=LONGVARCHAR}, #{query,jdbcType=LONGVARCHAR}, #{userAgent,jdbcType=LONGVARCHAR}, 
+      #{cookie,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.neilren.neilren4j.dbentity.TLogAccess">
+    update t_log_access
+    set datetime = #{datetime,jdbcType=TIMESTAMP},
+      ip = #{ip,jdbcType=VARCHAR},
+      protocol = #{protocol,jdbcType=VARCHAR},
+      scheme = #{scheme,jdbcType=VARCHAR},
+      host_name = #{hostName,jdbcType=VARCHAR},
+      port = #{port,jdbcType=VARCHAR},
+      method = #{method,jdbcType=VARCHAR},
+      session_id = #{sessionId,jdbcType=VARCHAR},
+      accept = #{accept,jdbcType=VARCHAR},
+      accept_language = #{acceptLanguage,jdbcType=VARCHAR},
+      browser_type = #{browserType,jdbcType=VARCHAR},
+      browser_name = #{browserName,jdbcType=VARCHAR},
+      browser_manufacture = #{browserManufacture,jdbcType=VARCHAR},
+      browser_group = #{browserGroup,jdbcType=VARCHAR},
+      browser_engine = #{browserEngine,jdbcType=VARCHAR},
+      browser_major_version = #{browserMajorVersion,jdbcType=VARCHAR},
+      browser_minor_version = #{browserMinorVersion,jdbcType=VARCHAR},
+      browser_version = #{browserVersion,jdbcType=VARCHAR},
+      os_name = #{osName,jdbcType=VARCHAR},
+      os_type = #{osType,jdbcType=VARCHAR},
+      os_group = #{osGroup,jdbcType=VARCHAR},
+      os_manufacturer = #{osManufacturer,jdbcType=VARCHAR},
+      Referer = #{referer,jdbcType=LONGVARCHAR},
+      url = #{url,jdbcType=LONGVARCHAR},
+      query = #{query,jdbcType=LONGVARCHAR},
+      user_agent = #{userAgent,jdbcType=LONGVARCHAR},
+      cookie = #{cookie,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, datetime, ip, protocol, scheme, host_name, port, method, session_id, accept, 
+    accept_language, browser_type, browser_name, browser_manufacture, browser_group, 
+    browser_engine, browser_major_version, browser_minor_version, browser_version, os_name, 
+    os_type, os_group, os_manufacturer, Referer, url, query, user_agent, cookie
+    from t_log_access
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, datetime, ip, protocol, scheme, host_name, port, method, session_id, accept, 
+    accept_language, browser_type, browser_name, browser_manufacture, browser_group, 
+    browser_engine, browser_major_version, browser_minor_version, browser_version, os_name, 
+    os_type, os_group, os_manufacturer, Referer, url, query, user_agent, cookie
+    from t_log_access
+  </select>
+</mapper>

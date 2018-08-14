@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="system/layout/head::head">
+</head>
+<body class="easyui-layout">
+<div data-options="region:'north',border:false" style="height:60px;background:#B3DFDA;padding:10px">north region</div>
+<div data-options="region:'west',split:true" style="width:200px;">
+    <div title="TreeMenu">
+        <ul class="easyui-tree">
+            <li>
+                <span>Article</span>
+                <ul>
+                    <li><a href="javascript:addTab('ArticleList','/system/article/list')">ArticleList</a></li>
+                    <li><a href="javascript:addTab('Category','/system/article/category/list')">Category</a></li>
+                    <li><a href="javascript:addTab('Tag','/system/article/tag/list')">Tag</a></li>
+                </ul>
+            </li>
+            <li>
+                <span>Setting</span>
+                <ul>
+                    <li><a href="javascript:addTab('Holiday','/system/holiday/list')">Holiday</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<div data-options="region:'east',split:true,collapsed:true,title:'East'" style="width:100px;padding:10px;">east region
+</div>
+<div data-options="region:'south',border:false" style="height:20px;background:#A9FACD;">south region</div>
+<div data-options="region:'center',border:false">
+    <div id="tt" class="easyui-tabs" data-options="fit:true">
+        <div title="About" style="padding:10px">
+            <p style="font-size:14px">jQuery EasyUI framework helps you build your web pages easily.</p>
+            <ul>
+                <li>easyui is a collection of user-interface plugin based on jQuery.</li>
+                <li>easyui provides essential functionality for building modem, interactive, javascript applications.
+                </li>
+                <li>using easyui you don't need to write many javascript code, you usually defines user-interface by
+                    writing some HTML markup.
+                </li>
+                <li>complete framework for HTML5 web page.</li>
+                <li>easyui save your time and scales while developing your products.</li>
+                <li>easyui is very easy but powerful.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    function addTab(title, url){
+        if ($('#tt').tabs('exists', title)){
+            $('#tt').tabs('select', title);
+        } else {
+            var content = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';
+            $('#tt').tabs('add',{
+                title:title,
+                content:content,
+                closable:true
+            });
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/head::head(${title},${head})">
+</head>
+<body>
+<header th:replace="layout/header::header(${menu},${holiday})">
+</header>
+<main class="container-fluid">
+    <section id="banner" class="row">
+        <div class="col-lg-8 col-md-6">
+            <div class="section-img" style="background-image: url('/img/kitbox.jpg')"></div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="section-text">
+                <span class="eyebrow">Public Service</span>
+                <h2>开发工具箱</h2>
+                <p>
+                    Development Kit Box<br>
+                    工欲善其事，必先利其器。<br>
+                    开发过程中或者生活中常常需要一些小工具来提升工作生产效率。我在工作生活中需要用到的小工具都会在这里共享。
+                </p>
+            </div>
+        </div>
+    </section>
+</main>
+<footer th:replace="layout/footer::footer(${footer})"></footer>
+</body>
+</html>

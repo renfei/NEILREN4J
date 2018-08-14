@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/head::head(${title},${head})">
+</head>
+<body>
+<header th:replace="layout/header::header(${menu},${holiday})">
+</header>
+<main class="container">
+    <div class="about">
+        <div class="about-title">
+            <h1>数码相册</h1>
+            <p>Digital album</p>
+        </div>
+        <p>时间的流逝无法停止，但是美好的一瞬可以留住。</p>
+    </div>
+</main>
+<footer th:replace="layout/footer::footer(${footer})"></footer>
+</body>
+</html>

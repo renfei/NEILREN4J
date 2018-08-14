@@ -20,6 +20,7 @@
 
 ## NEILREN的历史
 **Spring Boot**
+- 2018-08-14    NeilRenV4 1.0.0发布到Github
 - 2018-07-16    使用SpringBoot重新构建
 
 **Spring MVC**

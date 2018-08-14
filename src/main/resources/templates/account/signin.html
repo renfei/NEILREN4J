@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/head::head(${title},${head})">
+</head>
+<body>
+<style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none !important;
+        margin: 0;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+
+    .panl {
+        transition: opacity 1s;
+        filter: Alpha(opacity=100);
+        opacity: 0;
+        float: left;
+        width: 100%;
+    }
+</style>
+<div class="signbox">
+    <div class="boxinbox">
+        <div class="signlogo">
+            <img src="/img/NeilCat.svg" width="24" height="24">
+        </div>
+        <h1>Sign in</h1>
+        <p class="signtext">with your NeilRen Account</p>
+        <div class="frombox">
+            <div class="account panl" style="opacity: 1;display: inline;">
+                <div id="accountbox" class="inputgrop">
+                    <input id="account" type="text">
+                    <div class="inputgrop_text">Account</div>
+                </div>
+                <div style="padding-top: 30px;">
+                    您可以使用您的用户名或者电子邮箱地址
+                </div>
+                <div style="padding-top: 30px;">
+                    <a href="javascript:void(0)">忘记账户？</a>
+                </div>
+            </div>
+            <div class="password panl" style="opacity: 0;display: none;">
+                <div id="passwordbox" class="inputgrop">
+                    <input id="passwd" type="password">
+                    <div class="inputgrop_text">Password</div>
+                </div>
+                <div id="vcodebox" class="inputgrop">
+                    <div style="float: left;width: calc(100% - 110px);">
+                        <input id="vcode" type="text">
+                        <div class="inputgrop_text" style="width: calc(100% - 110px);">Verification Code</div>
+                    </div>
+                    <img id="codeimg" src="/VerifyImage/get" style="float: right;cursor: pointer;"
+                         onclick="RefreshVerificationCode()">
+                    <div style="clear: both"></div>
+                </div>
+                <div style="padding-top: 30px;">
+                    <a href="javascript:void(0)">忘记密码？</a>
+                </div>
+            </div>
+            <div class="totp panl" style="opacity: 0;display: none;">
+                <div id="totpbox" class="inputgrop">
+                    <input id="totp" type="number" oninput="if(value.length>6)value=value.slice(0,6)">
+                    <div class="inputgrop_text">One-Time Password(OTP)</div>
+                </div>
+                <div style="padding-top: 30px;">
+                    请打开您手机中的 Google Authenticator 谷歌身份验证器，或其他支持双因子验证的APP，输入当前的6位数动态密码。
+                </div>
+                <div style="padding-top: 30px;">
+                    <a href="javascript:void(0)">手机APP丢失？</a>
+                </div>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="btn">
+            <button id="btnNext" type="submit" onclick="next()" class="btn btn-primary">Next</button>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+</div>
+<script>
+    var username = undefined;
+    var has512passwd = undefined;
+    var vcode = undefined;
+    var totp = undefined;
+    $(function () {
+        inputfocus("#account", "#accountbox");
+        inputfocus("#passwd", "#passwordbox");
+        inputfocus("#vcode", "#vcodebox");
+        inputfocus("#totp", "#totpbox");
+        $(".frombox").bind("keypress",function(e){
+            // 兼容FF和IE和Opera
+            var theEvent = e || window.event;
+            var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+            if (code == 13) {
+                e.preventDefault();
+                //回车执行查询
+                $('#btnNext').click();
+            }
+        });
+
+    });
+
+    function next() {
+        var account = $(".account").css("opacity") == "1";
+        var password = $(".password").css("opacity") == "1";
+        var totp = $(".totp").css("opacity") == "1";
+        if (account) {
+            //输入账户页面
+            if ($("#account").val() == "") {
+                $(".signtext").html("请输入账户名");
+                return false;
+            }
+            username = $("#account").val();
+            $(".signtext").html("with your NeilRen Account");
+            $(".account").css("opacity", "0");
+            $(".account").hide();
+            $(".password").show();
+            $(".password").css("opacity", "1");
+            $(".totp").css("opacity", "0");
+            $(".totp").hide();
+        } else if (password) {
+            //输入密码页面
+            if ($("#passwd").val() == "") {
+                $(".signtext").html("请输入密码");
+                return false;
+            }
+            if ($("#vcode").val() == "") {
+                $(".signtext").html("请输入验证码");
+                return false;
+            }
+            var SHA512 = new Hashes.SHA512
+            has512passwd = SHA512.hex($("#passwd").val());
+            vcode = $("#vcode").val();
+            ajax(
+                "/account/doSignin",
+                "POST",
+                {
+                    account: username,
+                    passwd: has512passwd,
+                    vcode: vcode
+                },
+                false,
+                false,
+                function (data, textStatus, jqXHR) {
+                    if (data.success) {
+                        if (data.message == "totp") {
+                            $(".signtext").html("with your NeilRen Account");
+                            $(".account").css("opacity", "0");
+                            $(".account").hide();
+                            $(".password").css("opacity", "0");
+                            $(".password").hide();
+                            $(".totp").show();
+                            $(".totp").css("opacity", "1");
+                        } else if (data.message == "Success!") {
+                            window.location.replace("/");
+                        }
+                    } else {
+                        $("#passwd").val("");
+                        $("#vcode").val("");
+                        if (data.message == "密码错误" || data.message == "验证码错误") {
+                            $(".signtext").html(data.message);
+                        } else {
+                            $(".signtext").html(data.message);
+                            $(".password").css("opacity", "0");
+                            $(".password").hide();
+                            $(".account").show();
+                            $(".account").css("opacity", "1");
+                            $(".totp").css("opacity", "0");
+                            $(".totp").hide();
+                        }
+                        RefreshVerificationCode();
+                        return false;
+                    }
+                },
+                function (XMLHttpRequest, textStatus, errorThrown) {
+
+                });
+        } else if (totp) {
+            //输入totp页面
+            if ($("#totp").val() == "") {
+                $(".signtext").html("请输入OTP一次性密码");
+                return false;
+            }
+            totp = $("#totp").val();
+            ajax(
+                "/account/doSignin",
+                "POST",
+                {
+                    account: username,
+                    passwd: has512passwd,
+                    vcode: vcode,
+                    totp: totp
+                },
+                false,
+                false,
+                function (data, textStatus, jqXHR) {
+                    if (data.success) {
+                        if (data.message == "Success!") {
+                            window.location.replace("/");
+                        } else {
+                            $(".signtext").html(data.message);
+                            return null;
+                        }
+                    } else {
+                        if (data.message == "TOTP验证失败") {
+                            $(".signtext").html(data.message);
+                            return false;
+                        } else {
+                            $(".password").css("opacity", "0");
+                            $(".password").hide();
+                            $(".account").show();
+                            $(".account").css("opacity", "1");
+                            $(".totp").css("opacity", "0");
+                            $(".totp").hide();
+                        }
+                        RefreshVerificationCode();
+                        return false;
+                    }
+                },
+                function (XMLHttpRequest, textStatus, errorThrown) {
+
+                });
+        }
+    }
+
+    function RefreshVerificationCode() {
+        $("#codeimg").attr("src", "/VerifyImage/get?random=" + Math.random());
+    }
+
+    function inputfocus(inputid, boxid) {
+        $(inputid).focus(function () {
+            $(boxid).addClass("onfocus");
+        });
+        $(inputid).blur(function () {
+            if ($(inputid).val().length == 0) {
+                $(boxid).removeClass("onfocus");
+            }
+        });
+    }
+</script>
+</body>
+</html>

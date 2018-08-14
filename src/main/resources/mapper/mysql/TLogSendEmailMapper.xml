@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neilren.neilren4j.dao.TLogSendEmailMapper">
+  <resultMap id="BaseResultMap" type="com.neilren.neilren4j.dbentity.TLogSendEmail">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="senddate" jdbcType="TIMESTAMP" property="senddate" />
+    <result column="toemail" jdbcType="LONGVARCHAR" property="toemail" />
+    <result column="subject" jdbcType="LONGVARCHAR" property="subject" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_log_send_email
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.neilren.neilren4j.dbentity.TLogSendEmail">
+    insert into t_log_send_email (id, senddate, toemail, 
+      subject, content)
+    values (#{id,jdbcType=BIGINT}, #{senddate,jdbcType=TIMESTAMP}, #{toemail,jdbcType=LONGVARCHAR}, 
+      #{subject,jdbcType=LONGVARCHAR}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.neilren.neilren4j.dbentity.TLogSendEmail">
+    update t_log_send_email
+    set senddate = #{senddate,jdbcType=TIMESTAMP},
+      toemail = #{toemail,jdbcType=LONGVARCHAR},
+      subject = #{subject,jdbcType=LONGVARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, senddate, toemail, subject, content
+    from t_log_send_email
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, senddate, toemail, subject, content
+    from t_log_send_email
+  </select>
+</mapper>

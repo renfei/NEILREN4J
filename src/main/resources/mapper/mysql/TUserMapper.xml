@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neilren.neilren4j.dao.TUserMapper">
+  <resultMap id="BaseResultMap" type="com.neilren.neilren4j.dbentity.TUser">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="passwd" jdbcType="CHAR" property="passwd" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="salt" jdbcType="CHAR" property="salt" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="secret" jdbcType="CHAR" property="secret" />
+    <result column="join_date" jdbcType="TIMESTAMP" property="joinDate" />
+    <result column="last_login_date" jdbcType="TIMESTAMP" property="lastLoginDate" />
+    <result column="user_state" jdbcType="INTEGER" property="userState" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.neilren.neilren4j.dbentity.TUser">
+    insert into t_user (id, account, passwd, 
+      email, salt, birthday, sex, 
+      secret, join_date, last_login_date, 
+      user_state)
+    values (#{id,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR}, #{passwd,jdbcType=CHAR}, 
+      #{email,jdbcType=VARCHAR}, #{salt,jdbcType=CHAR}, #{birthday,jdbcType=DATE}, #{sex,jdbcType=CHAR}, 
+      #{secret,jdbcType=CHAR}, #{joinDate,jdbcType=TIMESTAMP}, #{lastLoginDate,jdbcType=TIMESTAMP}, 
+      #{userState,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.neilren.neilren4j.dbentity.TUser">
+    update t_user
+    set account = #{account,jdbcType=VARCHAR},
+      passwd = #{passwd,jdbcType=CHAR},
+      email = #{email,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=CHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      sex = #{sex,jdbcType=CHAR},
+      secret = #{secret,jdbcType=CHAR},
+      join_date = #{joinDate,jdbcType=TIMESTAMP},
+      last_login_date = #{lastLoginDate,jdbcType=TIMESTAMP},
+      user_state = #{userState,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, account, passwd, email, salt, birthday, sex, secret, join_date, last_login_date, 
+    user_state
+    from t_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByUserNameOrEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, account, passwd, email, salt, birthday, sex, secret, join_date, last_login_date,
+    user_state
+    from t_user
+    where account = #{username,jdbcType=VARCHAR} OR email = #{username,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, account, passwd, email, salt, birthday, sex, secret, join_date, last_login_date, 
+    user_state
+    from t_user
+  </select>
+</mapper>

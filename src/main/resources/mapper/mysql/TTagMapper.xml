@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neilren.neilren4j.dao.TTagMapper">
+  <resultMap id="BaseResultMap" type="com.neilren.neilren4j.dbentity.TTag">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="en_name" jdbcType="LONGVARCHAR" property="enName" />
+    <result column="zh_name" jdbcType="LONGVARCHAR" property="zhName" />
+    <result column="describe" jdbcType="LONGVARCHAR" property="describe" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_tag
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.neilren.neilren4j.dbentity.TTag">
+    insert into t_tag (id, en_name, zh_name, 
+      `describe`)
+    values (#{id,jdbcType=BIGINT}, #{enName,jdbcType=LONGVARCHAR}, #{zhName,jdbcType=LONGVARCHAR}, 
+      #{describe,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.neilren.neilren4j.dbentity.TTag">
+    update t_tag
+    set en_name = #{enName,jdbcType=LONGVARCHAR},
+      zh_name = #{zhName,jdbcType=LONGVARCHAR},
+      `describe` = #{describe,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, en_name, zh_name, `describe`
+    from t_tag
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, en_name, zh_name, `describe`
+    from t_tag
+  </select>
+  <select id="selectByArticleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT
+    	`t_tag`.*
+    FROM
+    	`t_tag`
+    LEFT JOIN `t_article_tag` ON `t_tag`.`id` = `t_article_tag`.`tag_id`
+    WHERE
+    	`t_article_tag`.`article_id` = #{id,jdbcType=BIGINT}
+    LIMIT 0,1
+  </select>
+  <select id="selectByTagEnName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, en_name, zh_name, `describe`
+    from t_tag
+    WHERE en_name = #{enName,jdbcType=LONGVARCHAR}
+  </select>
+</mapper>

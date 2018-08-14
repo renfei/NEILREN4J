@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/head::head(${title},${head})">
+</head>
+<body>
+<header th:replace="layout/header::header(${menu},${holiday})">
+</header>
+<main class="container">
+    <div class="about">
+        <div class="about-title">
+            <h1>隐私声明和 Cookie</h1>
+            <p>Legal Resources</p>
+        </div>
+        <p>我们十分重视你的隐私。 本隐私声明阐述了 NEILREN.COM 处理的个人数据以及 NEILREN.COM 处理个人数据的方式和目的。</p>
+        <p>请阅读本隐私声明中特定于服务的详细信息，这些详细信息提供了其他相关信息。 此声明适用于 NEILREN.COM 与你之间的互动、 NEILREN.COM 提供的所有服务。</p>
+    </div>
+</main>
+<main class="container article" style="margin-top: 40px;">
+    <article>
+        <div class="row content">
+            <div class="col-md-3" style="font-size: 12px;">
+                <div>
+                    <ul style="list-style: none;font-size: 14px;">
+                        <li><a href="#1">我们收集的个人数据</a></li>
+                        <li><a href="#2">我们如何使用个人数据</a></li>
+                        <li><a href="#3">Cookie 和类似技术</a></li>
+                        <li><a href="#4">搜索和人工智能</a></li>
+                    </ul>
+                </div>
+                <div style="margin-top: 40px;">
+                    <h4>Cookie</h4>
+                    <p>
+                        大多数 NEILREN.COM 站点使用 Cookie - Cookie 是放置在设备上的小文本文件，域中放置 Cookie 的 Web 服务器稍后可以检索这些小文本文件。 我们使用 Cookie 来存储你的首选项和设置、帮助登录、提供定向广告，以及分析站点运行。
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <h2 style="margin-bottom: 20px;" id="1">我们收集的个人数据</h2>
+                <div class="gray-bar" style="margin-bottom: 20px;"></div>
+                <p>
+                    我们会收集你的数据作为分析来源，其中包括但不限于：你的设备信息、IP地址、访问行为信息。我们收集的数据取决于你与 NEILREN.COM 互动的环境、你所做的选择。
+                </p>
+                <p>
+                    在你使用 NEILREN.COM 提供的服务时，将默认为您已经阅读并同意了我们的隐私条款。
+                </p>
+                <h2 style="margin-bottom: 20px;" id="2">我们如何使用个人数据</h2>
+                <div class="gray-bar" style="margin-bottom: 20px;"></div>
+                <p>
+                    NEILREN.COM 使用我们收集的数据为你提供丰富的交互式体验。给您提供更有价值的信息。
+                </p>
+                <p>
+                    我们还有可能根据您的信息进行广告推荐、性能分析调查。
+                </p>
+                <p></p>
+                <h2 style="margin-bottom: 20px;" id="3">Cookie 和类似技术</h2>
+                <div class="gray-bar" style="margin-bottom: 20px;"></div>
+                <p>
+                    Cookie 是放置在设备上的小型文本文件，用于存储数据，域中放置 Cookie 的 Web 服务器可以调用这些数据。 我们使用 Cookie 和类似技术来存储和遵守你的偏好和设置、使你能够登录、提供基于兴趣的广告、打击欺诈行为、分析我们服务的性能以及实现其他合法目的。
+                </p>
+                <p>我们也使用“Web 信号”帮助提供 Cookie 和收集用法和性能数据。 我们的网站可能包含来自第三方服务提供商的 Web 信号、Cookie 或类似技术。</p>
+                <p>
+                    你有各种用于控制 Cookie、Web 信号和类似技术所收集的数据的工具。 例如，你可以使用 Internet 浏览器中的控件来限制你所访问的网站可如何使用 Cookie，并通过清除或阻止 Cookie 来撤消同意。
+                </p>
+                <h2 style="margin-bottom: 20px;" id="4">搜索和人工智能</h2>
+                <div class="gray-bar" style="margin-bottom: 20px;"></div>
+                <p>搜索和人工智能产品会将你与信息联系起来，并智能地感知、处理和处置信息—随着时间的推移进行学习和适应。</p>
+            </div>
+        </div>
+    </article>
+    <div style="height: 40px;">
+    </div>
+</main>
+<footer th:replace="layout/footer::footer(${footer})"></footer>
+</body>
+</html>

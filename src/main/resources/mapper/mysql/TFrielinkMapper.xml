@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neilren.neilren4j.dao.TFrielinkMapper">
+  <resultMap id="BaseResultMap" type="com.neilren.neilren4j.dbentity.TFrielink">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="add_date" jdbcType="TIMESTAMP" property="addDate" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="black_white" jdbcType="INTEGER" property="blackWhite" />
+    <result column="last_check_time" jdbcType="TIMESTAMP" property="lastCheckTime" />
+    <result column="sitename" jdbcType="LONGVARCHAR" property="sitename" />
+    <result column="link" jdbcType="LONGVARCHAR" property="link" />
+    <result column="domain" jdbcType="LONGVARCHAR" property="domain" />
+    <result column="email" jdbcType="LONGVARCHAR" property="email" />
+    <result column="qq" jdbcType="LONGVARCHAR" property="qq" />
+    <result column="remark" jdbcType="LONGVARCHAR" property="remark" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_frielink
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.neilren.neilren4j.dbentity.TFrielink">
+    insert into t_frielink (id, add_date, state, 
+      black_white, last_check_time, sitename, 
+      link, domain, email, 
+      qq, remark)
+    values (#{id,jdbcType=BIGINT}, #{addDate,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}, 
+      #{blackWhite,jdbcType=INTEGER}, #{lastCheckTime,jdbcType=TIMESTAMP}, #{sitename,jdbcType=LONGVARCHAR}, 
+      #{link,jdbcType=LONGVARCHAR}, #{domain,jdbcType=LONGVARCHAR}, #{email,jdbcType=LONGVARCHAR}, 
+      #{qq,jdbcType=LONGVARCHAR}, #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.neilren.neilren4j.dbentity.TFrielink">
+    update t_frielink
+    set add_date = #{addDate,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=INTEGER},
+      black_white = #{blackWhite,jdbcType=INTEGER},
+      last_check_time = #{lastCheckTime,jdbcType=TIMESTAMP},
+      sitename = #{sitename,jdbcType=LONGVARCHAR},
+      link = #{link,jdbcType=LONGVARCHAR},
+      domain = #{domain,jdbcType=LONGVARCHAR},
+      email = #{email,jdbcType=LONGVARCHAR},
+      qq = #{qq,jdbcType=LONGVARCHAR},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, add_date, state, black_white, last_check_time, sitename, link, domain, 
+    email, qq, remark
+    from t_frielink
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, add_date, state, black_white, last_check_time, sitename, link, domain, 
+    email, qq, remark
+    from t_frielink
+  </select>
+  <select id="selectValidFrieLinks" resultType="com.neilren.neilren4j.dbentity.TFrielink">
+        SELECT *
+        FROM neilrenv4.t_frielink
+        WHERE neilrenv4.t_frielink.state > 0 AND neilrenv4.t_frielink.black_white >= 0;
+    </select>
+  <select id="selectBlackFrieLinks" resultType="com.neilren.neilren4j.dbentity.TFrielink">
+        SELECT *
+        FROM neilrenv4.t_frielink
+        WHERE neilrenv4.t_frielink.black_white = -1;
+    </select>
+  <select id="selectShowingFrieLinks" resultType="com.neilren.neilren4j.dbentity.TFrielink">
+        SELECT *
+        FROM neilrenv4.t_frielink
+        WHERE neilrenv4.t_frielink.black_white = 0 AND neilrenv4.t_frielink.state = 1;
+    </select>
+  <select id="selectHideFrieLinks" resultType="com.neilren.neilren4j.dbentity.TFrielink">
+        SELECT *
+        FROM neilrenv4.t_frielink
+        WHERE neilrenv4.t_frielink.black_white = 0 AND neilrenv4.t_frielink.state = 0;
+    </select>
+  <select id="selectFrieLinkByDomain" parameterType="String"
+          resultType="com.neilren.neilren4j.dbentity.TFrielink">
+        SELECT *
+        FROM neilrenv4.t_frielink
+        WHERE neilrenv4.t_frielink.link = CONCAT('http://', #{_parameter}, '/') OR
+          neilrenv4.t_frielink.link = CONCAT('https://', #{_parameter}, '/');
+    </select>
+  <select id="selectFrieLinkByLink" parameterType="String"
+          resultType="com.neilren.neilren4j.dbentity.TFrielink">
+        SELECT *
+        FROM neilrenv4.t_frielink
+        WHERE neilrenv4.t_frielink.link = #{_parameter};
+    </select>
+  <insert id="insertFrieLink" parameterType="com.neilren.neilren4j.dbentity.TFrielink">
+    <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    INSERT INTO neilrenv4.t_frielink
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sitename != null">
+        sitename,
+      </if>
+      <if test="link != null">
+        link,
+      </if>
+      <if test="domain != null">
+        domain,
+      </if>
+      <if test="addDate != null">
+        add_date,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="blackWhite != null">
+        black_white,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="lastCheckTime != null">
+        last_check_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sitename != null">
+        #{sitename,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="link != null">
+        #{link,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="domain != null">
+        #{domain,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="addDate != null">
+        #{addDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="blackWhite != null">
+        #{blackWhite,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="lastCheckTime != null">
+        #{lastCheckTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByFrieLink" parameterType="com.neilren.neilren4j.dbentity.TFrielink">
+    UPDATE neilrenv4.t_frielink
+    <set>
+      <if test="link != null">
+        link = #{link,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="addDate != null">
+        add_date = #{addDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sitename != null">
+        sitename = #{sitename,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="domain != null">
+        domain = #{domain,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="blackWhite != null">
+        black_white = #{blackWhite,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="lastCheckTime != null">
+        last_check_time = #{lastCheckTime},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

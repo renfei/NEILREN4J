@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/head::head(${title},${head})">
+</head>
+<body>
+<header th:replace="layout/header::header(${menu},${holiday})">
+</header>
+<main class="container">
+    <div class="about">
+        <div class="about-title">
+            <h1>404 - Not Found</h1>
+            <p>抱歉! 您访问的页面不存在!</p>
+        </div>
+        <div class="about-info">
+            <h2>404 Page Not Found</h2>
+            <div class="row">
+                <div class="col-md-3 col-sm-3">
+                    <div class="img" style="background-image: url('/img/404.jpg')"></div>
+                </div>
+                <div class="col-md-5 col-sm-9">
+                    <span class="title">Page Not Found</span>
+                    <h3>在服务器上没有找到您请求的页面</h3>
+                    <p>
+                        服务器上无法找到您请求的网页，该网页可能已经被关闭或者您输入的网址错误，您可以尝试使用搜索功能找到您需要的网页
+                    </p>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <span class="title">Try to Search</span>
+                    <h3>尝试搜索一下</h3>
+                    <form action="/Search">
+                        <input type="text" placeholder="Search" name="wd"
+                               style="height: 44px;padding-left:20px;border: 1px solid #dadce0;width: calc(100% - 50px);">
+                        <button type="submit" style="border: 0;">
+                            <span class="glyphicon glyphicon-search" style="padding: 15px;"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="gray-bar"></div>
+        <div class="about-info" id="xuanchuan">
+            <h2>宝贝回家 - 公益宣传</h2>
+            <div class="row">
+                <div class="col-md-3 col-sm-3">
+                    <div id="404img" class="img"></div>
+                </div>
+                <div class="col-md-9 col-sm-9">
+                    <span class="title">Baby Back Home</span>
+                    <h3>您访问的页面找不回来了，但我们可以一起帮他们回家</h3>
+                    <p>
+                        <strong style="font-size: 22px;"><span id="name"></span>(<span
+                                id="sex"></span>)</strong><br/>
+                    <hr style="border-top: 1px solid #000;">
+                    <strong>出生日期：</strong><span id="birth_time"></span><br/>
+                    <strong>失踪日期：</strong><span id="lost_time"></span><br/>
+                    <strong>失踪地点：</strong><span id="lost_place"></span><br/>
+                    <strong>特征描述：</strong><span
+                        id="child_feature"></span><br/>
+                    <a href="JavaScript:void(0)" id="404url"
+                       class="btn btn-primary"
+                       data-animation-delay="60"
+                       style="margin-bottom: 5px;" target="_blank">
+                        查看详情
+                    </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="gray-bar"></div>
+    </div>
+</main>
+<footer th:replace="layout/footer::footer(${footer})"></footer>
+<script th:inline="javascript">
+    $(function () {
+        if (jsondata != undefined) {
+            var num = Math.random() * jsondata.data.length;
+            num = parseInt(num, 10);
+            $('#404img').css("background-image", "url(" + jsondata.data[num].child_pic + ")");
+            $('#name').html(jsondata.data[num].name);
+            $('#sex').html(jsondata.data[num].sex);
+            $('#birth_time').html(jsondata.data[num].birth_time);
+            $('#lost_time').html(jsondata.data[num].lost_time);
+            $('#lost_place').html(jsondata.data[num].lost_place);
+            $('#child_feature').html(jsondata.data[num].child_feature);
+            $('#404url').attr('href', jsondata.data[num].url);
+        }else {
+            $('#xuanchuan').hide();
+        }
+    });
+</script>
+</body>
+</html>

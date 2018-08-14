@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="system/layout/head::head">
+</head>
+<body class="easyui-layout">
+<table class="easyui-datagrid"
+       data-options="fit:true,rownumbers:true,singleSelect:true,url:'/system/holiday/getDateList',method:'get',pagination:true,pageSize:10,toolbar:'#tb'">
+    <thead>
+    <tr>
+        <th data-options="field:'id'">ID</th>
+        <th data-options="field:'text'">文字</th>
+        <th data-options="field:'startDate'">开始日期</th>
+        <th data-options="field:'endDate'">结束日期</th>
+        <th data-options="field:'color',formatter:formatterColor">颜色</th>
+        <th data-options="field:'style'">样式表</th>
+    </tr>
+    </thead>
+</table>
+<div id="tb" style="padding:5px;height:auto">
+    <div style="margin-bottom:5px">
+        <a href="javascript:$('#w').window('open');" class="easyui-linkbutton" iconCls="icon-add" plain="true"></a>
+    </div>
+</div>
+<div id="w" class="easyui-window" data-options="iconCls:'icon-save',closed:true"
+     style="width:100%;height:100%;padding:5px;">
+    <div class="easyui-layout" data-options="fit:true">
+        <div data-options="region:'center'" id="main">
+            <table cellpadding="5">
+                <tr>
+                    <td>开始日期:</td>
+                    <td><input id="startDate" class="easyui-datebox" type="text" data-options="sharedCalendar:'#cc'" style="width: 300px;"></td>
+                </tr>
+                <tr>
+                    <td>结束日期:</td>
+                    <td><input id="endDate" class="easyui-datebox" type="text" data-options="sharedCalendar:'#cc'" style="width: 300px;"></td>
+                </tr>
+                <tr>
+                    <td>颜色:</td>
+                    <td><input id="color" class="easyui-textbox" type="text" style="width: 300px;">
+                    </td>
+                </tr>
+                <tr>
+                    <td>文字:</td>
+                    <td><input id="text" class="easyui-textbox" type="text" style="width: 300px;"></td>
+                </tr>
+                <tr>
+                    <td>样式:</td>
+                    <td><input id="style" class="easyui-textbox" name="message" data-options="multiline:true"
+                               style="height:60px;width: 300px"></td>
+                </tr>
+            </table>
+        </div>
+        <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)"
+               onclick="javascript:sub()" style="width:80px">Ok</a>
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)"
+               onclick="$('#w').window('close')" style="width:80px">Cancel</a>
+        </div>
+    </div>
+</div>
+<div id="cc" class="easyui-calendar"></div>
+<script>
+    function formatterColor(val, row) {
+        return '<span style="color: ' + val + '">' + val + '</span>';
+    }
+    function sub() {
+        $.ajax({
+            url: '/system/holiday/saveHoliday',
+            type: "post",
+            dataType: "json",
+            data: {
+                "startDate": $("#startDate").datebox('getValue') + " 00:00:00",
+                "endDate": $("#endDate").datebox('getValue') + " 00:00:00",
+                "color": $("#color").textbox('getValue'),
+                "style": $("#style").textbox('getValue'),
+                "text": $("#text").textbox('getValue')
+            },
+            cache: false,
+            success: function (data, textStatus, jqXHR) {
+                if (data.success) {
+                    $('#w').window('close');
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+            }
+        });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neilren.neilren4j.dao.TArticleMapper">
+    <resultMap id="BaseResultMap" type="com.neilren.neilren4j.dbentity.TArticle">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="source" jdbcType="INTEGER" property="source"/>
+        <result column="views" jdbcType="BIGINT" property="views"/>
+        <result column="date" jdbcType="TIMESTAMP" property="date"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="source_url" jdbcType="LONGVARCHAR" property="sourceUrl"/>
+        <result column="author" jdbcType="LONGVARCHAR" property="author"/>
+        <result column="author_url" jdbcType="LONGVARCHAR" property="authorUrl"/>
+        <result column="title" jdbcType="LONGVARCHAR" property="title"/>
+        <result column="keyword" jdbcType="LONGVARCHAR" property="keyword"/>
+        <result column="describes" jdbcType="LONGVARCHAR" property="describes"/>
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+        <result column="img" jdbcType="LONGVARCHAR" property="img"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_article
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.neilren.neilren4j.dbentity.TArticle">
+    insert into t_article (source, views,
+      date, status, source_url, 
+      author, author_url, title, 
+      keyword, describes, content, 
+      img)
+    values (#{source,jdbcType=INTEGER}, #{views,jdbcType=BIGINT},
+      #{date,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{sourceUrl,jdbcType=LONGVARCHAR}, 
+      #{author,jdbcType=LONGVARCHAR}, #{authorUrl,jdbcType=LONGVARCHAR}, #{title,jdbcType=LONGVARCHAR}, 
+      #{keyword,jdbcType=LONGVARCHAR}, #{describes,jdbcType=LONGVARCHAR}, #{content,jdbcType=LONGVARCHAR}, 
+      #{img,jdbcType=LONGVARCHAR})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.neilren.neilren4j.dbentity.TArticle">
+    update t_article
+    set source = #{source,jdbcType=INTEGER},
+      views = #{views,jdbcType=BIGINT},
+      date = #{date,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      source_url = #{sourceUrl,jdbcType=LONGVARCHAR},
+      author = #{author,jdbcType=LONGVARCHAR},
+      author_url = #{authorUrl,jdbcType=LONGVARCHAR},
+      title = #{title,jdbcType=LONGVARCHAR},
+      keyword = #{keyword,jdbcType=LONGVARCHAR},
+      describes = #{describes,jdbcType=LONGVARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR},
+      img = #{img,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultType="com.neilren.neilren4j.entity.Article">
+    SELECT
+    t_article.*, t_category.zh_name
+    FROM
+    	`t_article`
+    LEFT JOIN `t_article_category` ON `t_article`.id = `t_article_category`.article_id
+    LEFT JOIN `t_category` ON `t_category`.id = `t_article_category`.category_id
+    where `t_article`.id = #{id,jdbcType=BIGINT}
+    LIMIT 0,1
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, source, views, date, status, source_url, author, author_url, title, keyword, 
+    describes, content, img
+    from t_article
+  </select>
+    <select id="selectAllArticle" resultType="com.neilren.neilren4j.entity.Article">
+    SELECT
+	t_article.*, t_category.zh_name
+    FROM
+    	`t_article`
+    LEFT JOIN `t_article_category` ON `t_article`.id = `t_article_category`.article_id
+    LEFT JOIN `t_category` ON `t_category`.id = `t_article_category`.category_id
+    ORDER BY
+    	`t_article`.date DESC
+  </select>
+    <select id="selectByTagIdAndArticleId" parameterType="java.lang.Long"
+            resultType="com.neilren.neilren4j.entity.Article">
+        SELECT
+        t_article.*, t_category.zh_name
+        FROM
+        `t_article`
+        LEFT JOIN `t_article_category` ON `t_article`.id = `t_article_category`.article_id
+        LEFT JOIN `t_category` ON `t_category`.id = `t_article_category`.category_id
+        where `t_article`.id <![CDATA[<>]]> #{articleid,jdbcType=BIGINT} and `t_category`.id = #{tagid,jdbcType=BIGINT}
+        LIMIT 0,4
+    </select>
+    <select id="selectTopViewArticle" resultType="com.neilren.neilren4j.entity.Article">
+       SELECT
+        	`t_article`.*, `t_tag`.zh_name
+        FROM
+        	`t_article`
+        LEFT JOIN `t_article_category` ON `t_article`.`id` = `t_article_category`.`article_id`
+        LEFT JOIN `t_tag` ON `t_article_category`.`category_id` = `t_tag`.`id`
+        ORDER BY
+        	`t_article`.`views` DESC
+    </select>
+    <select id="selectArticleListByTag" parameterType="com.neilren.neilren4j.dbentity.TTag"
+            resultType="com.neilren.neilren4j.entity.Article">
+        SELECT
+        	`t_article`.*, `t_tag`.zh_name
+        FROM
+        	`t_article`
+        LEFT JOIN `t_article_tag` ON `t_article`.`id` = `t_article_tag`.`article_id`
+        LEFT JOIN `t_tag` ON `t_article_tag`.`tag_id` = `t_tag`.`id`
+        WHERE `t_tag`.en_name = #{tag.enName,jdbcType=LONGVARCHAR}
+        ORDER BY
+        `t_article`.date DESC
+    </select>
+    <select id="selectArticleListByCat" parameterType="com.neilren.neilren4j.dbentity.TCategory"
+            resultType="com.neilren.neilren4j.entity.Article">
+        SELECT
+        `t_article`.*, `t_category`.`zh_name`
+        FROM
+        `t_article`
+        LEFT JOIN `t_article_category` ON `t_article`.`id` = `t_article_category`.`article_id`
+        LEFT JOIN `t_category` ON `t_article_category`.`category_id` = `t_category`.`id`
+        WHERE `t_category`.`en_name` =  #{cat.enName,jdbcType=LONGVARCHAR}
+        ORDER BY
+        `t_article`.date DESC
+    </select>
+</mapper>

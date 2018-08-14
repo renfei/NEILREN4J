@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/head::head(${title},${head})">
+</head>
+<body>
+<header th:replace="layout/header::header(${menu},${holiday})">
+</header>
+<main class="container">
+    <div class="page-title">
+        <span class="eyebrow" th:text="${eyebrow}"></span>
+        <h1 th:text="${h1}"></h1>
+        <p th:text="${describe}"></p>
+    </div>
+    <div id="tagcloud" th:if="${tagcloud!=null||categorys!=null}">
+        <a th:if="${tagcloud!=null}" th:each="tag:${tagcloud}" th:text="${tag.zhName}"
+           th:href="${'/tag/'+tag.enName}"></a>
+        <a th:if="${categorys!=null}" th:each="cat:${categorys}" th:text="${cat.zhName}"
+           th:href="${'/cat/'+cat.enName}"></a>
+    </div>
+    <div class="list-box">
+        <h2>Articles in this series</h2>
+        <ul id="ul">
+            <li th:each="article:${articles}">
+                <a class="row" th:href="${'/Article/'+article.id}">
+                    <section class="col-md-10">
+                        <header th:text="${article.zh_name}"></header>
+                        <h3 th:text="${article.title}"></h3>
+                    </section>
+                    <div class="col-md-2 visible-md-inline visible-lg-inline allstories-img"
+                         th:style="${article.img==null?'':'background-image: url('+article.img+');'}"></div>
+                </a>
+            </li>
+        </ul>
+        <div class="row" style="padding: 20px 0;">
+            <button type="button" class="btn btn-primary btn-lg btn-block"
+                    style="padding: 25px 0; width: 100%;text-transform: uppercase;" onclick="paging()">Load more stories
+            </button>
+        </div>
+    </div>
+</main>
+<footer th:replace="layout/footer::footer(${footer})"></footer>
+<script>
+    /* <![CDATA[ */
+    var type = "[[${type}]]";
+    var value = "[[${value}]]";
+    /* ]]> */
+    window.onload = function () {
+        var oDiv = document.getElementById('tagcloud');
+        var aA = $("#tagcloud a");
+        var i = 0;
+        for (i = 0; i < aA.length; i++) {
+            aA[i].pause = 1;
+            aA[i].time = null;
+            initialize(aA[i]);
+            aA[i].onmouseover = function () {
+                this.pause = 0;
+            };
+            aA[i].onmouseout = function () {
+                this.pause = 1;
+            };
+        }
+        setInterval(starmove, 50);
+
+        function starmove() {
+            for (i = 0; i < aA.length; i++) {
+                if (aA[i].pause) {
+                    domove(aA[i]);
+                }
+            }
+        }
+
+        function domove(obj) {
+            if (obj.offsetTop <= -obj.offsetHeight) {
+                obj.style.top = oDiv.offsetHeight + "px";
+                initialize(obj);
+            } else {
+                obj.style.top = obj.offsetTop - obj.ispeed + "px";
+            }
+        }
+
+        function initialize(obj) {
+            var iLeft = parseInt(Math.random() * oDiv.offsetWidth);
+            var scale = Math.random() * 1 + 1;
+            var iTimer = parseInt(Math.random() * 1500);
+            obj.pause = 0;
+
+            obj.style.fontSize = 12 * scale + 'px';
+
+            if ((iLeft - obj.offsetWidth) > 0) {
+                obj.style.left = iLeft - obj.offsetWidth + "px";
+            } else {
+                obj.style.left = iLeft + "px";
+            }
+            clearTimeout(obj.time);
+            obj.time = setTimeout(function () {
+                obj.pause = 1;
+            }, iTimer);
+            obj.ispeed = Math.ceil(Math.random() * 4) + 1;
+        }
+    };
+    var page = 1;
+
+    function paging() {
+        $("#btn").html("Loading...");
+        $.ajax({
+            url: '/blog/paging',
+            type: "post",
+            dataType: "json",
+            data: {
+                "page": page + 1,
+                "type": type,
+                "value": value
+            },
+            cache: false,
+            success: function (data, textStatus, jqXHR) {
+                if (data.success) {
+                    page = page + 1;
+                    var html = $("#ul").html();
+                    for (var i = 0; i < data.data.length; i++) {
+                        html += "<li>";
+                        html += "<a class=\"row\" href=\"/Article/" + data.data[i].id + "\">";
+                        html += "<section class=\"col-md-10\">";
+                        html += "<header>" + data.data[i].zh_name + "</header>";
+                        html += "<h3>" + data.data[i].title + "</h3>";
+                        html += "</section>";
+                        if (data.data[i].img == null) {
+                            html += "<div class=\"col-md-2 visible-md-inline visible-lg-inline allstories-img\"></div>";
+                        } else {
+                            html += "<div class=\"col-md-2 visible-md-inline visible-lg-inline allstories-img\" style=\"background-image: url(\"" + data.data[i].img + "\";)\"></div>";
+                        }
+                        html += "</a>";
+                        html += "</li>";
+                    }
+                    $("#ul").html(html);
+                }
+                $("#btn").html("Load more stories");
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $("#btn").html("Load more stories");
+            }
+        });
+    }
+</script>
+</body>
+</html>

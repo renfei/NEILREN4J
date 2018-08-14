@@ -1,0 +1,89 @@
+### Server 配置 ##########
+server:
+  port: 9080
+### Spring 配置 ##########
+spring:
+  # 驱动配置信息 ###
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/neilrenv4?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    initialSize: 1
+    minIdle: 1
+    maxActive: 100
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT1FROMDUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    filters: stat,wall,log4j
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    useGlobalDataSourceStat: true
+    logSlowSql: true
+    #### elasticsearch ##########
+    elasticsearch:
+      jest:
+       uris:
+       - http://localhost:9200
+       read-timeout: 5000
+  aop:
+    auto: true
+### NeilRen 配置 ##########
+neilren:
+  version: 1.0.0
+  host: http://localhost:9080
+  googletotpseed: null
+  googletotpissuer: NEILREN.COM
+  pagecss:
+    - /css/bootstrap.min.css
+    - /syntaxhighlighter/styles/shCore.css
+    - /syntaxhighlighter/styles/shThemeDefault.css
+    - /css/neilren4j.css
+  pagejss:
+    - /js/jquery-3.3.1.min.js
+    - /js/popper-1.14.3.js
+    - /js/bootstrap.min.js
+    - /js/hashes.js
+    - /js/neilren4j.js
+    - /syntaxhighlighter/scripts/shCore.js
+    - //msite.baidu.com/sdk/c.js?appid=1606398243645928
+    - //qzonestyle.gtimg.cn/qzone/v6/portal/gy/404/data.js
+    - https://www.googletagmanager.com/gtag/js?id=null
+  baidu:
+    site: https://localhost:9080/
+    token: null
+    xiongzhangappid: null
+    xiongzhangtoken: null
+  aliyun:
+    accesskey: null
+    secret: null
+    openSearch:
+      appname: NEILREN
+      host: http://opensearch-cn-beijing.aliyuncs.com
+    oss:
+      endpoint: http://oss-cn-beijing.aliyuncs.com
+      bucketname: bj-neilren
+      rootPath: neilren4j/upload/
+    cdn:
+      host: https://cdn.neilren.com/
+  email:
+    smtp: smtp.mxhichina.com
+    port: 465
+    debug: true
+    from: no-reply@neilren.com
+    ssl: true
+    username: no-reply@neilren.com
+    password: null
+### MyBatis 配置 ##########
+mybatis:
+  mapper-locations: classpath:mapper/mysql/*.xml
+### PageHelper 配置 ##########
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

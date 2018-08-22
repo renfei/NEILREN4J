@@ -70,108 +70,12 @@
         </div>
     </div>
     <div style="clear: both"></div>
-    <script th:inline="javascript">
-
-        // 百度自动推送
-        (function(){
-            var bp = document.createElement('script');
-            var curProtocol = window.location.protocol.split(':')[0];
-            if (curProtocol === 'https') {
-                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-            }
-            else {
-                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-            }
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(bp, s);
-        })();
-        // 360搜索自动提交
-        (function(){
-            var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?64af1dda7e7ac75d0636d7df7b3134c3":"https://jspassport.ssl.qhimg.com/11.0.1.js?64af1dda7e7ac75d0636d7df7b3134c3";
-            document.write('<script src="' + src + '" id="sozz"><\/script>');
-        })();
-
-        $(window).scroll(function (event) {
-            var t = $(window).scrollTop();  //获取距离页面顶部的距离
-            var height = $(".top-bar").height();
-            // console.log(t);
-            if (t >= 120) { //当距离顶部超过300px时
-                document.getElementsByClassName("top-bar")[0].style.webkitTransform = "translate3d(0px,-" + height + "px,0px)";
-                // $(".top-bar").css({"transition":"translate3d(0px,-128px,0px)"});
-            } else { //如果距离顶部小于300px
-                // document.getElementsByClassName("top-bar")[0].style.webkitTransform="transform .4s,background .4s";
-                document.getElementsByClassName("top-bar")[0].style.webkitTransform = "translate3d(0px,0px,0px)";
-            }
-        });
-        window.onresize = function () {
-            if ($(window).width() > 992) {
-                $('body').css('overflow', 'auto');
-            }
-        };
-
-        function showpadmenu() {
-            $(".drawer-backdrop").css("opacity", "1");
-            $(".drawer-backdrop").css("visibility", "visible");
-            $(".drawer-backdrop").css("height", $(window).height());
-            $('body').css('overflow', 'hidden');//浮层出现时窗口不能滚动设置
-            $(".pad-menu").css("height", $(window).height());
-            $(".pad-menu").css("visibility", "visible");
-            $(".pad-menu").css("transform", "translateZ(0)");
-        }
-
-        function closepadmenu() {
-            $(".drawer-backdrop").css("opacity", "0");
-            $(".drawer-backdrop").css("visibility", "hidden");
-            $('body').css('overflow', 'auto');
-            $(".pad-menu").css("visibility", "hidden");
-            $(".pad-menu").css("transform", "translate3d(-100%, 0, 0);");
-        }
-
-        function opensearch() {
-            $(".menu ul").css({
-                "opacity": "0",
-                "visibility": "hidden"
-            });
-            $(".btns").css({
-                "opacity": "0",
-                "visibility": "hidden"
-            });
-            $(".search-bar form").css({
-                "display": "block",
-                "opacity": "1",
-                "height": "44px"
-            });
-        }
-
-        function openmenumini() {
-            $(".menu-mini").css({
-                "display":"block"
-            });
-            $(".menu-mini").focus();
-        }
-
-        function closemenumini() {
-            $(".menu-mini").css({
-                "display":"none"
-            });
-        }
-
-        function closesearch() {
-            $(".menu ul").css({
-                "opacity": "1",
-                "visibility": ""
-            });
-            $(".btns").css({
-                "opacity": "1",
-                "visibility": ""
-            });
-            $(".search-bar form").css({
-                "display": "none",
-                "opacity": "0",
-                "height": "0"
-            });
-        }
-    </script>
+    <!--mip 运行环境-->
+    <script src="https://c.mipcdn.com/static/v1/mip.js"></script>
+    <!--分享组件 代码-->
+    <script src="https://c.mipcdn.com/static/v1/mip-share/mip-share.js"></script>
+    <!--百度统计组件 代码-->
+    <script src="https://c.mipcdn.com/static/v1/mip-stats-baidu/mip-stats-baidu.js"></script>
 </footer>
 </body>
 </html>

@@ -70,6 +70,8 @@
     	`t_article`
     LEFT JOIN `t_article_category` ON `t_article`.id = `t_article_category`.article_id
     LEFT JOIN `t_category` ON `t_category`.id = `t_article_category`.category_id
+    GROUP BY
+    t_article.id
     ORDER BY
     	`t_article`.date DESC
   </select>

@@ -6,10 +6,10 @@ spring:
   # 驱动配置信息 ###
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/neilrenv4?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://127.0.0.1:3306/neilrenv4?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
     username: root
     password: root
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     initialSize: 1
     minIdle: 1
     maxActive: 100
@@ -27,34 +27,35 @@ spring:
     #### elasticsearch ##########
     elasticsearch:
       jest:
-       uris:
-       - http://localhost:9200
-       read-timeout: 5000
+        uris:
+        - http://localhost:9200
+        read-timeout: 5000
   aop:
     auto: true
 ### NeilRen 配置 ##########
 neilren:
-  version: 1.0.0
-  host: http://localhost:9080
+  version: 1.0
+  host: https://www.neilren.com
   googletotpseed: null
   googletotpissuer: NEILREN.COM
   pagecss:
-    - /css/bootstrap.min.css
-    - /syntaxhighlighter/styles/shCore.css
-    - /syntaxhighlighter/styles/shThemeDefault.css
-    - /css/neilren4j.css
+  - https://cdn.neilren.com/NeilRenV4/css/bootstrap.min.css
+  - https://cdn.neilren.com/NeilRenV4/syntaxhighlighter/styles/shCore.css
+  - https://cdn.neilren.com/NeilRenV4/syntaxhighlighter/styles/shThemeDefault.css
+  - https://cdn.neilren.com/NeilRenV4/css/neilren4j.css
   pagejss:
-    - /js/jquery-3.3.1.min.js
-    - /js/popper-1.14.3.js
-    - /js/bootstrap.min.js
-    - /js/hashes.js
-    - /js/neilren4j.js
-    - /syntaxhighlighter/scripts/shCore.js
-    - //msite.baidu.com/sdk/c.js?appid=1606398243645928
-    - //qzonestyle.gtimg.cn/qzone/v6/portal/gy/404/data.js
-    - https://www.googletagmanager.com/gtag/js?id=null
+  - https://cdn.neilren.com/NeilRenV4/js/jquery-3.3.1.min.js
+  - https://cdn.neilren.com/NeilRenV4/js/popper-1.14.3.js
+  - https://cdn.neilren.com/NeilRenV4/js/bootstrap.min.js
+  - https://cdn.neilren.com/NeilRenV4/js/hashes.js
+  - https://cdn.neilren.com/NeilRenV4/js/neilren4j.js
+  - https://cdn.neilren.com/NeilRenV4/syntaxhighlighter/scripts/shCore.js
+  - https://cdn.neilren.com/NeilRenV4/syntaxhighlighter/scripts/shAutoloader.js
+  - //msite.baidu.com/sdk/c.js?appid=1606398243645928
+  - //qzonestyle.gtimg.cn/qzone/v6/portal/gy/404/data.js
+  - https://www.googletagmanager.com/gtag/js?id=UA-45593016-2
   baidu:
-    site: https://localhost:9080/
+    site: https://www.neilren.com/
     token: null
     xiongzhangappid: null
     xiongzhangtoken: null
@@ -63,13 +64,14 @@ neilren:
     secret: null
     openSearch:
       appname: NEILREN
-      host: http://opensearch-cn-beijing.aliyuncs.com
+      host: http://vpc.opensearch-cn-beijing.aliyuncs.com
     oss:
       endpoint: http://oss-cn-beijing.aliyuncs.com
       bucketname: bj-neilren
       rootPath: neilren4j/upload/
     cdn:
       host: https://cdn.neilren.com/
+    apiappcodeip: null
   email:
     smtp: smtp.mxhichina.com
     port: 465

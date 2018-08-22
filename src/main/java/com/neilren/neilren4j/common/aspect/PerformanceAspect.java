@@ -64,10 +64,7 @@ public class PerformanceAspect {
     @Around("logPointcut()")
     public Object doAround(ProceedingJoinPoint joinPoint) throws Throwable {
         startTime.set(System.nanoTime());
-
-        if (calls.get() == null) {
-            calls.set(0L);
-        }
+        calls.set(0L);
         long start = System.currentTimeMillis();
         try {
             Object result = joinPoint.proceed();

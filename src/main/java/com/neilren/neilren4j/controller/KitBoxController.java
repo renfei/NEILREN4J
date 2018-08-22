@@ -29,4 +29,15 @@ public class KitBoxController extends BasePageController {
         mv.setViewName("kitbox/index");
         return mv;
     }
+
+    @RequestMapping("worst_password_check")
+    public ModelAndView getWorstPasswordCheck() {
+        ModelAndView mv = new ModelAndView();
+        List<Menu> menuList = siteMenuService.getAllMenu("/kitbox");
+        mv.addObject("menu", menuList);
+        HeadTitle headTitle = new HeadTitle("弱密码检测工具 - 开发工具箱 - " + siteName, null, null);
+        mv.addObject("title", headTitle);
+        mv.setViewName("kitbox/worst_password_check");
+        return mv;
+    }
 }

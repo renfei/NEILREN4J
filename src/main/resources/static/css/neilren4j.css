@@ -261,7 +261,7 @@
     top: 70px;
     right: 10px;
     border: 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,.5);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .5);
     z-index: 1;
     background: #fff;
 }
@@ -287,9 +287,9 @@ main {
 }
 
 .section-img {
-    background-image: url('/img/default.jpeg');
+    background-image: url('//cdn.neilren.com/NeilRenV4/img/default.jpeg');
     flex-basis: calc(64.59068% + 32px + 1.03799%);
-    min-height: 446px;
+    min-height: 400px;
     display: block;
     background-position: 50%;
     background-size: cover;
@@ -372,7 +372,7 @@ main {
 }
 
 .topstories .topstories-list .topstories-img {
-    background-image: url('/img/default.jpeg');
+    background-image: url('//cdn.neilren.com/NeilRenV4/img/default.jpeg');
     background-position: 50%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -422,7 +422,7 @@ main {
 
 .allstories ul li a .allstories-img {
     background-position: 50%;
-    background-image: url('/img/default.jpeg');
+    background-image: url('//cdn.neilren.com/NeilRenV4/img/default.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
     display: block;
@@ -537,7 +537,7 @@ footer .foot-menu ul li a {
 .article .article-img {
     height: 440px;
     background-position: 50%;
-    background-image: url('/img/default.jpeg');
+    background-image: url('//cdn.neilren.com/NeilRenV4/img/default.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -552,6 +552,11 @@ footer .foot-menu ul li a {
 
 .article .content p {
     text-indent: 2em;
+}
+
+/*修复由于p标签首行缩进导致图片溢出的问题*/
+.article .content p img {
+    margin-left: -2em;
 }
 
 .article .content .article-info {
@@ -602,7 +607,7 @@ footer .foot-menu ul li a {
 }
 
 .article .article-other .other-list .otherarticle-img {
-    background-image: url(/img/default.jpeg);
+    background-image: url(//cdn.neilren.com/NeilRenV4/img/default.jpeg);
     background-position: 50%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -645,7 +650,7 @@ footer .foot-menu ul li a {
 }
 
 .about .about-info .img {
-    background-image: url(/img/neilren.jpg);
+    background-image: url(//cdn.neilren.com/NeilRenV4/img/neilren.jpg);
     background-position: 50%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -726,7 +731,7 @@ footer .foot-menu ul li a {
 
 .list-box ul li a .allstories-img {
     background-position: 50%;
-    background-image: url('/img/default.jpeg');
+    background-image: url('//cdn.neilren.com/NeilRenV4/img/default.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
     display: block;
@@ -902,4 +907,28 @@ footer .foot-menu ul li a {
     .signbox .boxinbox {
         padding: 24px 24px 36px;
     }
+}
+
+.tool-list {
+    border: 1px solid #dadce0;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding-bottom: 10px;
+    margin: 2px;
+}
+
+.tool-list .tool-icon {
+    width: 45px;
+    height: 45px;
+    float: left;
+    background-size: cover;
+}
+
+.tool-list h4 {
+}
+
+.tool-list span {
+    text-indent: inherit;
+    padding: 0 5px;
 }

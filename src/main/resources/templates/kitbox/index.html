@@ -8,7 +8,7 @@
 <main class="container-fluid">
     <section id="banner" class="row">
         <div class="col-lg-8 col-md-6">
-            <div class="section-img" style="background-image: url('/img/kitbox.jpg')"></div>
+            <div class="section-img" style="background-image: url('//cdn.neilren.com/NeilRenV4/img/kitbox.jpg')"></div>
         </div>
         <div class="col-lg-4 col-md-6">
             <div class="section-text">
@@ -22,6 +22,27 @@
             </div>
         </div>
     </section>
+</main>
+<main class="container article" style="margin-top: 40px;">
+    <article>
+        <section class="row">
+            <h2>Security Tools</h2>
+        </section>
+        <div class="row content">
+            <div class="col-xs-12 col-sm-4 col-md-3 tool-list">
+                <a href="/kitbox/worst_password_check">
+                    <h4>密码强度检测</h4>
+                    <div class="tool-icon" style="background-image: url('//cdn.neilren.com/NeilRenV4/img/icon/password.png');"></div>
+                    <div style="float: left;width: calc(100% - 45px);">
+                        <span>Worst Password Check.弱密码检查。</span>
+                    </div>
+                    <div class="clear"></div>
+                </a>
+            </div>
+        </div>
+    </article>
+    <div style="height: 40px;">
+    </div>
 </main>
 <footer th:replace="layout/footer::footer(${footer})"></footer>
 </body>

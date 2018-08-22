@@ -13,6 +13,7 @@ public class Aliyun {
     private OpenSearch openSearch;
     private OSS oss;
     private CDN cdn;
+    private String apiappcodeip;
 
     public String getAccesskey() {
         return accesskey;
@@ -52,5 +53,13 @@ public class Aliyun {
 
     public void setCdn(CDN cdn) {
         this.cdn = cdn;
+    }
+
+    public String getApiappcodeip() {
+        return apiappcodeip;
+    }
+
+    public void setApiappcodeip(String apiappcodeip) {
+        this.apiappcodeip = apiappcodeip;
     }
 }

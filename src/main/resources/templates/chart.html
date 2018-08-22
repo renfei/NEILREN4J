@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/head::head(${title},${head})">
+</head>
+<body>
+<header th:replace="layout/header::header(${menu},${holiday})">
+</header>
+<main class="container">
+    <div class="about">
+        <div class="about-title">
+            <h1>OpenDate</h1>
+            <p>开放数据。以下数据来源于我站真实的访问数据。</p>
+        </div>
+        <div class="about-info">
+            <h2>ISP运营商占比</h2>
+            <div class="row">
+                <iframe src="https://das.base.shuju.aliyun.com/token3rd/dashboard/view/pc.htm?pageId=28cde46c-b6b7-4da9-86f9-4ce116a8a93b&accessToken=fef83e832691a97730b0a0247d8857db"
+                        height="300px" width="100%" scrolling="no" frameborder="0"></iframe>
+            </div>
+            <h2>操作系统占比</h2>
+            <div class="row">
+                <iframe src="https://das.base.shuju.aliyun.com/token3rd/dashboard/view/pc.htm?pageId=8b0a6750-6c3e-4a7f-b09d-f8264fdd472f&accessToken=82cf879d8c8b7577b0122241575c7e9b"
+                        height="300px" width="100%" scrolling="no" frameborder="0"></iframe>
+            </div>
+            <h2>浏览器占比</h2>
+            <div class="row">
+                <iframe src="https://das.base.shuju.aliyun.com/token3rd/dashboard/view/pc.htm?pageId=799db532-4bab-4e39-a52c-367c64066954&accessToken=9db6fd4003641c7c0fa81d8dbcf7ad09"
+                        height="300px" width="100%" scrolling="no" frameborder="0"></iframe>
+            </div>
+            <h2>省份占比</h2>
+            <div class="row">
+                <iframe src="https://das.base.shuju.aliyun.com/token3rd/dashboard/view/pc.htm?pageId=64b9b284-8aa1-4d28-945e-8662bf31d766&accessToken=ed658f4f0912579e78214526c2130cfa"
+                        height="300px" width="100%" scrolling="no" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="layout/footer::footer(${footer})"></footer>
+</body>
+</html>

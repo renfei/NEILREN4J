@@ -1,3 +1,4 @@
+新增一行，贡献自己的代码到别人的项目中
 <p align="center">
   <a href="http://www.neilren.com">
     <img src="https://github.com/NeilRen/NEILREN4J/raw/master/doc/img/neilren4j_logo_1415x477.png" width=300 height=101>
@@ -10,7 +11,7 @@
   [![Yii2](https://img.shields.io/badge/Powered_by-NeilRen-green.svg?style=flat)](https://www.neilren.com/)
   
   <p align="center">
-    任霏的个人网站 Java 版，Spring MVC SSM框架整合
+    任霏的个人网站 Java 版，Spring Boot SSM框架整合
     <br>
     <a href="http://www.neilren.com"><strong>查看neilren.com &raquo;</strong></a>
   </p>
@@ -19,8 +20,15 @@
 <br>
 
 ## NEILREN的历史
+**Spring Boot**
+- 2018-08-14    NeilRenV4 1.0.0发布到Github
+- 2018-07-16    使用SpringBoot重新构建
+
 **Spring MVC**
-- 2017-06-00    计划上Github开源管理代码
+- 2017-10-02    新增友情链接自助申请、友情链接自动巡查、邮件发送通知、集成阿里绿网内容检测、域名工具类
+- 2017-06-07    集成阿里云开放搜索引擎
+- 2017-06-03    新增微信公众号的接入
+- 2017-06-00    计划上Github开源管理代码
 - 2017-05-00    搭建成功第一版 SSM 框架，设计新版 数据库结构、前端页面
 - 2017-04-00    购买搭建Linux服务器
 - 2016-12-00    尝试使用 SSM 框架构建新的Java版网站

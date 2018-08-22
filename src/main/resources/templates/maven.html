@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/head::head(${title},${head})">
+</head>
+<body>
+<header th:replace="layout/header::header(${menu},${holiday})">
+</header>
+<main class="container-fluid">
+    <section id="banner" class="row">
+        <div class="col-lg-8 col-md-6">
+            <div class="section-img" style="background-image: url('/img/maven.jpg')"></div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="section-text">
+                <span class="eyebrow">Public Service</span>
+                <h2>Maven Repository</h2>
+                <p>
+                    Maven Repository Mirror.<br>
+                    Maven 仓库镜像服务。由于中国大陆访问境外服务较为缓慢，为使广大开发者快速便捷的使用 Maven 服务，我们提供了 Maven 中央仓库的镜像服务。<br>
+                    同时支持 Maven / NuGet。
+                </p>
+                <a href="http://maven.neilren.com/" target="_blank">
+                    <span class="link">Go to Repository<span class="glyphicon glyphicon-play-circle"
+                                                             aria-hidden="true"></span></span>
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+<main class="container article" style="margin-top: 40px;">
+    <article>
+        <section class="row">
+            <h1>使用 Maven Repository Mirror 加速你的 Maven 构建</h1>
+        </section>
+        <div class="row content">
+            <div class="col-md-2">
+                <div class="article-info" style="padding-bottom: 30px;">
+                    <h5>Article Info</h5>
+                    <span>Author:NeilRen</span>
+                    <span>Source:Original</span>
+                    <span>Category:</span>
+                    <span>Tag:</span>
+                    <span>Published:2018-07-20</span>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <p>在中国大陆的网络环境中访问境外网络会十分缓慢，开发者很多时间用于等待依赖包的下载，利用镜像服务，可以加速程序的构建，下面就带领您使用 Maven镜像服务 加速您的程序构建。</p>
+                <h4>先决条件</h4>
+                <p>
+                    首先，您的电脑上必须安装了 Maven，安装方法不在此介绍。
+                </p>
+                <p>
+                    在 Maven 的安装目录中，conf 文件夹下有个 setting.xml 文件，编辑 setting.xml 文件，在 mirrors 节点中增加一个节点：
+                    http://maven.neilren.com/repository/maven-public/
+                    <script src="/syntaxhighlighter/scripts/shBrushXml.js"></script>
+                <pre class="brush:xml;">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;settings xmlns=&quot;http://maven.apache.org/SETTINGS/1.0.0&quot;
+          xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+          xsi:schemaLocation=&quot;http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd&quot;&gt;
+    &lt;mirrors&gt;
+      &lt;mirror&gt;
+        &lt;id&gt;neilrenmaven&lt;/id&gt;
+        &lt;name&gt;neilren maven&lt;/name&gt;
+        &lt;url&gt;http://maven.neilren.com/repository/maven-public/&lt;/url&gt;
+        &lt;mirrorOf&gt;central&lt;/mirrorOf&gt;
+    &lt;/mirror&gt;
+    &lt;/mirrors&gt;
+&lt;/settings&gt;
+            </pre>
+                </p>
+                <p>settings.xml文件的路径<br>
+                    settings.xml的默认路径：个人目录/.m2/settings.xml<br>
+                    windowns: C:\Users\你的用户名\.m2\settings.xml<br>
+                    linux: /home/你的用户名/.m2/settings.xml
+                </p>
+                <h4>工作原理</h4>
+                <p>
+                    当您向镜像仓库请求一个包时，如果镜像仓库中缓存了包将会直接发送给您；如果镜像仓库没有该包，将向Maven中央仓库去查询下载该包并缓存到镜像仓库，下次其他人请求该包时将直接发送该包，从而实现了加速构建您的应用。
+                </p>
+            </div>
+            <div class="col-md-2">
+                <div th:replace="layout/share::share"></div>
+            </div>
+        </div>
+    </article>
+    <div style="height: 40px;">
+    </div>
+</main>
+<footer th:replace="layout/footer::footer(${footer})"></footer>
+<script>
+</script>
+</body>
+</html>

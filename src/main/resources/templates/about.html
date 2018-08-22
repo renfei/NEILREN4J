@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/head::head(${title},${head})">
+</head>
+<body>
+<header th:replace="layout/header::header(${menu},${holiday})">
+</header>
+<main class="container">
+    <div class="about">
+        <div class="about-title">
+            <h1>About</h1>
+            <p>More information about us.</p>
+        </div>
+        <div class="about-info">
+            <h2>Neil Ren</h2>
+            <div class="row">
+                <div class="col-md-3 col-sm-3">
+                    <div class="img"></div>
+                </div>
+                <div class="col-md-5 col-sm-9">
+                    <span class="title">Software Development Engineer</span>
+                    <h3>编程很简单。但需要有一定天赋的人才能理解这种简单。</h3>
+                    <p>
+                        好奇是最好的老师，保持你的好奇心，探索事物背后的原理，其实这个世界十分有趣和聪明。其实每个人都潜藏着拥有改变世界的力量，这份宝藏等待你的挖掘。
+                    </p>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <span class="title">Keep in touch with me</span>
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>E-mail:<a href="mailto:ren.fei.cn@gmail.com" target="_blank">ren.fei.cn@gmail.com</a></li>
+                        <li>GitHub:<a href="https://github.com/NeilRen" target="_blank">GitHub</a></li>
+                        <li>Sina Weibo:<a href="https://weibo.com/NeilRen" target="_blank">NeilRen</a></li>
+                        <li>Tencent QQ：<a
+                                href="https://shang.qq.com/wpa/qunwpa?idkey=bfbde7e5dec79fd3cdb23c7cf590ca698e3da8b48a71369139ed6aa52f9a7513"
+                                target="_blank">130832168</a></li>
+                        <li>Tel:+86 13082843041</li>
+                        <li>Zhangjiakou - Hebei - China</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="gray-bar"></div>
+        <div class="about-info">
+            <h2>This Web Site</h2>
+            <div class="row">
+                <div class="col-md-3 col-sm-3">
+                    <div class="img" style="background-image: url('/img/NeilCat.svg')"></div>
+                </div>
+                <div class="col-md-5 col-sm-9">
+                    <span class="title">Personal Website</span>
+                    <h3>分享即提高，通过分享，收获最大的是你自己。</h3>
+                    <p>
+                        为什么要建立这个网站？其实这里是我的游乐场和实验室，感兴趣的新鲜事物都会在这里被尝试和验证，掌握以后将用于商业项目。
+                        同时感谢乐于分享的前辈们，我也将我所知道的经验分享到这里。
+                    </p>
+                    <p>
+                        2012年使用WordPress建立了个人博客；2015年大学毕业后使用 ASP.NET MVC 模仿WordPress开发了新版个人博客；
+                        2017年自学Java完成技术转型使用Spring MVC完成了Java版的开发；2018年使用SpringBoot集成更多的框架，从前端页面到后端代码完全重写；
+                    </p>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <span class="title">Special Thanks</span>
+                    <h3>Open Source Projects</h3>
+                    <p>
+                        <a href="https://spring.io" target="_blank">Spring</a>;
+                        <a href="http://www.mybatis.org" target="_blank">MyBatis</a>;
+                        <a href="https://shiro.apache.org" target="_blank">Shiro</a>;
+                        <a href="https://mariadb.org" target="_blank">MariaDB</a>;
+                        <a href="https://www.centos.org" target="_blank">CentOS</a>;
+                        <a href="https://github.com/alibaba/druid" target="_blank">Druid</a>;
+                        <a href="https://github.com/alibaba/fastjson" target="_blank">Fastjson</a>;
+                        <a href="https://getbootstrap.com" target="_blank">Bootstrap</a>;
+                        <a href="https://www.thymeleaf.org" target="_blank">Thymeleaf</a>;
+                        <a href="http://glyphicons.com" target="_blank">Glyphicons</a>;
+                        <a href="http://nginx.org" target="_blank">Nginx</a>;
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="gray-bar"></div>
+        <div class="about-info">
+            <h2>Important Dates</h2>
+            <div class="row">
+                <div class="col-md-3 col-sm-3">
+                    <div class="img" style="background-image: url('/img/dates.jpg')"></div>
+                </div>
+                <div class="col-md-9 col-sm-9">
+                    <span class="title">Development History</span>
+                    <h3>冰冻三尺非一日之寒，滴水石穿非一日之功。</h3>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>
+                                <h5>Date</h5>
+                            </th>
+                            <th>
+                                <h5>Event</h5>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td width="20%">2012-04-08</td>
+                            <td>使用WordPress搭建了独立的个人博客网站bennett-ren.com</td>
+                        </tr>
+                        <tr>
+                            <td>2012-06-04</td>
+                            <td>注册 任霏.中国，中文域名</td>
+                        </tr>
+                        <tr>
+                            <td>2013-03-01</td>
+                            <td>注册ren-fei.com 域名更改为ren-fei.com</td>
+                        </tr>
+                        <tr>
+                            <td>2013-11-06</td>
+                            <td>注册neilren.com，20岁的生日，更换域名</td>
+                        </tr>
+                        <tr>
+                            <td>2015-01-05</td>
+                            <td>注册neil.ren域名</td>
+                        </tr>
+                        <tr>
+                            <td>2015-06-21</td>
+                            <td>大学毕业，在企业实习中，计划独立开发网站程序</td>
+                        </tr>
+                        <tr>
+                            <td>2015-06-27</td>
+                            <td>MVC	配置新服务器，新购阿里云服务器</td>
+                        </tr>
+                        <tr>
+                            <td>2015-07-06</td>
+                            <td>数据库迁移，从MySQL迁移到SQL Server</td>
+                        </tr>
+                        <tr>
+                            <td>2015-08-01</td>
+                            <td>NEILREN.COM上线，使用 ASP.NET MVC 独立开发程序，项目代号 <a href="https://github.com/NeilRen/NeilNT" target="_blank">NeilNT</a></td>
+                        </tr>
+                        <tr>
+                            <td>2016-10-00</td>
+                            <td>计划转Java技术，开始筹备Java知识和Linux知识</td>
+                        </tr>
+                        <tr>
+                            <td>2016-12-00</td>
+                            <td>尝试使用 SSM 框架构建新的Java版网站</td>
+                        </tr>
+                        <tr>
+                            <td>2017-04-00</td>
+                            <td>购买搭建Linux服务器</td>
+                        </tr>
+                        <tr>
+                            <td>2017-05-00</td>
+                            <td>开始Java版开发，项目代号 NEILREN4J</td>
+                        </tr>
+                        <tr>
+                            <td>2017-06-00</td>
+                            <td>计划上Github开源管理代码</td>
+                        </tr>
+                        <tr>
+                            <td>2017-06-03</td>
+                            <td>新增微信公众号的接入</td>
+                        </tr>
+                        <tr>
+                            <td>2017-06-07</td>
+                            <td>集成阿里云开放搜索引擎</td>
+                        </tr>
+                        <tr>
+                            <td>2017-10-02</td>
+                            <td>新增友情链接自助申请、友情链接自动巡查、邮件发送通知、集成阿里绿网内容检测、域名工具类</td>
+                        </tr>
+                        <tr>
+                            <td>2018-07-16</td>
+                            <td>使用SpringBoot重新构建，项目代号 NEILRENV4</td>
+                        </tr>
+                        <tr>
+                            <td>2018-07-28</td>
+                            <td>功能新增：网页头部节日主题装扮</td>
+                        </tr>
+                        <tr>
+                            <td>2018-08-01</td>
+                            <td>功能新增：利用AOP切面统计执行时间和执行方法数量，对执行时间过长的方法进行日志记录</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="gray-bar"></div>
+    </div>
+</main>
+<footer th:replace="layout/footer::footer(${footer})"></footer>
+</body>
+</html>

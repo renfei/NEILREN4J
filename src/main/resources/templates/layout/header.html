@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<header th:fragment="header(menu,holiday)">
+    <div class="top-bar">
+        <div id="tophead" th:style="${holiday==null?'':holiday.style}">
+            <div class="container-fluid">
+                <div class="lockup">
+                    <div class="img-logo">
+                        <div class="img-logo-link">
+                            <img src="/img/NeilCat.svg" height="24">
+                        </div>
+                        <div class="text-logo"
+                             th:style="${holiday==null?'':'text-shadow: 0 0 0.2em '+holiday.color+', 0 0 0.2em '+holiday.color+';'}">
+                            NeilRen
+                        </div>
+                    </div>
+                    <div th:utext="${holiday==null?'':holiday.text}"
+                         th:style="${'padding-top: 15px;'+(holiday==null?'':'text-shadow: 0 0 0.2em '+holiday.color+', 0 0 0.2em '+holiday.color+';')}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="gray-bar"></div>
+        <!--pad button-->
+        <div class="menu visible-xs-block visible-sm-block visible-md-block" style="height: auto;">
+            <button type="button" class="navbar-toggle collapsed" style="padding: 15px 10px;"
+                    data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar" onclick="showpadmenu()">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <nav class="menu visible-md-inline visible-lg-inline">
+            <ul>
+                <li th:each="m:${menu}" th:class="${m.activity?'activity':''}">
+                    <a th:href="${m.url}" th:text="${m.name}"></a>
+                </li>
+            </ul>
+        </nav>
+        <!--search-->
+        <div class="search-bar">
+            <form action="/Search">
+                <span class="glyphicon glyphicon-search" style="padding: 15px;"></span>
+                <input type="text" placeholder="Search" name="wd" style="height: 44px;border: 0;">
+                <span class="glyphicon glyphicon-remove" style="padding: 15px;float: right;"
+                      onclick="closesearch()"></span>
+            </form>
+        </div>
+        <div class="btns visible-md-inline visible-lg-inline">
+            <div class="btn">
+                <span class="glyphicon glyphicon-search" onclick="opensearch()"></span>
+            </div>
+            <div class="btn">
+                <span class="glyphicon glyphicon-option-vertical" onclick="openmenumini()"></span>
+            </div>
+        </div>
+        <!--Menu_mini-->
+        <div class="menu-mini">
+            <ul>
+                <li><a href="/account/signin">SignIn</a></li>
+                <li class="gray-bar"></li>
+                <li><a href="javascript:closemenumini();">Close</a></li>
+            </ul>
+        </div>
+        <div th:if="${submenu!=null}" class="visible-md-inline visible-lg-inline">
+            <div class="gray-bar"></div>
+            <nav class="menu_2">
+                <ul>
+                    <li th:each="m:${submenu}" th:class="${m.activity?'activity':''}">
+                        <a th:href="${m.url}" th:text="${m.name}"></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!--pad menu-->
+        <div class="visible-xs-block visible-sm-block visible-md-block">
+            <div class="pad-menu">
+                <div class="lockup" style="padding-left: 10px;">
+                    <div class="img-logo">
+                        <div class="img-logo-link">
+                            <img src="/img/NeilCat.svg" height="24">
+                        </div>
+                        <div class="text-logo">NeilRen</div>
+                    </div>
+                    <div class="pad-menu-close">
+                        <span class="glyphicon glyphicon-remove" onclick="closepadmenu()"></span>
+                    </div>
+                </div>
+                <div class="gray-bar"></div>
+                <form action="/Search" class="input-group">
+                    <span class="glyphicon glyphicon-search" style="padding: 22px;"></span>
+                    <input type="text" name="wd" placeholder="Search" style="height: 62px;border: 0;width: 221px;">
+                </form>
+                <div class="gray-bar"></div>
+                <ul>
+                    <li th:each="m:${menu}" th:class="${m.activity?'activity':''}">
+                        <a th:href="${m.url}" th:text="${m.name}"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="drawer-backdrop visible-xs-block visible-sm-block visible-md-block" onclick="closepadmenu()"></div>
+    </div>
+</header>
+</body>
+</html>

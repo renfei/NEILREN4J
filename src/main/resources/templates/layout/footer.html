@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<footer th:fragment="footer(footer)">
+    <div class="container foot-menu">
+        <div class="row">
+            <div class="col-md-2 col-sm-3">
+                <h4>更多服务</h4>
+                <ul>
+                    <li><a href="http://maven.neilren.com/" target="_blank">Maven Repository</a></li>
+                </ul>
+            </div>
+            <div class="col-md-2 col-sm-3">
+                <h4>公益与捐赠</h4>
+                <ul>
+                    <!--<li><a href="" target="_blank">捐赠</a></li>-->
+                    <li><a href="/error/404" target="_blank">我的公益404页面</a></li>
+                    <li><a href="http://www.csapa.org/" rel="nofollow" target="_blank">中国小动物保护协会</a></li>
+                    <li><a href="https://www.unicef.org/zh" rel="nofollow" target="_blank">联合国儿童基金会</a></li>
+                </ul>
+            </div>
+            <div class="col-md-2 col-sm-3">
+                <h4>推荐厂商</h4>
+                <ul>
+                    <li><a href="https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=mqe0f1u0" rel="nofollow" target="_blank">阿里云计算</a></li>
+                    <li><a href="https://cloud.tencent.com/redirect.php?redirect=1005&cps_key=1e6697c30d61f2919ab51bce34ffd8dc" rel="nofollow" target="_blank">腾讯云计算</a></li>
+                    <li><a href="https://www.donglu.net/user/aff.php?aff=114" rel="nofollow" target="_blank">东陆互联</a></li>
+                </ul>
+            </div>
+            <div class="col-md-2 col-sm-3">
+                <h4>社会化互动</h4>
+                <ul>
+                    <li><a href="https://shang.qq.com/wpa/qunwpa?idkey=bfbde7e5dec79fd3cdb23c7cf590ca698e3da8b48a71369139ed6aa52f9a7513" target="_blank">开发者交流QQ群</a></li>
+                    <li><a href="https://github.com/NeilRen" target="_blank">Github 程序员交友</a></li>
+                </ul>
+            </div>
+            <div class="col-md-2 col-sm-3">
+                <h4>其他内容</h4>
+                <ul>
+                    <li><a href="/about" target="_blank">关于更多信息</a></li>
+                    <li><a href="/legal/privacystatement" target="_blank">隐私与 Cookie</a></li>
+                    <li><a href="/legal/intellectualproperty" target="_blank">使用条款</a></li>
+                </ul>
+            </div>
+            <div class="col-md-2 col-sm-3">
+                <h4>微信订阅号</h4>
+                <ul>
+                    <li><img src="https://cdn.neilren.com/neilren4j/1.0.0/img/wechat_neilrencom.svg" style="margin-left: -10px;"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid foot">
+        <div class="foot-logo">
+            <img src="/img/NeilCat_Backward_Grey.svg">
+        </div>
+        <uL>
+            <li><a href="/legal/privacystatement" target="_blank">隐私与 Cookie</a></li>
+            <li><a href="/legal/intellectualproperty" target="_blank">使用条款</a></li>
+            <li><a href="http://www.miibeian.gov.cn/" rel="nofollow" target="_blank">冀ICP备12003293号</a></li>
+            <li><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=13070902000223"  rel="nofollow" target="_blank">冀公网安备13070902000223号</a></li>
+            <li th:utext="${'&copy; NEILREN '+ #dates.format(new java.util.Date().getTime(), 'yyyy')}"></li>
+        </uL>
+        <div style="clear: both;">
+            <uL>
+                <li th:text="${'GMT+8, '+#dates.format(new java.util.Date().getTime(), 'yyyy-MM-dd HH:mm')+','}"></li>
+                <li th:if="${footer.processed!=null}" th:text="${'Processed in '+footer.processed+' second(s),'}"></li>
+                <li th:if="${footer.calls!=null}" th:text="${'calls '+footer.calls+' methods.'}"></li>
+            </uL>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+    <script th:inline="javascript">
+
+        // 百度自动推送
+        (function(){
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+        // 360搜索自动提交
+        (function(){
+            var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?64af1dda7e7ac75d0636d7df7b3134c3":"https://jspassport.ssl.qhimg.com/11.0.1.js?64af1dda7e7ac75d0636d7df7b3134c3";
+            document.write('<script src="' + src + '" id="sozz"><\/script>');
+        })();
+
+        $(window).scroll(function (event) {
+            var t = $(window).scrollTop();  //获取距离页面顶部的距离
+            var height = $(".top-bar").height();
+            // console.log(t);
+            if (t >= 120) { //当距离顶部超过300px时
+                document.getElementsByClassName("top-bar")[0].style.webkitTransform = "translate3d(0px,-" + height + "px,0px)";
+                // $(".top-bar").css({"transition":"translate3d(0px,-128px,0px)"});
+            } else { //如果距离顶部小于300px
+                // document.getElementsByClassName("top-bar")[0].style.webkitTransform="transform .4s,background .4s";
+                document.getElementsByClassName("top-bar")[0].style.webkitTransform = "translate3d(0px,0px,0px)";
+            }
+        });
+        window.onresize = function () {
+            if ($(window).width() > 992) {
+                $('body').css('overflow', 'auto');
+            }
+        };
+
+        function showpadmenu() {
+            $(".drawer-backdrop").css("opacity", "1");
+            $(".drawer-backdrop").css("visibility", "visible");
+            $(".drawer-backdrop").css("height", $(window).height());
+            $('body').css('overflow', 'hidden');//浮层出现时窗口不能滚动设置
+            $(".pad-menu").css("height", $(window).height());
+            $(".pad-menu").css("visibility", "visible");
+            $(".pad-menu").css("transform", "translateZ(0)");
+        }
+
+        function closepadmenu() {
+            $(".drawer-backdrop").css("opacity", "0");
+            $(".drawer-backdrop").css("visibility", "hidden");
+            $('body').css('overflow', 'auto');
+            $(".pad-menu").css("visibility", "hidden");
+            $(".pad-menu").css("transform", "translate3d(-100%, 0, 0);");
+        }
+
+        function opensearch() {
+            $(".menu ul").css({
+                "opacity": "0",
+                "visibility": "hidden"
+            });
+            $(".btns").css({
+                "opacity": "0",
+                "visibility": "hidden"
+            });
+            $(".search-bar form").css({
+                "display": "block",
+                "opacity": "1",
+                "height": "44px"
+            });
+        }
+
+        function openmenumini() {
+            $(".menu-mini").css({
+                "display":"block"
+            });
+            $(".menu-mini").focus();
+        }
+
+        function closemenumini() {
+            $(".menu-mini").css({
+                "display":"none"
+            });
+        }
+
+        function closesearch() {
+            $(".menu ul").css({
+                "opacity": "1",
+                "visibility": ""
+            });
+            $(".btns").css({
+                "opacity": "1",
+                "visibility": ""
+            });
+            $(".search-bar form").css({
+                "display": "none",
+                "opacity": "0",
+                "height": "0"
+            });
+        }
+    </script>
+</footer>
+</body>
+</html>

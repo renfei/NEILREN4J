@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="system/layout/head::head">
+</head>
+<body class="easyui-layout">
+<table class="easyui-datagrid"
+       data-options="fit:true,rownumbers:true,singleSelect:true,url:'/system/article/getDateList',method:'get',pagination:true,pageSize:10,toolbar:'#tb'">
+    <thead>
+    <tr>
+        <th data-options="field:'id'">ID</th>
+        <th data-options="field:'zh_name'">分类</th>
+        <th data-options="field:'title'">标题</th>
+        <th data-options="field:'img',formatter:formatterImg">特色图像</th>
+        <th data-options="field:'date'">日期</th>
+        <th data-options="field:'source',formatter:formatterSource">来源</th>
+        <th data-options="field:'sourceUrl'">来源链接</th>
+        <th data-options="field:'author'">作者</th>
+        <th data-options="field:'authorUrl'">作者链接</th>
+        <th data-options="field:'keyword'">KeyWord</th>
+        <th data-options="field:'describes'">Describes</th>
+        <th data-options="field:'views'">浏览量</th>
+        <th data-options="field:'status'">状态</th>
+        <!--<th data-options="field:'content'">Item ID</th>-->
+
+    </tr>
+    </thead>
+</table>
+<div id="tb" style="padding:5px;height:auto">
+    <div style="margin-bottom:5px">
+        <a href="javascript:$('#w').window('open');" class="easyui-linkbutton" iconCls="icon-add" plain="true"></a>
+    </div>
+</div>
+<div id="w" class="easyui-window" data-options="iconCls:'icon-save',closed:true"
+     style="width:100%;height:100%;padding:5px;">
+    <div class="easyui-layout" data-options="fit:true">
+        <div data-options="region:'east',split:true" style="width:250px">
+            <table cellpadding="5">
+                <tr>
+                    <td>标题:</td>
+                    <td><input id="title" class="easyui-textbox" type="text"></td>
+                </tr>
+                <tr>
+                    <td>特色图像:</td>
+                    <td><input type="file" id="fileputHB" name="fileputHB" data-options='onChange:change_photo'></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <img id="Img" width="200px" height="200px"/>
+                        <input type="hidden" id="imgurl">
+                    </td>
+                </tr>
+                <tr>
+                    <td>分类:</td>
+                    <td><input id="cat" class="easyui-combobox" type="text" data-options="
+					url:'/system/article/getCategorys',
+					method:'get',
+					valueField:'id',
+					textField:'zhName',
+					panelHeight:'auto'
+			"></td>
+                </tr>
+                <tr>
+                    <td>标签:</td>
+                    <td><input id="tags" class="easyui-combobox"
+                               data-options="
+					url:'/system/article/getTags',
+					method:'get',
+					valueField:'id',
+					textField:'zhName',
+					multiple:true,
+					panelHeight:'auto'
+			"></td>
+                </tr>
+                <tr>
+                    <td>来源:</td>
+                    <td>
+                        <select id="source" class="easyui-combobox">
+                            <option value="0">原创</option>
+                            <option value="1">转载</option>
+                            <option value="2">译文</option>
+                        </select></td>
+                </tr>
+                <tr>
+                    <td>来源链接:</td>
+                    <td><input id="sourceUrl" class="easyui-textbox" type="text" name="subject"></td>
+                </tr>
+                <tr>
+                    <td>作者:</td>
+                    <td><input id="author" class="easyui-textbox" name="message"></td>
+                </tr>
+                <tr>
+                    <td>作者链接:</td>
+                    <td><input id="authorUrl" class="easyui-textbox" name="message"></td>
+                </tr>
+                <tr>
+                    <td>KeyWord:</td>
+                    <td><input id="keyword" class="easyui-textbox" name="message"></td>
+                </tr>
+                <tr>
+                    <td>Describes:</td>
+                    <td><input id="describes" class="easyui-textbox" name="message"></td>
+                </tr>
+            </table>
+        </div>
+        <div data-options="region:'center'" id="main">
+            <!-- 加载编辑器的容器 -->
+            <script id="container" name="content" type="text/plain" class="remarkContext" style="width: 100%;">这里写你的初始化内容</script>
+        </div>
+        <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-ok'" href="javascript:void(0)"
+               onclick="javascript:sub()" style="width:80px">Ok</a>
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" href="javascript:void(0)"
+               onclick="$('#w').window('close')" style="width:80px">Cancel</a>
+        </div>
+    </div>
+</div>
+<!-- 配置文件 -->
+<script type="text/javascript" src="/js/ueditor/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="/js/ueditor/ueditor.all.min.js"></script>
+<!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+<script type="text/javascript" charset="utf-8" src="/js/ueditor/lang/zh-cn/zh-cn.js"></script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var ue = UE.getEditor('container');
+    UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
+    UE.Editor.prototype.getActionUrl = function (action) {
+        if (action == 'uploadimage' || action == 'uploadscrawl' || action == 'uploadimage') {
+            return '/tool/FileUploadPoint';
+            /* 这里填上你自己的上传图片的action */
+        } else {
+            return this._bkGetActionUrl.call(this, action);
+        }
+    };
+
+    function sub() {
+        var cat = $("#cat").combobox('getValue');
+        var tags=$("#tags").combobox('getValues');
+        var stag="";
+        for (var i = 0; i < tags.length; i++) {
+            stag+=tags[i]+",";
+        }
+        stag = stag.substring(0,stag.length-1);
+        $.ajax({
+            url: "/system/article/saveArticle?cat="+cat+"&tag="+stag,
+            type: "POST",
+            dataType: "json",
+            data: {
+                "source":$("#source").combobox('getValue'),
+                "views":0,
+                "status":0,
+                "sourceUrl":$("#sourceUrl").textbox('getValue'),
+                "author":$("#author").textbox('getValue'),
+                "authorUrl":$("#authorUrl").textbox('getValue'),
+                "title":$("#title").textbox('getValue'),
+                "keyword":$("#keyword").textbox('getValue'),
+                "describes":$("#describes").textbox('getValue'),
+                "content":UE.getEditor('container').getContent(),
+                "img":$("#imgurl").val()
+            },
+            cache: false,
+            async: false,
+            success: function (data, textStatus, jqXHR) {
+                if(data.success){
+                    $('#w').window('close');
+                    alert("成功");
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+            }
+        });
+    }
+
+    function formatterImg(val, row) {
+        if (val != undefined && val != '') {
+            return '<img height="32" src=\'' + val + '\'>';
+        }
+    }
+
+    function formatterSource(val, row) {
+        if (val == 0) {
+            return "原创";
+        } else {
+            return "转载";
+        }
+    }
+    $("#fileputHB").change(function (){
+        var fileObj = document.getElementById("fileputHB").files[0]; // js 获取文件对象
+        if (typeof (fileObj) == "undefined" || fileObj.size <= 0) {
+            alert("请选择图片");
+            return;
+        }
+        var formFile = new FormData();
+        formFile.append("upfile", fileObj); //加入文件对象
+        var data = formFile;
+        $.ajax({
+            url: "/tool/FileUploadPoint",
+            data: data,
+            type: "Post",
+            dataType: "json",
+            cache: false,//上传文件无需缓存
+            processData: false,//用于对data参数进行序列化处理 这里必须false
+            contentType: false, //必须
+            success: function (result) {
+                //判断是否为JSON对象
+                if(typeof(result) == "object" &&
+                    Object.prototype.toString.call(result).toLowerCase() == "[object object]" && !data.length){
+
+                }else {
+                    result = JSON.parse(result);
+                }
+                if(result.state){
+                    $("#imgurl").val(result.url);
+                    $("Img").attr("src",result.url);
+                }
+            }
+        });
+    });
+
+</script>
+</body>
+</html>

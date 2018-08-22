@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neilren.neilren4j.dao.TIpMapper">
+  <resultMap id="BaseResultMap" type="com.neilren.neilren4j.dbentity.TIp">
+    <result column="startip" jdbcType="BIGINT" property="startip" />
+    <result column="endip" jdbcType="BIGINT" property="endip" />
+    <result column="country" jdbcType="LONGVARCHAR" property="country" />
+    <result column="local" jdbcType="LONGVARCHAR" property="local" />
+  </resultMap>
+  <insert id="insert" parameterType="com.neilren.neilren4j.dbentity.TIp">
+    insert into t_ip (startip, endip, country, 
+      `local`)
+    values (#{startip,jdbcType=BIGINT}, #{endip,jdbcType=BIGINT}, #{country,jdbcType=LONGVARCHAR}, 
+      #{local,jdbcType=LONGVARCHAR})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select startip, endip, country, `local`
+    from t_ip
+  </select>
+  <select id="selectByIP" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select startip, endip, country,`local`
+    from t_ip
+    where startip <![CDATA[<=]]> INET_ATON(#{ip,jdbcType=LONGVARCHAR}) and endip <![CDATA[>=]]> INET_ATON(#{ip,jdbcType=LONGVARCHAR})
+  </select>
+</mapper>

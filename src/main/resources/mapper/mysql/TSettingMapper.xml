@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neilren.neilren4j.dao.TSettingMapper">
+  <resultMap id="BaseResultMap" type="com.neilren.neilren4j.dbentity.TSetting">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="key" jdbcType="LONGVARCHAR" property="key" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="value" jdbcType="LONGVARCHAR" property="value" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_setting
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.neilren.neilren4j.dbentity.TSetting">
+    insert into t_setting (id, `key`, sort,
+      value)
+    values (#{id,jdbcType=BIGINT}, #{key,jdbcType=LONGVARCHAR}, #{sort,jdbcType=INTEGER},
+      #{value,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.neilren.neilren4j.dbentity.TSetting">
+    update t_setting
+    set `key` = #{key,jdbcType=LONGVARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      value = #{value,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, `key`, sort, value
+    from t_setting
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, `key`, sort, value
+    from t_setting
+  </select>
+  <select id="selectByKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, `key`, sort, value
+    from t_setting
+    where `key` = #{key,jdbcType=LONGVARCHAR}
+  </select>
+</mapper>

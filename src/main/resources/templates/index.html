@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/head::head(${title},${head})">
+</head>
+<body>
+<header th:replace="layout/header::header(${menu},${holiday})">
+</header>
+<main class="container-fluid">
+    <section th:if="${hotnews!=null}" id="banner" class="row">
+        <div class="col-lg-8 col-md-6">
+            <div class="section-img"
+                 th:style="${hotnews.img==null?'':'background-image: url('+hotnews.img+');'}"></div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="section-text">
+                <span class="eyebrow" th:text="${hotnews.zh_name}"></span>
+                <h2 th:text="${#strings.abbreviate(hotnews.title,27)}"></h2>
+                <p th:text="${#strings.abbreviate(hotnews.content,180)}"></p>
+                <a th:href="${'/Article/'+hotnews.id}">
+                    <span class="link">阅读更多 <span class="glyphicon glyphicon-play-circle"
+                                                  aria-hidden="true"></span></span>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="container topstories">
+        <div class="row">
+            <h2 class="topstories-title">Top Stories</h2>
+            <div class="col-md-4 col-sm-6 topstories-list" th:each="art:${articlestop3}">
+                <a href="javascript:void(0)"><p th:text="${art.zh_name}"></p></a>
+                <a th:href="${'/Article/'+art.id}">
+                    <h4 th:text="${art.title}"></h4>
+                    <div class="topstories-img"
+                         th:style="${art.img==null?'':'background-image: url('+art.img+');'}"></div>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class="container allstories">
+        <div class="row">
+            <h2 class="allstories-title">All Stories</h2>
+            <ul id="ul">
+                <li th:each="article:${articles}">
+                    <a class="row" th:href="${'/Article/'+article.id}">
+                        <section class="col-md-10">
+                            <header th:text="${article.zh_name}"></header>
+                            <h3 th:text="${article.title}"></h3>
+                        </section>
+                        <div class="col-md-2 visible-md-inline visible-lg-inline allstories-img"
+                             th:style="${article.img==null?'':'background-image: url('+article.img+');'}"></div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="row" style="padding: 20px 0;">
+            <button id="btn" type="button" class="btn btn-primary btn-lg btn-block" onclick="paging()"
+                    style="padding: 25px 0; width: 100%;text-transform: uppercase;">Load more stories
+            </button>
+        </div>
+    </section>
+</main>
+<div class="container-fluid" style="background-color: #e3e3e3;">
+    <div class="container frielink">
+        <ul>
+            <li>友情链接：</li>
+            <li th:each="link:${frieLinkList}">
+                <a th:href="${link.link}" th:text="${link.sitename}" target="_blank"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+<footer th:replace="layout/footer::footer(${footer})"></footer>
+<script th:inline="javascript">
+    /* <![CDATA[ */
+    var type = [[${type}]];
+    var value = "[[${value}]]";
+    /* ]]> */
+    var page = 1;
+
+    function paging() {
+        $("#btn").html("Loading...");
+        $.ajax({
+            url: '/blog/paging',
+            type: "post",
+            dataType: "json",
+            data: {
+                "page": page + 1,
+                "type": type,
+                "value": value
+            },
+            cache: false,
+            success: function (data, textStatus, jqXHR) {
+                if (data.success) {
+                    page = page + 1;
+                    var html = $("#ul").html();
+                    for (var i = 0; i < data.data.length; i++) {
+                        html += "<li>";
+                        html += "<a class=\"row\" href=\"/Article/" + data.data[i].id + "\">";
+                        html += "<section class=\"col-md-10\">";
+                        html += "<header>" + data.data[i].zh_name + "</header>";
+                        html += "<h3>" + data.data[i].title + "</h3>";
+                        html += "</section>";
+                        if (data.data[i].img == null) {
+                            html += "<div class=\"col-md-2 visible-md-inline visible-lg-inline allstories-img\"></div>";
+                        } else {
+                            html += "<div class=\"col-md-2 visible-md-inline visible-lg-inline allstories-img\" style=\"background-image: url(\"" + data.data[i].img + "\";)\"></div>";
+                        }
+                        html += "</a>";
+                        html += "</li>";
+                    }
+                    $("#ul").html(html);
+                }
+                $("#btn").html("Load more stories");
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $("#btn").html("Load more stories");
+            }
+        });
+    }
+</script>
+</body>
+</html>

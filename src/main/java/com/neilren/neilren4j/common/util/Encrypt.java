@@ -44,8 +44,52 @@ public class Encrypt {
      * @return
      */
 
+    public String MD5(final String strText) {
+        return SHA(strText, "MD5");
+    }
+
+    /**
+     * 传入文本内容，返回 SHA-1 串
+     *
+     * @param strText 明文
+     * @return
+     */
+
+    public String SHA1(final String strText) {
+        return SHA(strText, "SHA-1");
+    }
+
+    /**
+     * 传入文本内容，返回 SHA-256 串
+     *
+     * @param strText 明文
+     * @return
+     */
+
+    public String SHA224(final String strText) {
+        return SHA(strText, "SHA-224");
+    }
+
+    /**
+     * 传入文本内容，返回 SHA-256 串
+     *
+     * @param strText 明文
+     * @return
+     */
+
     public String SHA256(final String strText) {
         return SHA(strText, "SHA-256");
+    }
+
+    /**
+     * 传入文本内容，返回 SHA-256 串
+     *
+     * @param strText 明文
+     * @return
+     */
+
+    public String SHA384(final String strText) {
+        return SHA(strText, "SHA-384");
     }
 
     /**

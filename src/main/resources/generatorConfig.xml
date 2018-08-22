@@ -55,5 +55,6 @@
         <!--<table schema="DbIp" tableName="t_ip" />-->
         <!--<table schema="DbFrieLink" tableName="t_frielink" />-->
         <!--<table schema="DbLogSendEmail" tableName="t_log_send_email" />-->
+        <!--<table schema="DbWorstPasswd" tableName="t_worst_passwd" />-->
     </context>
 </generatorConfiguration>

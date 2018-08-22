@@ -49,6 +49,16 @@ public class TLogAccess {
 
     private String osManufacturer;
 
+    private String area;
+
+    private String country;
+
+    private String city;
+
+    private String region;
+
+    private String isp;
+
     private String referer;
 
     private String url;
@@ -241,6 +251,46 @@ public class TLogAccess {
 
     public void setOsManufacturer(String osManufacturer) {
         this.osManufacturer = osManufacturer;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getIsp() {
+        return isp;
+    }
+
+    public void setIsp(String isp) {
+        this.isp = isp;
     }
 
     public String getReferer() {

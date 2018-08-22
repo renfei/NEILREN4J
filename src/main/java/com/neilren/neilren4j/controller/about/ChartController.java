@@ -1,4 +1,4 @@
-package com.neilren.neilren4j.controller;
+package com.neilren.neilren4j.controller.about;
 
 import com.neilren.neilren4j.common.baseclass.BasePageController;
 import com.neilren.neilren4j.entity.HeadTitle;
@@ -14,25 +14,25 @@ import java.util.List;
 /**
  * @author NeilRen
  * @version 1.0
- * @ClassName AboutController
+ * @ClassName ChartController
  * @Description TODO
- * @Date 2018/7/19 22:15
+ * @Date 2018/8/20 17:48
  */
 @Controller
-@RequestMapping("/about")
-public class AboutController extends BasePageController {
+@RequestMapping("/about/chart")
+public class ChartController extends BasePageController {
     @Autowired
     private AboutService aboutService;
 
     @RequestMapping("")
-    public ModelAndView getAboutPage() {
+    public ModelAndView getChart() {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("about");
         List<Menu> menuList = siteMenuService.getAllMenu("/about");
         mv.addObject("menu", menuList);
-        mv.addObject("submenu", aboutService.getSubMenu("/about"));
-        HeadTitle headTitle = new HeadTitle("关于 - " + siteName, null, null);
+        mv.addObject("submenu", aboutService.getSubMenu("/about/chart"));
+        HeadTitle headTitle = new HeadTitle("开放数据 - " + siteName, null, null);
         mv.addObject("title", headTitle);
+        mv.setViewName("chart");
         return mv;
     }
 }

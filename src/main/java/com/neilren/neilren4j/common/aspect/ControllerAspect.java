@@ -1,24 +1,16 @@
 package com.neilren.neilren4j.common.aspect;
 
-import com.neilren.neilren4j.entity.LogAccess;
 import com.neilren.neilren4j.service.LogService;
-import com.neilren.neilren4j.service.SecurityService;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author NeilRen
@@ -33,8 +25,6 @@ import java.util.Set;
 public class ControllerAspect {
     @Autowired
     private LogService logService;
-    @Autowired
-    private SecurityService securityService;
 
     @Pointcut("execution(public * com.neilren.neilren4j.controller.*.*(..))")
     public void controller() {
@@ -49,8 +39,7 @@ public class ControllerAspect {
     public void doBefore(JoinPoint joinPoint) {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
-        LogAccess logAccess = new LogAccess(request);
-        logService.writeAccessLog(logAccess);
+        logService.insertAccessLog(request);
     }
 
     @Around("controller()")

@@ -11,6 +11,8 @@ public class HeadTitle {
     private String title;
     private String description;
     private String keyword;
+    private String canonical;
+    private String miphtml;
 
     public HeadTitle(String title, String description, String keyword) {
         this.title = title;
@@ -40,5 +42,21 @@ public class HeadTitle {
 
     public void setKeyword(String keyword) {
         this.keyword = keyword;
+    }
+
+    public String getCanonical() {
+        return canonical;
+    }
+
+    public void setCanonical(String canonical) {
+        this.canonical = canonical;
+    }
+
+    public String getMiphtml() {
+        return miphtml;
+    }
+
+    public void setMiphtml(String miphtml) {
+        this.miphtml = miphtml;
     }
 }

@@ -9,7 +9,7 @@
         <title th:text="${title.title}"></title>
         <meta name="description" th:if="${title.description!=null}" th:content="${title.description}">
         <meta name="keyword" th:if="${title.keyword!=null}" th:content="${title.keyword}">
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+        <link rel="shortcut icon" href="https://cdn.neilren.com/NeilRenV4/favicon.ico" type="image/x-icon"/>
         <link th:each="cs:${head.css}" rel="stylesheet" type="text/css" th:href="${cs}"/>
         <script th:each="js:${head.jss}" th:src="${js}" type="text/javascript"></script>
         <script th:utext="${head.script}"></script>

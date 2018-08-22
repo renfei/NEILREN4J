@@ -25,6 +25,11 @@
     <result column="os_type" jdbcType="VARCHAR" property="osType" />
     <result column="os_group" jdbcType="VARCHAR" property="osGroup" />
     <result column="os_manufacturer" jdbcType="VARCHAR" property="osManufacturer" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="region" jdbcType="VARCHAR" property="region" />
+    <result column="isp" jdbcType="VARCHAR" property="isp" />
     <result column="Referer" jdbcType="LONGVARCHAR" property="referer" />
     <result column="url" jdbcType="LONGVARCHAR" property="url" />
     <result column="query" jdbcType="LONGVARCHAR" property="query" />
@@ -43,9 +48,11 @@
       browser_name, browser_manufacture, browser_group, 
       browser_engine, browser_major_version, browser_minor_version, 
       browser_version, os_name, os_type, 
-      os_group, os_manufacturer, Referer, 
-      url, query, user_agent, 
-      cookie)
+      os_group, os_manufacturer, area, 
+      country, city, region, 
+      isp, Referer, url, 
+      query, user_agent, cookie
+      )
     values (#{id,jdbcType=BIGINT}, #{datetime,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR}, 
       #{protocol,jdbcType=VARCHAR}, #{scheme,jdbcType=VARCHAR}, #{hostName,jdbcType=VARCHAR}, 
       #{port,jdbcType=VARCHAR}, #{method,jdbcType=VARCHAR}, #{sessionId,jdbcType=VARCHAR}, 
@@ -53,9 +60,11 @@
       #{browserName,jdbcType=VARCHAR}, #{browserManufacture,jdbcType=VARCHAR}, #{browserGroup,jdbcType=VARCHAR}, 
       #{browserEngine,jdbcType=VARCHAR}, #{browserMajorVersion,jdbcType=VARCHAR}, #{browserMinorVersion,jdbcType=VARCHAR}, 
       #{browserVersion,jdbcType=VARCHAR}, #{osName,jdbcType=VARCHAR}, #{osType,jdbcType=VARCHAR}, 
-      #{osGroup,jdbcType=VARCHAR}, #{osManufacturer,jdbcType=VARCHAR}, #{referer,jdbcType=LONGVARCHAR}, 
-      #{url,jdbcType=LONGVARCHAR}, #{query,jdbcType=LONGVARCHAR}, #{userAgent,jdbcType=LONGVARCHAR}, 
-      #{cookie,jdbcType=LONGVARCHAR})
+      #{osGroup,jdbcType=VARCHAR}, #{osManufacturer,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
+      #{country,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, 
+      #{isp,jdbcType=VARCHAR}, #{referer,jdbcType=LONGVARCHAR}, #{url,jdbcType=LONGVARCHAR}, 
+      #{query,jdbcType=LONGVARCHAR}, #{userAgent,jdbcType=LONGVARCHAR}, #{cookie,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.neilren.neilren4j.dbentity.TLogAccess">
     update t_log_access
@@ -81,6 +90,11 @@
       os_type = #{osType,jdbcType=VARCHAR},
       os_group = #{osGroup,jdbcType=VARCHAR},
       os_manufacturer = #{osManufacturer,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      region = #{region,jdbcType=VARCHAR},
+      isp = #{isp,jdbcType=VARCHAR},
       Referer = #{referer,jdbcType=LONGVARCHAR},
       url = #{url,jdbcType=LONGVARCHAR},
       query = #{query,jdbcType=LONGVARCHAR},
@@ -92,7 +106,8 @@
     select id, datetime, ip, protocol, scheme, host_name, port, method, session_id, accept, 
     accept_language, browser_type, browser_name, browser_manufacture, browser_group, 
     browser_engine, browser_major_version, browser_minor_version, browser_version, os_name, 
-    os_type, os_group, os_manufacturer, Referer, url, query, user_agent, cookie
+    os_type, os_group, os_manufacturer, area, country, city, region, isp, Referer, url, 
+    query, user_agent, cookie
     from t_log_access
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -100,7 +115,8 @@
     select id, datetime, ip, protocol, scheme, host_name, port, method, session_id, accept, 
     accept_language, browser_type, browser_name, browser_manufacture, browser_group, 
     browser_engine, browser_major_version, browser_minor_version, browser_version, os_name, 
-    os_type, os_group, os_manufacturer, Referer, url, query, user_agent, cookie
+    os_type, os_group, os_manufacturer, area, country, city, region, isp, Referer, url, 
+    query, user_agent, cookie
     from t_log_access
   </select>
 </mapper>

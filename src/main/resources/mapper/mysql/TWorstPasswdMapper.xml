@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neilren.neilren4j.dao.TWorstPasswdMapper">
+  <resultMap id="BaseResultMap" type="com.neilren.neilren4j.dbentity.TWorstPasswd">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="passwd" jdbcType="VARCHAR" property="passwd" />
+    <result column="md5" jdbcType="VARCHAR" property="md5" />
+    <result column="sha1" jdbcType="VARCHAR" property="sha1" />
+    <result column="sha224" jdbcType="VARCHAR" property="sha224" />
+    <result column="sha256" jdbcType="VARCHAR" property="sha256" />
+    <result column="sha384" jdbcType="VARCHAR" property="sha384" />
+    <result column="sha512" jdbcType="VARCHAR" property="sha512" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_worst_passwd
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.neilren.neilren4j.dbentity.TWorstPasswd">
+    insert into t_worst_passwd (id, passwd, md5, 
+      sha1, sha224, sha256, 
+      sha384, sha512, state
+      )
+    values (#{id,jdbcType=BIGINT}, #{passwd,jdbcType=VARCHAR}, #{md5,jdbcType=VARCHAR}, 
+      #{sha1,jdbcType=VARCHAR}, #{sha224,jdbcType=VARCHAR}, #{sha256,jdbcType=VARCHAR}, 
+      #{sha384,jdbcType=VARCHAR}, #{sha512,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.neilren.neilren4j.dbentity.TWorstPasswd">
+    update t_worst_passwd
+    set passwd = #{passwd,jdbcType=VARCHAR},
+      md5 = #{md5,jdbcType=VARCHAR},
+      sha1 = #{sha1,jdbcType=VARCHAR},
+      sha224 = #{sha224,jdbcType=VARCHAR},
+      sha256 = #{sha256,jdbcType=VARCHAR},
+      sha384 = #{sha384,jdbcType=VARCHAR},
+      sha512 = #{sha512,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, passwd, md5, sha1, sha224, sha256, sha384, sha512, state
+    from t_worst_passwd
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, passwd, md5, sha1, sha224, sha256, sha384, sha512, state
+    from t_worst_passwd where state = 1
+  </select>
+  <select id="selectByPwd" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, passwd, md5, sha1, sha224, sha256, sha384, sha512, state
+    from t_worst_passwd
+    where passwd = #{pwd,jdbcType=VARCHAR} and state = 1
+  </select>
+</mapper>

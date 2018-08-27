@@ -6,8 +6,6 @@
         <title th:text="${title.title}"></title>
         <!-- canonical 中的链接优先填写对应内容的移动端页面（H5）地址 -->
         <link rel="canonical" th:href="${title.canonical}">
-        <meta name="description" th:if="${title.description!=null}" th:content="${title.description}">
-        <meta name="keyword" th:if="${title.keyword!=null}" th:content="${title.keyword}">
         <link rel="stylesheet" type="text/css" href="https://c.mipcdn.com/static/v1/mip.css">
     </head>
 </html>

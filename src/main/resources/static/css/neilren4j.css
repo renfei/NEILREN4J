@@ -289,7 +289,7 @@ main {
 .section-img {
     background-image: url('//cdn.neilren.com/NeilRenV4/img/default.jpeg');
     flex-basis: calc(64.59068% + 32px + 1.03799%);
-    min-height: 400px;
+    min-height: 446px;
     display: block;
     background-position: 50%;
     background-size: cover;

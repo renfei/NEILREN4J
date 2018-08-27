@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -145,7 +146,7 @@ public class ToolController extends BasePageController {
         return mv;
     }
 
-    @RequestMapping("FileUploadPoint")
+    @RequestMapping(value = "FileUploadPoint",method = RequestMethod.POST)
     @ResponseBody
     public String FileUploadPoint(MultipartFile upfile) {
         // 获取文件名

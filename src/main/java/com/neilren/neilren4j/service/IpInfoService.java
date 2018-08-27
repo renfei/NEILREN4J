@@ -28,7 +28,7 @@ public class IpInfoService extends BaseService {
     private Neilren4jConfig neilren4jConfig;
 
     public AlicmapiIP getIpInfo(String ip) {
-        String host = "https://api01.aliyun.venuscn.com";
+        String host = "http://api01.aliyun.venuscn.com";
         String path = "/ip";
         String method = "GET";
         String appcode = neilren4jConfig.getAliyun().getApiappcodeip();

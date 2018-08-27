@@ -1,5 +1,7 @@
 package com.neilren.neilren4j.entity;
 
+import lombok.Data;
+
 /**
  * @author NeilRen
  * @version 1.0
@@ -7,16 +9,13 @@ package com.neilren.neilren4j.entity;
  * @Description 友情链接申请表单实体类
  * @Date 2018/8/6 22:45
  */
+@Data
 public class Forms {
     private String link;
     private String domain;
     private String sitename;
     private String email;
     private String qq;
-
-    public String getLink() {
-        return link;
-    }
 
     public void setLink(String link) {
         this.link = link;
@@ -34,37 +33,5 @@ public class Forms {
         } else if (link.indexOf("https://") != -1) {
             this.link = "https://" + domain + "/";
         }
-    }
-
-    public String getDomain() {
-        return domain;
-    }
-
-//    public void setDomain(String domain) {
-//        this.domain = domain;
-//    }
-
-    public String getSitename() {
-        return sitename;
-    }
-
-    public void setSitename(String sitename) {
-        this.sitename = sitename;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getQq() {
-        return qq;
-    }
-
-    public void setQq(String qq) {
-        this.qq = qq;
     }
 }

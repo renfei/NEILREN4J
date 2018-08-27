@@ -3,6 +3,7 @@ package com.neilren.neilren4j.entity;
 import com.neilren.neilren4j.common.util.Encrypt;
 import com.neilren.neilren4j.common.util.GoogleAuthenticator;
 import com.neilren.neilren4j.dbentity.TUser;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @Description TODO
  * @Date 2018/7/30 16:54
  */
+@Data
 public class User extends TUser {
     @Autowired
     private Encrypt encrypt;

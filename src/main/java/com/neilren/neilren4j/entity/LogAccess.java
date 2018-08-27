@@ -6,6 +6,7 @@ import eu.bitwalker.useragentutils.Browser;
 import eu.bitwalker.useragentutils.OperatingSystem;
 import eu.bitwalker.useragentutils.UserAgent;
 import eu.bitwalker.useragentutils.Version;
+import lombok.Data;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -17,6 +18,7 @@ import java.util.Date;
  * @Description TODO
  * @Date 2018/8/1 12:55
  */
+@Data
 public class LogAccess extends TLogAccess {
     public LogAccess(HttpServletRequest request) {
         IpUtil ipUtil = new IpUtil();

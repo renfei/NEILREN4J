@@ -1,5 +1,7 @@
 package com.neilren.neilren4j.entity;
 
+import lombok.Data;
+
 /**
  * @author NeilRen
  * @version 1.0
@@ -7,6 +9,7 @@ package com.neilren.neilren4j.entity;
  * @Description TODO
  * @Date 2018/8/14 17:16
  */
+@Data
 public class HeadTitle {
     private String title;
     private String description;
@@ -18,45 +21,5 @@ public class HeadTitle {
         this.title = title;
         this.description = description;
         this.keyword = keyword;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getKeyword() {
-        return keyword;
-    }
-
-    public void setKeyword(String keyword) {
-        this.keyword = keyword;
-    }
-
-    public String getCanonical() {
-        return canonical;
-    }
-
-    public void setCanonical(String canonical) {
-        this.canonical = canonical;
-    }
-
-    public String getMiphtml() {
-        return miphtml;
-    }
-
-    public void setMiphtml(String miphtml) {
-        this.miphtml = miphtml;
     }
 }

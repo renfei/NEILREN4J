@@ -1,5 +1,7 @@
 package com.neilren.neilren4j.entity;
 
+import lombok.Data;
+
 /**
  * @author NeilRen
  * @version 1.0
@@ -7,23 +9,12 @@ package com.neilren.neilren4j.entity;
  * @Description TODO
  * @Date 2018/8/6 22:42
  */
+@Data
 public class AliyunGreenWeb {
     private float rate;
     private String suggestion;
     private String label;
     private String scene;
-
-    public float getRate() {
-        return rate;
-    }
-
-    public void setRate(float rate) {
-        this.rate = rate;
-    }
-
-    public String getSuggestion() {
-        return suggestion;
-    }
 
     public String getSuggestionZh() {
         if (suggestion.equals("pass"))
@@ -33,14 +24,6 @@ public class AliyunGreenWeb {
         else if (suggestion.equals("block"))
             return "命中";
         else return suggestion;
-    }
-
-    public void setSuggestion(String suggestion) {
-        this.suggestion = suggestion;
-    }
-
-    public String getLabel() {
-        return label;
     }
 
     public String getLabelZh() {
@@ -65,17 +48,5 @@ public class AliyunGreenWeb {
         else if (label.equals("customized"))
             return "自定义";
         else return label;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public String getScene() {
-        return scene;
-    }
-
-    public void setScene(String scene) {
-        this.scene = scene;
     }
 }

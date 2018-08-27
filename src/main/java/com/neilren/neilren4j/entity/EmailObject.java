@@ -1,5 +1,6 @@
 package com.neilren.neilren4j.entity;
 
+import lombok.Data;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
@@ -17,6 +18,7 @@ import java.util.Date;
  * @Description TODO
  * @Date 2018/8/6 21:47
  */
+@Data
 public class EmailObject {
     private String toEmail;             //收件人
     private String emailSubject;        //邮件主题
@@ -25,54 +27,6 @@ public class EmailObject {
     private String securityrating;      //涉密等级
     private String event;               //关联事件
     private String name;                //称呼
-
-    public String getSabstract() {
-        return sabstract == null ? "摘要缺失" : sabstract;
-    }
-
-    public void setSabstract(String sabstract) {
-        this.sabstract = sabstract;
-    }
-
-    public String getSecurityrating() {
-        return securityrating == null ? "非涉密内容" : securityrating;
-    }
-
-    public void setSecurityrating(String securityrating) {
-        this.securityrating = securityrating;
-    }
-
-    public String getEvent() {
-        return event == null ? "无关联事件" : event;
-    }
-
-    public void setEvent(String event) {
-        this.event = event;
-    }
-
-    public String getName() {
-        return name == null ? "无名氏" : name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getToEmail() {
-        return toEmail;
-    }
-
-    public void setToEmail(String toEmail) {
-        this.toEmail = toEmail;
-    }
-
-    public String getEmailSubject() {
-        return emailSubject;
-    }
-
-    public void setEmailSubject(String emailSubject) {
-        this.emailSubject = emailSubject;
-    }
 
     public String getEmailContent() {
         //读取邮件模板，构建发送内容
@@ -108,9 +62,5 @@ public class EmailObject {
         } catch (Exception e) {
             return emailContent;
         }
-    }
-
-    public void setEmailContent(String emailContent) {
-        this.emailContent = emailContent;
     }
 }

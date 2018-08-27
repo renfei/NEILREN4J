@@ -1,6 +1,7 @@
 package com.neilren.neilren4j.entity;
 
 import com.alibaba.fastjson.JSON;
+import lombok.Data;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,6 +14,7 @@ import java.util.List;
  * @Description TODO
  * @Date 2018/8/14 15:44
  */
+@Data
 public class BaiduXiongZhangJsonLD {
     private String context;
     private String id;
@@ -30,49 +32,9 @@ public class BaiduXiongZhangJsonLD {
         this.appid = appid;
     }
 
-    public String getContext() {
-        return context;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getAppid() {
-        return appid;
-    }
-
-    public void setAppid(String appid) {
-        this.appid = appid;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public List<String> getImages() {
-        return images;
-    }
-
-    public void setImages(List<String> images) {
-        this.images = images;
-    }
-
     public String getPubDate() {
         SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"); //加上时间
         return sDateFormat.format(pubDate);
-    }
-
-    public void setPubDate(Date pubDate) {
-        this.pubDate = pubDate;
     }
 
     public static String getHtmlCode(BaiduXiongZhangJsonLD baiduXiongZhangJsonLD) {

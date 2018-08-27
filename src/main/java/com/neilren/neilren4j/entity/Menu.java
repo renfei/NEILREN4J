@@ -1,6 +1,7 @@
 package com.neilren.neilren4j.entity;
 
 import com.neilren.neilren4j.dbentity.TMenu;
+import lombok.Data;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * @Description TODO
  * @Date 2018/7/18 14:43
  */
+@Data
 public class Menu extends TMenu {
     private boolean activity;
 

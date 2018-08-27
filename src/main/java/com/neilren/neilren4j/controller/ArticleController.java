@@ -29,8 +29,10 @@ import java.util.List;
 @Controller
 @RequestMapping("/Article")
 public class ArticleController extends BasePageController {
-    @RequestMapping({"{id}", "{id}/"})
-    public ModelAndView getArticleById(@PathVariable("id") Long id, HttpServletRequest request) throws NoHandlerFoundException {
+    @RequestMapping({"{id}", "{id}/", "{id}/{type}", "{id}/{type}/"})
+    public ModelAndView getArticleById(@PathVariable("id") Long id,
+                                       @PathVariable(value = "type", required = false) String type,
+                                       HttpServletRequest request) throws NoHandlerFoundException {
         ModelAndView mv = new ModelAndView();
         List<Menu> menuList = siteMenuService.getAllMenu("/blog");
         mv.addObject("menu", menuList);
@@ -64,10 +66,23 @@ public class ArticleController extends BasePageController {
                             }
                         }},
                         article.getDate(),
-                        "1233456"
+                        neilren4jConfig.getBaidu().getXiongzhangappid()
                 );
                 mv.addObject("baiduXiongZhangJsonLD", baiduXiongZhangJsonLD.getHtmlCode(baiduXiongZhangJsonLD));
-                mv.setViewName("article/detail");
+                if ("mip".equals(type)) {
+                    headTitle.setCanonical(neilren4jConfig.getHost() + "/Article/" + id);
+                    mv.addObject("title", headTitle);
+                    mv.setViewName("mip/article/detail");
+                } else if ("amp".equals(type)) {
+                    mv.setViewName("amp/article/detail");
+                } else if (type == null) {
+                    headTitle.setMiphtml(neilren4jConfig.getHost() + "/Article/" + id + "/mip");
+                    mv.addObject("title", headTitle);
+                    mv.setViewName("article/detail");
+                } else {
+                    HttpHeaders headers = new HttpHeaders();
+                    throw new NoHandlerFoundException(request.getMethod(), request.getRequestURL().toString(), headers);
+                }
             }
         } catch (NoHandlerFoundException e) {
             log.error(e.getMessage(), e);

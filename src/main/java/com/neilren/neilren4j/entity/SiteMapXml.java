@@ -1,5 +1,8 @@
 package com.neilren.neilren4j.entity;
 
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,6 +15,8 @@ import java.util.Date;
  * @Description TODO
  * @Date 2018/7/31 18:15
  */
+@Data
+@Slf4j
 public class SiteMapXml implements Serializable {
     private static final long serialVersionUID = 1L;
     private String loc;
@@ -19,15 +24,17 @@ public class SiteMapXml implements Serializable {
     private float priority;
     private Date lastmod;
 
-    public String getLastmod() throws ParseException {
+    public String getLastmod() {
         if (lastmod == null)
             return "";
-        String str = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").format(lastmod);
-        return str.substring(0, str.length() - 2) + ":00";
-    }
-
-    public void setLastmod(Date lastmod) {
-        this.lastmod = lastmod;
+        String str ="";
+        try {
+            str = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").format(lastmod);
+            return str.substring(0, str.length() - 2) + ":00";
+        }catch (Exception e){
+            log.error(e.getMessage(),e);
+        }
+        return "";
     }
 
     public SiteMapXml(String loc, Changefreq changefre, String priority) {
@@ -41,29 +48,5 @@ public class SiteMapXml implements Serializable {
         this.setLoc(loc);
         this.setPriority(Float.parseFloat(priority));
         this.setLastmod(lastmod);
-    }
-
-    public String getLoc() {
-        return loc;
-    }
-
-    public void setLoc(String loc) {
-        this.loc = loc;
-    }
-
-    public String getChangefreq() {
-        return changefreq.toString();
-    }
-
-    public void setChangefreq(Changefreq changefreq) {
-        this.changefreq = changefreq;
-    }
-
-    public String getPriority() {
-        return String.valueOf(priority);
-    }
-
-    public void setPriority(float priority) {
-        this.priority = priority;
     }
 }

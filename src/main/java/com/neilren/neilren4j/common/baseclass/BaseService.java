@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @Description TODO
  * @Date 2018/7/18 14:40
  */
-public class BaseService {
+public class BaseService extends BaseClass {
     @Autowired
     protected TSettingMapper settingMapper;
     @Autowired

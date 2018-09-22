@@ -3,6 +3,20 @@ server:
   port: 9080
 ### Spring 配置 ##########
 spring:
+  cache:
+    type: redis
+  redis:
+    database: 5
+    host: 127.0.0.1
+    port: 6379
+    password:
+    timeout: 3600
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
   # 驱动配置信息 ###
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -36,7 +50,7 @@ spring:
 neilren:
   version: 1.0
   host: https://www.neilren.com
-  googletotpseed: null
+  googletotpseed:
   googletotpissuer: NEILREN.COM
   pagecss:
   - https://cdn.neilren.com/NeilRenV4/css/bootstrap.min.css
@@ -53,25 +67,26 @@ neilren:
   - https://cdn.neilren.com/NeilRenV4/syntaxhighlighter/scripts/shAutoloader.js
   - //msite.baidu.com/sdk/c.js?appid=1606398243645928
   - //qzonestyle.gtimg.cn/qzone/v6/portal/gy/404/data.js
-  - https://www.googletagmanager.com/gtag/js?id=UA-45593016-2
+  # - https://www.googletagmanager.com/gtag/js?id=UA-45593016-2
   baidu:
     site: https://www.neilren.com/
-    token: null
-    xiongzhangappid: null
-    xiongzhangtoken: null
+    token:
+    xiongzhangappid:
+    xiongzhangtoken:
   aliyun:
-    accesskey: null
-    secret: null
+    accesskey:
+    secret:
     openSearch:
       appname: NEILREN
       host: http://vpc.opensearch-cn-beijing.aliyuncs.com
     oss:
-      endpoint: http://oss-cn-beijing.aliyuncs.com
+      #oss-cn-beijing.aliyuncs.com
+      endpoint: http://oss-cn-beijing-internal.aliyuncs.com
       bucketname: bj-neilren
       rootPath: neilren4j/upload/
     cdn:
       host: https://cdn.neilren.com/
-    apiappcodeip: null
+    apiappcodeip:
   email:
     smtp: smtp.mxhichina.com
     port: 465
@@ -79,7 +94,7 @@ neilren:
     from: no-reply@neilren.com
     ssl: true
     username: no-reply@neilren.com
-    password: null
+    password:
 ### MyBatis 配置 ##########
 mybatis:
   mapper-locations: classpath:mapper/mysql/*.xml

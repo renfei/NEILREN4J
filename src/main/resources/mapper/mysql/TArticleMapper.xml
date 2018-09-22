@@ -48,6 +48,11 @@
       img = #{img,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+    <update id="updateViewById" parameterType="java.lang.Long">
+    update t_article
+    set views = views +1
+    where id = #{id,jdbcType=BIGINT}
+  </update>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultType="com.neilren.neilren4j.entity.Article">
     SELECT
     t_article.*, t_category.zh_name

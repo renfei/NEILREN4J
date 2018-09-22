@@ -28,4 +28,6 @@ public interface TArticleMapper {
     List<Article> selectTopViewArticle();
 
     int updateByPrimaryKey(TArticle record);
+
+    int updateViewById(Long id);
 }

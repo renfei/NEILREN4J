@@ -11,6 +11,8 @@ import com.neilren.neilren4j.dbentity.*;
 import com.neilren.neilren4j.entity.Article;
 import com.neilren.neilren4j.entity.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,6 +27,7 @@ import java.util.List;
  * @Date 2018/7/21 09:44
  */
 @Service
+@Lazy
 public class ArticleService extends BasePageService {
     @Autowired
     private DelTagsUtil delTagsUtil;
@@ -45,26 +48,43 @@ public class ArticleService extends BasePageService {
         return articleTagMapper.insert(articleTag);
     }
 
+    /**
+     * 根据ID获取文章
+     *
+     * @param id ID编号
+     * @return 文章
+     */
     public Article getArticleById(Long id) {
-        Article article = articleMapper.selectByPrimaryKey(id);
+
+        //先从缓存中获取，如果没有就从数据库中获取
+        Article article = (Article) cacheGet("article", id.toString(), () -> articleMapper.selectByPrimaryKey(id), defaultCacheTime);
+
+        //拿到以后，浏览量加一
         if (article != null) {
-            article.setViews(article.getViews() + 1);
-            articleMapper.updateByPrimaryKey(article);
+            setViewAdd(id);
         }
         return article;
     }
 
+    @Async
+    public int setViewAdd(Long id) {
+        return articleMapper.updateViewById(id);
+    }
+
     public Article getHotNews() {
-        List<TSetting> settings = settingMapper.selectByKey("hotnews");
-        if (settings != null && settings.size() > 0) {
-            String hotnew = settings.get(0).getValue();
-            Long newsid = Long.valueOf(hotnew);
-            Article article = getArticleById(newsid);
-            article.setContent(delTagsUtil.getTextFromHtml(article.getContent()));
-            return article;
-        } else {
-            return null;
-        }
+        Article article = (Article) cacheGet("article", "hotnews", () -> {
+            List<TSetting> settings = settingMapper.selectByKey("hotnews");
+            if (settings != null && settings.size() > 0) {
+                String hotnew = settings.get(0).getValue();
+                Long newsid = Long.valueOf(hotnew);
+                Article a = getArticleById(newsid);
+                a.setContent(delTagsUtil.getTextFromHtml(a.getContent()));
+                return a;
+            } else {
+                return null;
+            }
+        }, defaultCacheTime);
+        return article;
     }
 
     /**
@@ -74,13 +94,17 @@ public class ArticleService extends BasePageService {
      * @return
      */
     public List<Article> getOtherRelated(Article article) {
-        //获取文章的分类
-        TTag tag = tagMapper.selectByArticleId(article.getId());
-        if (tag == null) {
-            return null;
-        }
-        //获取分类下其他文章
-        return articleMapper.selectByTagIdAndArticleId(tag.getId(), article.getId());
+        List<Article> articles = (List<Article>) cacheGet("articles", "other_" + article.getId(), () -> {
+            //获取文章的分类
+            TTag tag = tagMapper.selectByArticleId(article.getId());
+            if (tag == null) {
+                return null;
+            } else {
+                List<Article> a = articleMapper.selectByTagIdAndArticleId(tag.getId(), article.getId());
+                return a;
+            }
+        }, defaultCacheTime);
+        return articles;
     }
 
     public List<Article> selectAllArticle() {
@@ -97,8 +121,10 @@ public class ArticleService extends BasePageService {
     }
 
     public List<Article> selectAllArticle(int page, int rows) {
-        PageHelper.startPage(page, rows);
-        return articleMapper.selectAllArticle();
+        return (List<Article>) cacheGet("Article", page + "_" + rows, () -> {
+            PageHelper.startPage(page, rows);
+            return articleMapper.selectAllArticle();
+        }, defaultCacheTime);
     }
 
     public void selectAllArticle(EasyuiDatagrid easyuiDatagrid, int page, int rows) {
@@ -112,8 +138,10 @@ public class ArticleService extends BasePageService {
     }
 
     public List<Article> selectArticleListByTag(TTag tag, int page, int rows) {
-        PageHelper.startPage(page, rows);
-        return articleMapper.selectArticleListByTag(tag);
+        return (List<Article>) cacheGet("Article_Tag_" + tag.getEnName(), page + "_" + rows, () -> {
+            PageHelper.startPage(page, rows);
+            return articleMapper.selectArticleListByTag(tag);
+        }, defaultCacheTime);
     }
 
     public List<Article> selectArticleListByCat(TCategory cat, int page) {
@@ -121,24 +149,27 @@ public class ArticleService extends BasePageService {
     }
 
     public List<Article> selectArticleListByCat(TCategory cat, int page, int rows) {
-        PageHelper.startPage(page, rows);
-        return articleMapper.selectArticleListByCat(cat);
+        return (List<Article>) cacheGet("Article_cat_" + cat.getEnName(), page + "_" + rows, () -> {
+            PageHelper.startPage(page, rows);
+            return articleMapper.selectArticleListByCat(cat);
+        }, defaultCacheTime);
+
     }
 
     public List<TTag> getAllTag() {
-        return tagMapper.selectAll();
+        return (List<TTag>) cacheGet("AllTag", "", () -> tagMapper.selectAll(), defaultCacheTime);
     }
 
     public List<TCategory> getAllCategory() {
-        return categoryMapper.selectAll();
+        return (List<TCategory>) cacheGet("AllTag", "", () -> categoryMapper.selectAll(), defaultCacheTime);
     }
 
     public TTag getTagByEnName(String enName) {
-        return tagMapper.selectByTagEnName(enName);
+        return (TTag) cacheGet("Tag", enName, () -> tagMapper.selectByTagEnName(enName), defaultCacheTime);
     }
 
     public TCategory getCatByEnName(String enName) {
-        return categoryMapper.selectByCatEnName(enName);
+        return (TCategory) cacheGet("Cat", enName, () -> categoryMapper.selectByCatEnName(enName), defaultCacheTime);
     }
 
     public List<Menu> getSubMenu(String ename) {

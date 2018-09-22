@@ -26,7 +26,7 @@ public class AboutService extends BasePageService {
         Menu menu2 = new Menu();
         menu2.setUrl("/about/chart");
         menu2.setActivity(false);
-        menu2.setName("OpenDate");
+        menu2.setName("OpenData");
         subMenu.add(menu2);
         for (Menu m : subMenu) {
             if (m.getUrl().equals(url.trim().toLowerCase())) {

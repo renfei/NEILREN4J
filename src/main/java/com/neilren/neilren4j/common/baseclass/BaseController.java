@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @Description TODO
  * @Date 2018/7/16 17:01
  */
-public class BaseController {
+public class BaseController extends BaseClass {
     @Autowired
     protected Neilren4jConfig neilren4jConfig;
     @Autowired

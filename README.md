@@ -1,4 +1,10 @@
 <p align="center">
+  <h3>NEILREN4J 已经停止更新，由最新的
+  <a href="https://github.com/NeilRen/RenFei.Net">
+    RenFei.Net
+  </a>代替。</h3>
+ </p>
+<p align="center">
   <a href="http://www.neilren.com">
     <img src="https://github.com/NeilRen/NEILREN4J/raw/master/doc/img/neilren4j_logo_1415x477.png" width=300 height=101>
   </a>
